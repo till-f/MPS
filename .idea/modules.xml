@@ -12,9 +12,12 @@
       <module fileurl="file://$PROJECT_DIR$/core/aspects/behavior/behavior-runtime/behavior-runtime.iml" filepath="$PROJECT_DIR$/core/aspects/behavior/behavior-runtime/behavior-runtime.iml" group="core/aspects/behavior" />
       <module fileurl="file://$PROJECT_DIR$/languages/baseLanguage/closures/runtime/closures-runtime.iml" filepath="$PROJECT_DIR$/languages/baseLanguage/closures/runtime/closures-runtime.iml" group="languages" />
       <module fileurl="file://$PROJECT_DIR$/languages/baseLanguage/collections/runtime/collections-runtime.iml" filepath="$PROJECT_DIR$/languages/baseLanguage/collections/runtime/collections-runtime.iml" group="languages" />
+      <module fileurl="file://$PROJECT_DIR$/../intellij.modules/com.mbeddr.mpsutil.iml" filepath="$PROJECT_DIR$/../intellij.modules/com.mbeddr.mpsutil.iml" group="custom" />
+      <module fileurl="file://$PROJECT_DIR$/../intellij.modules/com.mora-ad.iml" filepath="$PROJECT_DIR$/../intellij.modules/com.mora-ad.iml" group="custom" />
       <module fileurl="file://$PROJECT_DIR$/core/components/components.iml" filepath="$PROJECT_DIR$/core/components/components.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/plugins/console/console.iml" filepath="$PROJECT_DIR$/plugins/console/console.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/kernel/dataFlowRuntime/dataflow-rt.iml" filepath="$PROJECT_DIR$/core/kernel/dataFlowRuntime/dataflow-rt.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/../intellij.modules/de.itemis.mps.editor.rapidfx.iml" filepath="$PROJECT_DIR$/../intellij.modules/de.itemis.mps.editor.rapidfx.iml" group="custom" />
       <module fileurl="file://$PROJECT_DIR$/plugins/debugger-api/api/debugger-api-api.iml" filepath="$PROJECT_DIR$/plugins/debugger-api/api/debugger-api-api.iml" group="plugins/debugger/debugger-api" />
       <module fileurl="file://$PROJECT_DIR$/plugins/debugger-api/runtime/debugger-api-runtime.iml" filepath="$PROJECT_DIR$/plugins/debugger-api/runtime/debugger-api-runtime.iml" group="plugins/debugger/debugger-api" />
       <module fileurl="file://$PROJECT_DIR$/plugins/debugger-java/api/debugger-java-api.iml" filepath="$PROJECT_DIR$/plugins/debugger-java/api/debugger-java-api.iml" group="plugins/debugger/debugger-java" />
@@ -75,6 +78,8 @@
       <module fileurl="file://$PROJECT_DIR$/workbench/mps-ui/mps-ui.iml" filepath="$PROJECT_DIR$/workbench/mps-ui/mps-ui.iml" group="workbench" />
       <module fileurl="file://$PROJECT_DIR$/workbench/mps-workbench/mps-workbench.iml" filepath="$PROJECT_DIR$/workbench/mps-workbench/mps-workbench.iml" group="plugins" />
       <module fileurl="file://$PROJECT_DIR$/core/openapi/openapi.iml" filepath="$PROJECT_DIR$/core/openapi/openapi.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/../intellij.modules/org.iets3.core.iml" filepath="$PROJECT_DIR$/../intellij.modules/org.iets3.core.iml" group="custom" />
+      <module fileurl="file://$PROJECT_DIR$/../intellij.modules/org.iets3.opensource.iml" filepath="$PROJECT_DIR$/../intellij.modules/org.iets3.opensource.iml" group="custom" />
       <module fileurl="file://$PROJECT_DIR$/core/persistence/persistence.iml" filepath="$PROJECT_DIR$/core/persistence/persistence.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/core/platform/platform.iml" filepath="$PROJECT_DIR$/core/platform/platform.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/core/project/project.iml" filepath="$PROJECT_DIR$/core/project/project.iml" group="core" />
