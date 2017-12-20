@@ -22,6 +22,7 @@
         <property id="1225118933224" name="comment" index="YLQ7P" />
       </concept>
       <concept id="1082978164219" name="jetbrains.mps.lang.structure.structure.EnumerationDataTypeDeclaration" flags="ng" index="AxPO7">
+        <property id="1197591154882" name="memberIdentifierPolicy" index="3lZH7k" />
         <reference id="1083171729157" name="memberDataType" index="M4eZT" />
         <child id="1083172003582" name="member" index="M5hS2" />
       </concept>
@@ -392,6 +393,92 @@
       <property role="20lmBu" value="aggregation" />
       <property role="20kJfa" value="node" />
       <ref role="20lvS9" to="tpee:fz3vP1J" resolve="Expression" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="6ZzNS$a2vGs">
+    <property role="EcuMT" value="8062515945409215260" />
+    <property role="TrG5h" value="CircleCustomizable" />
+    <property role="3GE5qa" value="icons.descriptors.text" />
+    <ref role="1TJDcQ" node="2p1v3tObwTw" resolve="Circle" />
+    <node concept="1TJgyi" id="6ZzNS$a2vGt" role="1TKVEl">
+      <property role="IQ2nx" value="8062515945409215261" />
+      <property role="TrG5h" value="thickness" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+  </node>
+  <node concept="AxPO7" id="4kGsAe0sSXV">
+    <property role="TrG5h" value="EFontFamily" />
+    <property role="3lZH7k" value="derive_from_internal_value" />
+    <property role="3GE5qa" value="icons.descriptors.text" />
+    <ref role="M4eZT" to="tpck:fKAOsGN" resolve="string" />
+    <node concept="M4N5e" id="4kGsAe0sSXW" role="M5hS2">
+      <property role="1uS6qo" value="Dialog" />
+      <property role="1uS6qv" value="Dialog" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0sSYg" role="M5hS2">
+      <property role="1uS6qo" value="DialogInput" />
+      <property role="1uS6qv" value="DialogInput" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0sSYb" role="M5hS2">
+      <property role="1uS6qo" value="SansSerif" />
+      <property role="1uS6qv" value="SansSerif" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0sSYn" role="M5hS2">
+      <property role="1uS6qo" value="Serif" />
+      <property role="1uS6qv" value="Serif" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0sSYw" role="M5hS2">
+      <property role="1uS6qo" value="Monospaced" />
+      <property role="1uS6qv" value="Monospaced" />
+    </node>
+  </node>
+  <node concept="AxPO7" id="4kGsAe0tlF8">
+    <property role="TrG5h" value="EFontStyle" />
+    <property role="3lZH7k" value="derive_from_internal_value" />
+    <property role="3GE5qa" value="icons.descriptors.text" />
+    <ref role="M4eZT" to="tpck:fKAOsGN" resolve="string" />
+    <node concept="M4N5e" id="4kGsAe0tlFf" role="M5hS2">
+      <property role="1uS6qo" value="Plain" />
+      <property role="1uS6qv" value="Plain" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0tlF9" role="M5hS2">
+      <property role="1uS6qo" value="Bold" />
+      <property role="1uS6qv" value="Bold" />
+    </node>
+    <node concept="M4N5e" id="4kGsAe0tlFa" role="M5hS2">
+      <property role="1uS6qo" value="Italic" />
+      <property role="1uS6qv" value="Italic" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="4kGsAe0sBd_">
+    <property role="EcuMT" value="4984484659274609509" />
+    <property role="TrG5h" value="TextCustomizable" />
+    <property role="3GE5qa" value="icons.descriptors.text" />
+    <ref role="1TJDcQ" node="2p1v3tObyyT" resolve="Text" />
+    <node concept="1TJgyi" id="4kGsAe0tlFm" role="1TKVEl">
+      <property role="IQ2nx" value="4984484659274799830" />
+      <property role="TrG5h" value="fontStyle" />
+      <ref role="AX2Wp" node="4kGsAe0tlF8" resolve="EFontStyle" />
+    </node>
+    <node concept="1TJgyi" id="4kGsAe0sSYF" role="1TKVEl">
+      <property role="IQ2nx" value="4984484659274682283" />
+      <property role="TrG5h" value="fontFamily" />
+      <ref role="AX2Wp" node="4kGsAe0sSXV" resolve="EFontFamily" />
+    </node>
+    <node concept="1TJgyi" id="4kGsAe0sBgA" role="1TKVEl">
+      <property role="IQ2nx" value="4984484659274609702" />
+      <property role="TrG5h" value="fontSize" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+    <node concept="1TJgyi" id="3mKaBWVV7Vo" role="1TKVEl">
+      <property role="IQ2nx" value="3868638805865823960" />
+      <property role="TrG5h" value="xOffset" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+    <node concept="1TJgyi" id="3mKaBWVV7Vt" role="1TKVEl">
+      <property role="IQ2nx" value="3868638805865823965" />
+      <property role="TrG5h" value="yOffset" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
 </model>
