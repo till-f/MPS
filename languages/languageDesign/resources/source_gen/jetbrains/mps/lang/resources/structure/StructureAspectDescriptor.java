@@ -15,6 +15,7 @@ import jetbrains.mps.smodel.runtime.StaticScope;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptCircle = createDescriptorForCircle();
+  /*package*/ final ConceptDescriptor myConceptCircleCustomizable = createDescriptorForCircleCustomizable();
   /*package*/ final ConceptDescriptor myConceptColor = createDescriptorForColor();
   /*package*/ final ConceptDescriptor myConceptColorLiteral = createDescriptorForColorLiteral();
   /*package*/ final ConceptDescriptor myConceptConceptIconResourceExpression = createDescriptorForConceptIconResourceExpression();
@@ -32,6 +33,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptRect = createDescriptorForRect();
   /*package*/ final ConceptDescriptor myConceptResource = createDescriptorForResource();
   /*package*/ final ConceptDescriptor myConceptText = createDescriptorForText();
+  /*package*/ final ConceptDescriptor myConceptTextCustomizable = createDescriptorForTextCustomizable();
   /*package*/ final ConceptDescriptor myConceptTextIcon = createDescriptorForTextIcon();
   private final LanguageConceptSwitch myConceptIndex;
 
@@ -41,7 +43,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptCircle, myConceptColor, myConceptColorLiteral, myConceptConceptIconResourceExpression, myConceptFileIcon, myConceptIcon, myConceptIconExpression, myConceptIconLayerDescription, myConceptIconResourceExpression, myConceptImage, myConceptNodeIconResourceExpression, myConceptOldIconBundle, myConceptOldIconDeclaration, myConceptOldIconReference, myConceptPrimitive, myConceptRect, myConceptResource, myConceptText, myConceptTextIcon);
+    return Arrays.asList(myConceptCircle, myConceptCircleCustomizable, myConceptColor, myConceptColorLiteral, myConceptConceptIconResourceExpression, myConceptFileIcon, myConceptIcon, myConceptIconExpression, myConceptIconLayerDescription, myConceptIconResourceExpression, myConceptImage, myConceptNodeIconResourceExpression, myConceptOldIconBundle, myConceptOldIconDeclaration, myConceptOldIconReference, myConceptPrimitive, myConceptRect, myConceptResource, myConceptText, myConceptTextCustomizable, myConceptTextIcon);
   }
 
   @Override
@@ -50,6 +52,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     switch (myConceptIndex.index(id)) {
       case LanguageConceptSwitch.Circle:
         return myConceptCircle;
+      case LanguageConceptSwitch.CircleCustomizable:
+        return myConceptCircleCustomizable;
       case LanguageConceptSwitch.Color:
         return myConceptColor;
       case LanguageConceptSwitch.ColorLiteral:
@@ -84,6 +88,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptResource;
       case LanguageConceptSwitch.Text:
         return myConceptText;
+      case LanguageConceptSwitch.TextCustomizable:
+        return myConceptTextCustomizable;
       case LanguageConceptSwitch.TextIcon:
         return myConceptTextIcon;
       default:
@@ -101,6 +107,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.super_("jetbrains.mps.lang.resources.structure.Primitive", 0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e28b1L);
     b.origin("r:03d44d4c-3d65-461c-9085-0f48e9569e59(jetbrains.mps.lang.resources.structure)/2756621024541675104");
     b.prop("r", 0x26417c37742e28c1L, "2756621024541681857");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForCircleCustomizable() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("jetbrains.mps.lang.resources", "CircleCustomizable", 0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x6fe3cf890a09fb1cL);
+    b.class_(false, false, false);
+    b.super_("jetbrains.mps.lang.resources.structure.Circle", 0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e60L);
+    b.origin("r:03d44d4c-3d65-461c-9085-0f48e9569e59(jetbrains.mps.lang.resources.structure)/8062515945409215260");
+    b.prop("thickness", 0x6fe3cf890a09fb1dL, "8062515945409215261");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForColor() {
@@ -244,6 +258,18 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:03d44d4c-3d65-461c-9085-0f48e9569e59(jetbrains.mps.lang.resources.structure)/2756621024541681849");
     b.prop("text", 0x26417c37742e28beL, "2756621024541681854");
     b.aggregate("color", 0x19d079f4ec114c16L).target(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x19d079f4ec114bdeL).optional(false).ordered(true).multiple(false).origin("1860120738943552534").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForTextCustomizable() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("jetbrains.mps.lang.resources", "TextCustomizable", 0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x452c726380727365L);
+    b.class_(false, false, false);
+    b.super_("jetbrains.mps.lang.resources.structure.Text", 0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e28b9L);
+    b.origin("r:03d44d4c-3d65-461c-9085-0f48e9569e59(jetbrains.mps.lang.resources.structure)/4984484659274609509");
+    b.prop("fontStyle", 0x452c726380755ad6L, "4984484659274799830");
+    b.prop("fontFamily", 0x452c726380738fabL, "4984484659274682283");
+    b.prop("fontSize", 0x452c726380727426L, "4984484659274609702");
+    b.prop("xOffset", 0x35b02a7f3bec7ed8L, "3868638805865823960");
+    b.prop("yOffset", 0x35b02a7f3bec7eddL, "3868638805865823965");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForTextIcon() {

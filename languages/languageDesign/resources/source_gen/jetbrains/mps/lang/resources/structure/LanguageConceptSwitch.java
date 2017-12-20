@@ -10,28 +10,31 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 public final class LanguageConceptSwitch {
   private final LanguageConceptIndex myIndex;
   public static final int Circle = 0;
-  public static final int Color = 1;
-  public static final int ColorLiteral = 2;
-  public static final int ConceptIconResourceExpression = 3;
-  public static final int FileIcon = 4;
-  public static final int Icon = 5;
-  public static final int IconExpression = 6;
-  public static final int IconLayerDescription = 7;
-  public static final int IconResourceExpression = 8;
-  public static final int Image = 9;
-  public static final int NodeIconResourceExpression = 10;
-  public static final int OldIconBundle = 11;
-  public static final int OldIconDeclaration = 12;
-  public static final int OldIconReference = 13;
-  public static final int Primitive = 14;
-  public static final int Rect = 15;
-  public static final int Resource = 16;
-  public static final int Text = 17;
-  public static final int TextIcon = 18;
+  public static final int CircleCustomizable = 1;
+  public static final int Color = 2;
+  public static final int ColorLiteral = 3;
+  public static final int ConceptIconResourceExpression = 4;
+  public static final int FileIcon = 5;
+  public static final int Icon = 6;
+  public static final int IconExpression = 7;
+  public static final int IconLayerDescription = 8;
+  public static final int IconResourceExpression = 9;
+  public static final int Image = 10;
+  public static final int NodeIconResourceExpression = 11;
+  public static final int OldIconBundle = 12;
+  public static final int OldIconDeclaration = 13;
+  public static final int OldIconReference = 14;
+  public static final int Primitive = 15;
+  public static final int Rect = 16;
+  public static final int Resource = 17;
+  public static final int Text = 18;
+  public static final int TextCustomizable = 19;
+  public static final int TextIcon = 20;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x982eb8df2c964bd7L, 0x996311712ea622e5L);
     builder.put(0x26417c37742e0e60L, Circle);
+    builder.put(0x6fe3cf890a09fb1cL, CircleCustomizable);
     builder.put(0x19d079f4ec114bdeL, Color);
     builder.put(0x19d079f4ec114bddL, ColorLiteral);
     builder.put(0x7ce01982590bd1eL, ConceptIconResourceExpression);
@@ -49,6 +52,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x26417c37742e0e61L, Rect);
     builder.put(0x7c8b08a50a39c6caL, Resource);
     builder.put(0x26417c37742e28b9L, Text);
+    builder.put(0x452c726380727365L, TextCustomizable);
     builder.put(0x26417c37742e0d45L, TextIcon);
     myIndex = builder.seal();
   }

@@ -10,6 +10,7 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_Circle;
+  private ConceptPresentation props_CircleCustomizable;
   private ConceptPresentation props_Color;
   private ConceptPresentation props_ColorLiteral;
   private ConceptPresentation props_ConceptIconResourceExpression;
@@ -27,6 +28,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Rect;
   private ConceptPresentation props_Resource;
   private ConceptPresentation props_Text;
+  private ConceptPresentation props_TextCustomizable;
   private ConceptPresentation props_TextIcon;
 
   @Override
@@ -41,6 +43,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Circle = cpb.create();
         }
         return props_Circle;
+      case LanguageConceptSwitch.CircleCustomizable:
+        if (props_CircleCustomizable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CircleCustomizable");
+          props_CircleCustomizable = cpb.create();
+        }
+        return props_CircleCustomizable;
       case LanguageConceptSwitch.Color:
         if (props_Color == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -115,7 +124,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.deprecated(true);
           cpb.presentationByName();
-          cpb.icon(IconContainer.RESOURCE_a0a3a0a11b0u);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a21b0w);
           props_OldIconBundle = cpb.create();
         }
         return props_OldIconBundle;
@@ -162,6 +171,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Text = cpb.create();
         }
         return props_Text;
+      case LanguageConceptSwitch.TextCustomizable:
+        if (props_TextCustomizable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TextCustomizable");
+          props_TextCustomizable = cpb.create();
+        }
+        return props_TextCustomizable;
       case LanguageConceptSwitch.TextIcon:
         if (props_TextIcon == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
