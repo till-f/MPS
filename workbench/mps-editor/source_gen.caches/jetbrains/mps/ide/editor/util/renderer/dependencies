@@ -31,6 +31,7 @@
     <classNode dependClassName="javax.swing.Icon" />
     <classNode dependClassName="javax.swing.JList" />
     <classNode dependClassName="jetbrains.mps.ide.icons.IconManager" />
+    <classNode dependClassName="jetbrains.mps.ide.icons.IdeIcons" />
     <classNode dependClassName="jetbrains.mps.ide.navigation.NodeNavigatable" />
     <classNode dependClassName="jetbrains.mps.smodel.presentation.NodePresentationUtil" />
     <classNode dependClassName="org.jetbrains.annotations.NotNull" />

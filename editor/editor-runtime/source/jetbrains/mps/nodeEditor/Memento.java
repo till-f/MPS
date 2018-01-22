@@ -52,7 +52,7 @@ class Memento implements EditorComponentState {
   private static final Comparator<Pair<EditorCell_Collection, Boolean>> COLLAPSED_STATES_COMPARATOR = new Comparator<Pair<EditorCell_Collection, Boolean>>() {
     @Override
     public int compare(Pair<EditorCell_Collection, Boolean> p1,
-        Pair<EditorCell_Collection, Boolean> p2) {
+                       Pair<EditorCell_Collection, Boolean> p2) {
       int depthDelta = getDepth(p2.o1) - getDepth(p1.o1);
       return depthDelta != 0 ? depthDelta : CELL_COMPARATOR.compare(p2.o1, p1.o1);
     }
@@ -157,7 +157,9 @@ class Memento implements EditorComponentState {
 
     if (myEditedNodeReference != null) {
       SNode newEditedNode = myEditedNodeReference.resolve(editor.getEditorContext().getRepository());
-      if (newEditedNode != null && editor.getEditedNode() != newEditedNode) {
+      // The newEditedNode may be still available as "unregistered node".
+      // Such nodes are not attached to any models, so ignoring...
+      if (newEditedNode != null && newEditedNode.getModel() != null && editor.getEditedNode() != newEditedNode) {
         editor.editNode(newEditedNode);
         editor.getUpdater().flushModelEvents();
         editorRebuildRequired = false;
@@ -276,14 +278,14 @@ class Memento implements EditorComponentState {
 
   public String toString() {
     return "Editor Memento[\n" +
-        "  selectedStack = " + mySelectionStack + "\n" +
-        "  collectionsWithBraces = " + myCollectionsWithEnabledBraces + "\n" +
-        "  foldableCells = " + myFoldableStates + "\n" +
-        "  collapsedCells = " + myInitiallyCollapsedStates + "\n" +
-        "  expandAlwaysCells = " + myRestoreAlwaysStates + "\n" +
-        "  enabledHints = " + Arrays.toString(myEnabledHints) + "\n" +
-        "  editedNodeReference = " + myEditedNodeReference + "\n" +
-        "]\n";
+           "  selectedStack = " + mySelectionStack + "\n" +
+           "  collectionsWithBraces = " + myCollectionsWithEnabledBraces + "\n" +
+           "  foldableCells = " + myFoldableStates + "\n" +
+           "  collapsedCells = " + myInitiallyCollapsedStates + "\n" +
+           "  expandAlwaysCells = " + myRestoreAlwaysStates + "\n" +
+           "  enabledHints = " + Arrays.toString(myEnabledHints) + "\n" +
+           "  editedNodeReference = " + myEditedNodeReference + "\n" +
+           "]\n";
   }
 
   private static final String SELECTION_STACK = "selectionStack";
@@ -417,8 +419,11 @@ class Memento implements EditorComponentState {
     if (element == null) {
       return;
     }
-    element.getChildren(COLLAPSED_ELEMENT).stream().map(el -> new Pair<CellInfo, Boolean>(DefaultCellInfo.loadFrom(el.getChild(CELL_ID_ELEMENT)),
-        Boolean.valueOf(el.getAttributeValue(COLLAPSED_VALUE)))).forEach(result::add);
+    element.getChildren(COLLAPSED_ELEMENT)
+           .stream()
+           .map(el -> new Pair<CellInfo, Boolean>(DefaultCellInfo.loadFrom(el.getChild(CELL_ID_ELEMENT)),
+                                                  Boolean.valueOf(el.getAttributeValue(COLLAPSED_VALUE))))
+           .forEach(result::add);
   }
 
   private static class ErrorMarker {
@@ -427,6 +432,7 @@ class Memento implements EditorComponentState {
     private static final String MODEL_TEXT = "modelText";
     private static final String PROPERTY_CELL = "propertyCell";
 
+    @NotNull
     private CellInfo myCellInfo;
     private String myText;
     private String myModelText = null;
@@ -590,7 +596,7 @@ class Memento implements EditorComponentState {
       TransactionalPropertyState that = (TransactionalPropertyState) o;
 
       return myCellInfo.equals(that.myCellInfo) &&
-          (myUncommittedValue == null ? that.myUncommittedValue == null : myUncommittedValue.equals(that.myUncommittedValue));
+             (myUncommittedValue == null ? that.myUncommittedValue == null : myUncommittedValue.equals(that.myUncommittedValue));
     }
 
     @Override

@@ -73,6 +73,7 @@ import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -122,8 +123,8 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
   @Nullable protected final IFile myDescriptorFile;
   @NotNull private final FileSystem myFileSystem;
   private SModuleReference myModuleReference;
-  private Set<ModelRoot> mySModelRoots = new LinkedHashSet<ModelRoot>();
-  private Set<ModuleFacetBase> myFacets = new LinkedHashSet<ModuleFacetBase>();
+  private Set<ModelRoot> mySModelRoots = new LinkedHashSet<>();
+  private Set<ModuleFacetBase> myFacets = new LinkedHashSet<>();
   private ModuleScope myScope = new ModuleScope();
 
   private boolean myChanged = false;
@@ -176,7 +177,7 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
     if (descriptor == null) {
       return Collections.emptyList();
     }
-    HashSet<SDependency> result = new HashSet<SDependency>();
+    HashSet<SDependency> result = new HashSet<>();
     final SRepository repo = getRepository();
     if (repo == null) {
       throw new IllegalStateException("It is not possible to resolve all declared dependencies with a null repository : module " + this);
@@ -402,8 +403,8 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
     // 1 && 2
     if (sourcesDescriptorFile != null) {
       // stub model roots
-      List<ModelRootDescriptor> toRemove = new ArrayList<ModelRootDescriptor>();
-      List<ModelRootDescriptor> toAdd = new ArrayList<ModelRootDescriptor>();
+      List<ModelRootDescriptor> toRemove = new ArrayList<>();
+      List<ModelRootDescriptor> toAdd = new ArrayList<>();
       for (ModelRootDescriptor rootDescriptor : descriptor.getModelRootDescriptors()) {
         String rootDescriptorType = rootDescriptor.getType();
         if (rootDescriptorType.equals(PersistenceRegistry.JAVA_CLASSES_ROOT)) {
@@ -424,7 +425,7 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
             //
             // trying to load new format : replacing paths like **.jar!/module ->
             String contentPath = rootDescriptor.getMemento().get(FileBasedModelRoot.CONTENT_PATH);
-            List<String> paths = new LinkedList<String>();
+            List<String> paths = new LinkedList<>();
             for (Memento sourceRoot : rootDescriptor.getMemento().getChildren(FileBasedModelRoot.SOURCE_ROOTS)) {
               paths.add(contentPath + File.separator + sourceRoot.get(FileBasedModelRoot.LOCATION));
             }
@@ -572,12 +573,12 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
     }
     myFacets.clear();
 
-    Map<String, Memento> config = new HashMap<String, Memento>();
+    Map<String, Memento> config = new HashMap<>();
     for (ModuleFacetDescriptor facetDescriptors : descriptor.getModuleFacetDescriptors()) {
       config.put(facetDescriptors.getType(), facetDescriptors.getMemento());
     }
 
-    Set<String> types = new HashSet<String>();
+    Set<String> types = new HashSet<>();
     collectMandatoryFacetTypes(types);
     types.addAll(config.keySet());
 
@@ -647,28 +648,82 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
   }
 
   // FIXME rename model roots
-  public void rename(@NotNull String newName) throws DescriptorTargetFileAlreadyExistsException {
+  public void rename(@NotNull String newModuleName) throws DescriptorTargetFileAlreadyExistsException {
     SModuleReference oldRef = getModuleReference();
-    renameModels(getModuleName(), newName, true);
+    final String oldModuleName = getModuleName();
 
     save(); //see MPS-18743, need to save before setting descriptor
 
     ModuleDescriptor descriptor = getModuleDescriptor();
     if (myDescriptorFile != null) {
-      String newDescriptorName = newName + MPSExtentions.DOT + FileUtil.getExtension(myDescriptorFile.getName());
-      //noinspection ConstantConditions
-      if (myDescriptorFile.getParent().getDescendant(newDescriptorName).exists()) {
-        throw new DescriptorTargetFileAlreadyExistsException(myDescriptorFile, newDescriptorName);
+      String newDescriptorName = newModuleName + MPSExtentions.DOT + FileUtil.getExtension(myDescriptorFile.getName());
+
+      // In case we just update descriptor
+      if (!myDescriptorFile.getName().equals(newDescriptorName)) {
+        //noinspection ConstantConditions
+        if (myDescriptorFile.getParent().getDescendant(newDescriptorName).exists()) {
+          throw new DescriptorTargetFileAlreadyExistsException(myDescriptorFile, newDescriptorName);
+        }
+        myDescriptorFile.rename(newModuleName + "." + FileUtil.getExtension(myDescriptorFile.getName()));
       }
-      myDescriptorFile.rename(newName + "." + FileUtil.getExtension(myDescriptorFile.getName()));
+
+      // Rename module folder iff it is equals to module name
+      if (myDescriptorFile.getParent().getName().equals(oldModuleName) && !oldModuleName.equals(newModuleName)) {
+        myDescriptorFile.getParent().rename(newModuleName);
+      }
+
+      updateModuleDescriptor(descriptor, newModuleName);
     }
 
     if (descriptor != null) {
-      descriptor.setNamespace(newName);
+      descriptor.setNamespace(newModuleName);
       setModuleDescriptor(descriptor);
     }
 
+    // Rename models after module to ensure, that they will have short new name without module prefix
+    renameModels(oldModuleName, newModuleName, true);
+
     fireModuleRenamed(oldRef);
+  }
+
+  private void updateModuleDescriptor(@NotNull ModuleDescriptor moduleDescriptor, @NotNull String newModuleName) {
+    // Update output path for generated files
+    final String generatorOutputPath = ProjectPathUtil.getGeneratorOutputPath(moduleDescriptor);
+    if (generatorOutputPath != null && generatorOutputPath.contains(moduleDescriptor.getNamespace())) {
+      ProjectPathUtil.setGeneratorOutputPath(moduleDescriptor, generatorOutputPath.replace(moduleDescriptor.getNamespace(), newModuleName));
+    }
+
+    /* Update model roots in descriptor:
+     * After module folder was renamed model roots are updated in SModule,
+     * because IFile used here to store location,
+     * but not in ModuleDescriptor - location is stored as string.
+     * */
+    final Collection<ModelRootDescriptor> modelRootDescriptors = moduleDescriptor.getModelRootDescriptors();
+    modelRootDescriptors.clear();
+    for (ModelRoot root : myModuleReference.resolve(getRepository()).getModelRoots()) {
+      Memento memento = new MementoImpl();
+      root.save(memento);
+      ModelRootDescriptor modelRootDescriptor = new ModelRootDescriptor(root.getType(), memento);
+      modelRootDescriptors.add(modelRootDescriptor);
+    }
+
+    // TODO: as soon as generator will have it's own descriptor file - remove this!
+    /* Have explicitly update generators model roots in language (there are no own descriptors for generators),
+     * because generators have been already renamed before language without folder rename,
+     * so they can't update their model roots earlier in own rename method.
+     * */
+    if (this instanceof Language) {
+      for(Generator generator : ((Language) this).getGenerators()) {
+        final Collection<ModelRootDescriptor> generatorMRDescriptors = generator.getModuleDescriptor().getModelRootDescriptors();
+        generatorMRDescriptors.clear();
+        for (ModelRoot root : generator.getModelRoots()) {
+          Memento memento = new MementoImpl();
+          root.save(memento);
+          ModelRootDescriptor modelRootDescriptor = new ModelRootDescriptor(root.getType(), memento);
+          generatorMRDescriptors.add(modelRootDescriptor);
+        }
+      }
+    }
   }
 
   /**
@@ -732,7 +787,7 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
 
   public List<String> getSourcePaths() {
     assertCanRead();
-    return new ArrayList<String>(SModuleOperations.getAllSourcePaths(this));
+    return new ArrayList<>(SModuleOperations.getAllSourcePaths(this));
   }
 
   public void updateModelsSet() {
@@ -745,7 +800,7 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
       return Collections.emptyList();
     }
 
-    List<ModelRoot> result = new ArrayList<ModelRoot>();
+    List<ModelRoot> result = new ArrayList<>();
     for (ModelRootDescriptor modelRoot : descriptor.getModelRootDescriptors()) {
       try {
         ModelRootFactory modelRootFactory = PersistenceFacade.getInstance().getModelRootFactory(modelRoot.getType());
@@ -882,14 +937,14 @@ public abstract class AbstractModule extends SModuleBase implements EditableSMod
 
     @Override
     protected Set<SModule> getInitialModules() {
-      Set<SModule> result = new HashSet<SModule>();
+      Set<SModule> result = new HashSet<>();
       result.add(AbstractModule.this);
       return result;
     }
 
     @Override
     protected Set<Language> getInitialUsedLanguages() {
-      HashSet<Language> result = new HashSet<Language>();
+      HashSet<Language> result = new HashSet<>();
       for (SLanguage l : AbstractModule.this.getUsedLanguages()) {
         SModule langModule = l.getSourceModule();
         if (langModule instanceof Language) {

@@ -10,6 +10,9 @@ import jetbrains.mps.openapi.intentions.Kind;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.openapi.editor.EditorContext;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.Collections;
 import jetbrains.mps.intentions.AbstractIntentionExecutable;
 import jetbrains.mps.openapi.intentions.IntentionDescriptor;
@@ -25,7 +28,13 @@ public final class MigrateToIndentLayout_Intention extends AbstractIntentionDesc
   }
   @Override
   public boolean isApplicable(final SNode node, final EditorContext editorContext) {
+    if (!(isApplicableToNode(node, editorContext))) {
+      return false;
+    }
     return true;
+  }
+  private boolean isApplicableToNode(final SNode node, final EditorContext editorContext) {
+    return !(SNodeOperations.isInstanceOf(SLinkOperations.getTarget(node, MetaAdapterFactory.getContainmentLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L, 0x10192e0d3baL, "cellLayout")), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x120150bb441L, "jetbrains.mps.lang.editor.structure.CellLayout_Indent")));
   }
   @Override
   public boolean isSurroundWith() {

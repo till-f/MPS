@@ -18,31 +18,28 @@ package jetbrains.mps.ide;
 import com.intellij.configurationStore.StoreAwareProjectManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.components.ServiceKt;
-import com.intellij.openapi.components.impl.stores.StoreUtil;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import jetbrains.mps.PlatformMpsTest;
-import jetbrains.mps.ide.newSolutionDialog.NewModuleUtil;
 import jetbrains.mps.ide.vfs.IdeaFile;
 import jetbrains.mps.ide.vfs.IdeaFileSystem;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.project.Solution;
-import jetbrains.mps.smodel.Language;
 import jetbrains.mps.util.Reference;
 import jetbrains.mps.vfs.DefaultCachingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ModuleInProjectTest extends PlatformMpsTest {
   private final static String MODULE_NAME_PREFIX = "TEST";
+  // By default property is not set and tmp project will not be deleted after test. Use for debug proposes.
+  private static final boolean SAVE_PROJECT =
+      Boolean.parseBoolean(System.getProperty("mps.tests.module.in.project.save.test.project"));
   private static int ourModuleCounter = 0;
 
   protected static MPSProject ourProject;
@@ -63,7 +60,17 @@ public class ModuleInProjectTest extends PlatformMpsTest {
 
   @After
   public void after() {
+    final VirtualFile projectDir = ModuleInProjectTest.ourProject.getProject().getBaseDir();
     ModuleIDETests.ourProject.dispose();
+    if (!SAVE_PROJECT) {
+      ApplicationManager.getApplication().invokeLater(() -> ApplicationManager.getApplication().runWriteAction(() -> {
+        try {
+          projectDir.delete(this);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }));
+    }
   }
 
   void refreshProjectRecursively() {

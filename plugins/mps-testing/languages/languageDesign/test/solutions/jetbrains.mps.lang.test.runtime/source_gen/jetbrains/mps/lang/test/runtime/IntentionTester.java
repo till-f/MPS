@@ -18,9 +18,15 @@ import jetbrains.mps.intentions.IntentionsManager;
 
 public class IntentionTester {
   private final BaseEditorTestBody myEditorTest;
+  private final boolean mySurroundWith;
 
   public IntentionTester(BaseEditorTestBody editorTest) {
+    this(editorTest, false);
+  }
+
+  public IntentionTester(BaseEditorTestBody editorTest, boolean surroundWith) {
     myEditorTest = editorTest;
+    mySurroundWith = surroundWith;
   }
 
   public boolean isIntentionApplicable(final String id, final SNode node) throws InterruptedException, InvocationTargetException {
@@ -38,6 +44,19 @@ public class IntentionTester {
       public void run() {
         myEditorTest.getEditorContext().select(node);
         Pair<IntentionExecutable, SNode> singleMatch = getSingleMatchingIntention(node, intentionCondition);
+        singleMatch.o1.execute(singleMatch.o2, myEditorTest.getEditorContext());
+      }
+    });
+  }
+
+  public void invokeMatchingIntention(final Condition<IntentionExecutable> intentionCondition) throws InterruptedException, InvocationTargetException {
+    myEditorTest.runUndoableCommandInEDTAndWait(new Runnable() {
+      public void run() {
+        SNode selectedNode = myEditorTest.getEditorContext().getSelectedNode();
+        if (selectedNode == null) {
+          return;
+        }
+        Pair<IntentionExecutable, SNode> singleMatch = getSingleMatchingIntention(selectedNode, intentionCondition);
         singleMatch.o1.execute(singleMatch.o2, myEditorTest.getEditorContext());
       }
     });
@@ -65,6 +84,7 @@ public class IntentionTester {
   private Collection<Pair<IntentionExecutable, SNode>> getAvailableIntentions(final SNode node) {
     IntentionsManager.QueryDescriptor query = new IntentionsManager.QueryDescriptor();
     query.setCurrentNodeOnly(false);
+    query.setSurroundWith(mySurroundWith);
     return IntentionsManager.getInstance().getAvailableIntentions(query, node, myEditorTest.getEditorContext());
   }
 }

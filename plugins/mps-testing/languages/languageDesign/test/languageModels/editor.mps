@@ -3873,5 +3873,27 @@
       </node>
     </node>
   </node>
+  <node concept="24kQdi" id="1488IJS6w6l">
+    <property role="3GE5qa" value="editor" />
+    <ref role="1XX52x" to="tp5g:1488IJS6sZl" resolve="InvokeSurroundWithIntentionStatement" />
+    <node concept="3EZMnI" id="1488IJS6w6n" role="2wV5jI">
+      <node concept="PMmxH" id="1488IJS6whV" role="3EZMnx">
+        <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
+      </node>
+      <node concept="l2Vlx" id="1488IJS6w6p" role="2iSdaV" />
+      <node concept="1iCGBv" id="1488IJS6wi3" role="3EZMnx">
+        <ref role="1NtTu8" to="tp5g:1488IJS6sZo" resolve="intention" />
+        <node concept="ljvvj" id="1488IJS6wi4" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+        <node concept="lj46D" id="1488IJS6wi5" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+        <node concept="1sVBvm" id="1488IJS6wi6" role="1sWHZn">
+          <node concept="3SHvHV" id="1488IJS6wi8" role="2wV5jI" />
+        </node>
+      </node>
+    </node>
+  </node>
 </model>
 

@@ -3291,6 +3291,31 @@
             </node>
           </node>
         </node>
+        <node concept="3clFbF" id="6BFVqCBqnES" role="3cqZAp">
+          <node concept="2OqwBi" id="6BFVqCBqovP" role="3clFbG">
+            <node concept="37vLTw" id="6BFVqCBqnEQ" role="2Oq$k0">
+              <ref role="3cqZAo" node="1nhYb0FOxH9" resolve="button" />
+            </node>
+            <node concept="liA8E" id="6BFVqCBqqzL" role="2OqNvi">
+              <ref role="37wK5l" to="dxuu:~AbstractButton.setEnabled(boolean):void" resolve="setEnabled" />
+              <node concept="3fqX7Q" id="6BFVqCBqrRo" role="37wK5m">
+                <node concept="2OqwBi" id="6BFVqCBqsBc" role="3fr31v">
+                  <node concept="2OqwBi" id="6BFVqCBqseq" role="2Oq$k0">
+                    <node concept="37vLTw" id="6BFVqCBqs2P" role="2Oq$k0">
+                      <ref role="3cqZAo" node="1nhYb0FOxGh" resolve="context" />
+                    </node>
+                    <node concept="liA8E" id="6BFVqCBqsv9" role="2OqNvi">
+                      <ref role="37wK5l" to="cj4x:~EditorContext.getEditorComponent():jetbrains.mps.openapi.editor.EditorComponent" resolve="getEditorComponent" />
+                    </node>
+                  </node>
+                  <node concept="liA8E" id="6BFVqCBqsN7" role="2OqNvi">
+                    <ref role="37wK5l" to="cj4x:~EditorComponent.isReadOnly():boolean" resolve="isReadOnly" />
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
         <node concept="3cpWs6" id="1nhYb0FOxJ6" role="3cqZAp">
           <node concept="37vLTw" id="3GM_nagTuKx" role="3cqZAk">
             <ref role="3cqZAo" node="1nhYb0FOxH9" resolve="button" />

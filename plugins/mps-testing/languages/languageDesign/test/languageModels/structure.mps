@@ -1361,5 +1361,19 @@
       <ref role="20lvS9" to="53vh:4uVwhQyFcjm" resolve="IMigrationUnit" />
     </node>
   </node>
+  <node concept="1TIwiD" id="1488IJS6sZl">
+    <property role="EcuMT" value="1227269295333560277" />
+    <property role="3GE5qa" value="editor" />
+    <property role="TrG5h" value="InvokeSurroundWithIntentionStatement" />
+    <property role="34LRSv" value="invoke surround with intention" />
+    <ref role="1TJDcQ" to="tpee:fzclF8l" resolve="Statement" />
+    <node concept="1TJgyj" id="1488IJS6sZo" role="1TKVEi">
+      <property role="IQ2ns" value="1227269295333560280" />
+      <property role="20lmBu" value="reference" />
+      <property role="20kJfa" value="intention" />
+      <property role="20lbJX" value="1" />
+      <ref role="20lvS9" to="tp3j:2c3oNEsfAwl" resolve="SurroundWithIntentionDeclaration" />
+    </node>
+  </node>
 </model>
 

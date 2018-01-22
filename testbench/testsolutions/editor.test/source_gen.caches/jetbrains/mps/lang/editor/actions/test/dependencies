@@ -427,6 +427,116 @@
     <classNode dependClassName="org.junit.Test" />
     <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
   </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineCommentedNode_Test" file="DeleteLineCommentedNode_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalMultipleCollection_Test" file="DeleteLineHorizontalMultipleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalSingleCollection_Test" file="DeleteLineHorizontalSingleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentHorizontalMultipleCollection_Test" file="DeleteLineIndentHorizontalMultipleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentVerticalMultipleCollection_Test" file="DeleteLineIndentVerticalMultipleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedHorizontalChild_Test" file="DeleteLineNestedHorizontalChild_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedSingleChild_Test" file="DeleteLineNestedSingleChild_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineReadOnlyChild_Test" file="DeleteLineReadOnlyChild_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineRoot_Test" file="DeleteLineRoot_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalMultipleCollection_Test" file="DeleteLineVerticalMultipleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalSingleCollection_Test" file="DeleteLineVerticalSingleCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
   <dependency className="jetbrains.mps.lang.editor.actions.test.DontInsertPlaceholderIntoSingleChildRole_Test" file="DontInsertPlaceholderIntoSingleChildRole_Test.java">
     <classNode dependClassName="java.lang.Exception" />
     <classNode dependClassName="java.lang.Override" />

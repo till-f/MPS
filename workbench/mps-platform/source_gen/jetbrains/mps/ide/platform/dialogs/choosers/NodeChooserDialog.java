@@ -41,7 +41,7 @@ public class NodeChooserDialog extends DialogWrapper {
       public void elementChosen(Object element) {
         doOKAction();
       }
-    }, ModalityState.stateForComponent(getWindow()), false);
+    }, ModalityState.any(), false);
 
     init();
   }

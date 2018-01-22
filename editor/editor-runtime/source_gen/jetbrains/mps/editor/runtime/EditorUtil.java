@@ -114,6 +114,7 @@ public class EditorUtil {
       }
     });
     button.setPreferredSize(new Dimension(20, 20));
+    button.setEnabled(!(context.getEditorComponent().isReadOnly()));
     return button;
   }
 

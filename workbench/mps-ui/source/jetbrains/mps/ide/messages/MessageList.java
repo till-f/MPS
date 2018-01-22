@@ -366,7 +366,8 @@ public abstract class MessageList implements IMessageList, SearchHistoryStorage,
     }, KeyStroke.getKeyStroke("F1"), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     myList.registerKeyboardAction(e -> selectAll(),
-        KeyStroke.getKeyStroke('A', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+                                  KeyStroke.getKeyStroke('A', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                                  JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     myList.addMouseListener(new MouseAdapter() {
       // Holds index of item, that was under cursor on mouse press action
@@ -412,7 +413,7 @@ public abstract class MessageList implements IMessageList, SearchHistoryStorage,
         int index = myList.locationToIndex(event.getPoint());
 
         final IMessage message = index != -1 && index >= myList.getFirstVisibleIndex() && index <= myList.getLastVisibleIndex()
-            ? myModel.getElementAt(index) : null;
+                                 ? myModel.getElementAt(index) : null;
         if (message == null || !myAutoscrollToSourceAction.isSelected(null)) {
           myList.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
           myCellRenderer.setIndexUnderMouse(-1);
@@ -493,6 +494,7 @@ public abstract class MessageList implements IMessageList, SearchHistoryStorage,
 
     JPopupMenu menu = ActionManager.getInstance().createActionPopupMenu(MPSActionPlaces.MPS_MESSAGES_POPUP, group).getComponent();
     menu.show(myList, event.getX(), event.getY());
+    event.consume();
   }
 
   @SuppressWarnings({"ThrowableInstanceNeverThrown", "unchecked"})
@@ -695,32 +697,32 @@ public abstract class MessageList implements IMessageList, SearchHistoryStorage,
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
       String result = Messages.showInputDialog(MessageList.this.myComponent, "Set max number of showing messages", "Messages Limit", null,
-          String.valueOf(MessageList.this.myMaxListSize),
-          new InputValidatorEx() {
-            @Nullable
-            @Override
-            public String getErrorText(String inputString) {
-              return checkInput(inputString) ? null : "Enter correct number";
-            }
+                                               String.valueOf(MessageList.this.myMaxListSize),
+                                               new InputValidatorEx() {
+                                                 @Nullable
+                                                 @Override
+                                                 public String getErrorText(String inputString) {
+                                                   return checkInput(inputString) ? null : "Enter correct number";
+                                                 }
 
-            @Override
-            public boolean checkInput(String inputString) {
-              try {
-                final Integer i = Integer.valueOf(inputString);
-                if (i < 1) {
-                  return false;
-                }
-              } catch (NumberFormatException nfe) {
-                return false;
-              }
-              return true;
-            }
+                                                 @Override
+                                                 public boolean checkInput(String inputString) {
+                                                   try {
+                                                     final Integer i = Integer.valueOf(inputString);
+                                                     if (i < 1) {
+                                                       return false;
+                                                     }
+                                                   } catch (NumberFormatException nfe) {
+                                                     return false;
+                                                   }
+                                                   return true;
+                                                 }
 
-            @Override
-            public boolean canClose(String inputString) {
-              return checkInput(inputString);
-            }
-          });
+                                                 @Override
+                                                 public boolean canClose(String inputString) {
+                                                   return checkInput(inputString);
+                                                 }
+                                               });
       if (result != null) {
         MessageList.this.myMaxListSize = Integer.valueOf(result);
       }
@@ -729,7 +731,7 @@ public abstract class MessageList implements IMessageList, SearchHistoryStorage,
 
   /*package*/ MessageListState getState() {
     return new MessageListState(myWarningsAction.isSelected(null), myInfoAction.isSelected(null), myAutoscrollToSourceAction.isSelected(null), mySearches,
-        myMaxListSize);
+                                myMaxListSize);
   }
 
   /*package*/ void loadState(MessageListState state) {

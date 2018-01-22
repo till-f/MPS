@@ -60,7 +60,7 @@ public abstract class BaseTabsComponent implements TabsComponent {
   private volatile boolean myDisposed = false;
 
   protected BaseTabsComponent(SNodeReference baseNode, Set<RelationDescriptor> possibleTabs, JComponent editor, NodeChangeCallback callback, boolean showGrayed,
-      CreateModeCallback createModeCallback, Project project) {
+                              CreateModeCallback createModeCallback, Project project) {
     myBaseNode = baseNode;
     final ArrayList<RelationDescriptor> tabs = new ArrayList<RelationDescriptor>(possibleTabs);
     Collections.sort(tabs, new RelationComparator());
@@ -128,9 +128,13 @@ public abstract class BaseTabsComponent implements TabsComponent {
     TabEditorLayout result = new TabEditorLayout();
 
     SNode baseNode = myBaseNode.resolve(getProject().getRepository());
-    if (baseNode == null) return result;
+    if (baseNode == null) {
+      return result;
+    }
     //see MPS-23013; if the node was just deleted and the command is not yet finished, the ref can still be resolved (unregistered nodes?)
-    if (baseNode.getModel() == null) return result;
+    if (baseNode.getModel() == null) {
+      return result;
+    }
 
     for (RelationDescriptor d : myPossibleTabs) {
       MultiMap<SNodeReference, SNodeReference> topToUses = new MultiMap<SNodeReference, SNodeReference>();
@@ -138,9 +142,13 @@ public abstract class BaseTabsComponent implements TabsComponent {
         if (n == null || n.getModel() == null/* n.model == null is hack for MPS-21506*/) {
           continue;
         }
-        topToUses.putValue(n.getContainingRoot().getReference(), n.getReference());
+        SNodeReference reference = n.getContainingRoot().getReference();
+        assert reference.resolve(getProject().getRepository()) != null : "Cannot resolve node by reference: " + reference.toString();
+        topToUses.putValue(reference, n.getReference());
       }
-      if (topToUses.isEmpty()) continue;
+      if (topToUses.isEmpty()) {
+        continue;
+      }
 
       for (SNodeReference top : topToUses.keySet()) {
         editedDocumentsNew.add(MPSUndoUtil.getDoc(getProject().getRepository(), top));

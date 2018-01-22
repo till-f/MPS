@@ -16,11 +16,13 @@
 package jetbrains.mps.ide;
 
 import com.intellij.configurationStore.StoreAwareProjectManager;
+import jetbrains.mps.extapi.persistence.FileBasedModelRoot;
 import jetbrains.mps.ide.newSolutionDialog.NewModuleUtil;
 import jetbrains.mps.module.ModuleDeleteHelper;
 import jetbrains.mps.project.AbstractModule;
 import jetbrains.mps.project.DescriptorTargetFileAlreadyExistsException;
 import jetbrains.mps.project.DevKit;
+import jetbrains.mps.project.ProjectPathUtil;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.refactoring.Renamer;
 import jetbrains.mps.smodel.Generator;
@@ -30,10 +32,15 @@ import jetbrains.mps.vfs.CachingFile;
 import jetbrains.mps.vfs.DefaultCachingContext;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.persistence.ModelRoot;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +51,7 @@ import java.util.List;
  * Note: several {@link #invokeInCommand(Runnable)} calls
  * are needed because of the absent undo realisation for the 'create module' actions.
  *
- * Also {@link StoreAwareProjectManager#flushChangedAlarm()} requires zero-level command
+ * Also {@link StoreAwareProjectManager#flushChangedProjectFileAlarm()} requires zero-level command
  */
 public class ModuleIDETests extends ModuleInProjectTest {
 
@@ -96,24 +103,183 @@ public class ModuleIDETests extends ModuleInProjectTest {
   }
 
   @Test
-  public void renameModule() {
+  public void renameLanguage() {
+    renameModule(
+        (moduleName) -> {
+          File moduleFolder = new File(ourProject.getProjectFile(), "languages");
+          moduleFolder = new File(moduleFolder, moduleName);
+          return NewModuleUtil.createLanguage(moduleName, moduleFolder.getAbsolutePath(), ourProject);
+        },
+        (moduleName, module) -> Assert.assertTrue(module instanceof Language)
+    );
+  }
+
+  @Test
+  public void renameLanguageWithSubmodules() {
+    final Solution[] runtimeSolution = new Solution[1];
+    final Solution[] sandboxSolution = new Solution[1];
+    final Solution[] someUnexpectedSolution = new Solution[1];
+    final String someUnexpectedSolutionName = getNewModuleName();
+    renameModule(
+        (moduleName) -> {
+          File moduleFolder = new File(ourProject.getProjectFile(), "languages");
+          moduleFolder = new File(moduleFolder, moduleName);
+          final Language language = NewModuleUtil.createLanguage(moduleName, moduleFolder.getAbsolutePath(), ourProject);
+          try {
+            runtimeSolution[0] = NewModuleUtil.createRuntimeSolution(language, moduleFolder.getAbsolutePath(), ourProject);
+            language.getModuleDescriptor().getRuntimeModules().add(runtimeSolution[0].getModuleReference());
+            sandboxSolution[0] = NewModuleUtil.createSandboxSolution(language, moduleFolder.getAbsolutePath(), ourProject);
+            someUnexpectedSolution[0] = NewModuleUtil.createSolution(someUnexpectedSolutionName, moduleFolder.getAbsolutePath() + File.separator+ someUnexpectedSolutionName, ourProject);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          language.save();
+          return language;
+        },
+        (moduleName, module) -> {
+          Assert.assertTrue(module instanceof Language);
+          // Runtime and sandbox solutions must be renamed
+          Assert.assertTrue(runtimeSolution[0].getModuleName().contains(moduleName));
+          Assert.assertTrue(sandboxSolution[0].getModuleName().contains(moduleName));
+          // Unexpected solution must not be renamed
+          Assert.assertTrue(!someUnexpectedSolution[0].getModuleName().contains(moduleName));
+        });
+  }
+
+  @Test
+  public void renameSolution() {
+    renameModule(
+        (moduleName) -> {
+          File moduleFolder = new File(ourProject.getProjectFile(), "solutions");
+          moduleFolder = new File(moduleFolder, moduleName);
+          return NewModuleUtil.createSolution(moduleName, moduleFolder.getAbsolutePath(), ourProject);
+        },
+        (moduleName, module) -> Assert.assertTrue(module instanceof Solution)
+    );
+  }
+
+  @Test
+  public void renameSolutionWithSpecialFolder() {
+    renameModule(
+        (moduleName) -> {
+          File moduleFolder = new File(ourProject.getProjectFile(), "solutions");
+          moduleFolder = new File(moduleFolder, moduleName);
+          // Create module with name different from folder name
+          return NewModuleUtil.createSolution(getNewModuleName(), moduleFolder.getAbsolutePath(), ourProject);
+        },
+        (moduleName, module) -> Assert.assertTrue(module instanceof Solution)
+    );
+  }
+
+  @Test
+  public void renameDevkit() {
+    renameModule(
+        (moduleName) -> {
+          File moduleFolder = new File(ourProject.getProjectFile(), "devkits");
+          moduleFolder = new File(moduleFolder, moduleName);
+          return NewModuleUtil.createDevKit(moduleName, moduleFolder.getAbsolutePath(), ourProject);
+        },
+        (moduleName, module) -> Assert.assertTrue(module instanceof DevKit)
+    );
+  }
+
+  private interface ModuleSupplier {
+    AbstractModule get(String moduleName);
+  }
+
+  private interface RenamedModuleChecker {
+    void check(String moduleName, AbstractModule module);
+  }
+
+  private void renameModule(ModuleSupplier moduleSupplier, @Nullable RenamedModuleChecker checker) {
     String moduleName = getNewModuleName();
     String newModuleName = getNewModuleName();
-    Reference<Language> langRef = new Reference<>();
-    invokeInCommand(() -> langRef.set(NewModuleUtil.createLanguage(moduleName, createNewDirInProject(), ourProject)));
+    Reference<AbstractModule> moduleReference = new Reference<>();
+    invokeInCommand(() -> moduleReference.set(moduleSupplier.get(moduleName)));
     invokeInCommand(() -> {
-      Language lang = langRef.get();
+      AbstractModule module = moduleReference.get();
+      final Collection<AbstractModule> subModules = Renamer.getSubModules(ourProject.getRepository(), module);
+
+      // If module name is not equals to folder name, that folder should not be renamed
+      boolean mustBeMoved = module.getModuleName().equals(module.getModuleSourceDir().getName());
+
       try {
-        Renamer.renameModule(lang, newModuleName);
+        Renamer.renameModuleWithSubModules(module, newModuleName, subModules);
       } catch (DescriptorTargetFileAlreadyExistsException e) {
         throw new RuntimeException(e);
       }
-      Assert.assertEquals(newModuleName, lang.getModuleName());
-      IFile descriptorFile = lang.getDescriptorFile();
+
+      // Check module itself and descriptor file rename
+      Assert.assertEquals(newModuleName, module.getModuleName());
+      IFile descriptorFile = module.getDescriptorFile();
       Assert.assertNotNull(descriptorFile);
       String fileName = descriptorFile.toPath().getFileName();
       Assert.assertNotNull(fileName);
       Assert.assertTrue(fileName.contains(newModuleName));
+
+
+      // Check module folder rename
+      final IFile moduleDir = descriptorFile.getParent();
+      Assert.assertNotNull(moduleDir);
+      String moduleDirName = moduleDir.toPath().getFileName();
+      Assert.assertNotNull(moduleDirName);
+      Assert.assertTrue(mustBeMoved == moduleDirName.equals(newModuleName));
+
+      // Check that model roots content folder is updated
+      for (ModelRoot modelRoot : module.getModelRoots()) {
+        // Only expect FileBasedModelRoot here
+        Assert.assertTrue(modelRoot instanceof FileBasedModelRoot);
+
+        final IFile contentDirectory = ((FileBasedModelRoot) modelRoot).getContentDirectory();
+        Assert.assertNotNull(contentDirectory);
+        Assert.assertTrue(contentDirectory.exists());
+        Assert.assertTrue(contentDirectory.toPath().startsWith(moduleDir.toPath()));
+      }
+
+      final String generatorOutputPath = ProjectPathUtil.getGeneratorOutputPath(module.getModuleDescriptor());
+      if (generatorOutputPath != null) {
+        Assert.assertTrue(mustBeMoved == generatorOutputPath.contains(newModuleName));
+      }
+
+      // Check models namespace is changed
+      for (SModel model : module.getModels()) {
+        model.getName().getNamespace().equals(newModuleName);
+      }
+
+      // Check model file name stays simple despite namespace change
+      final IFile modelsFolder = module.getModuleSourceDir().getChildren().stream().findFirst().filter(file -> file.getName().equals("models")).orElse(null);
+      // Some modules can exist without models folder - like Devkit
+      if (modelsFolder != null && modelsFolder.getChildren() != null) {
+        for (IFile file : modelsFolder.getChildren()) {
+          Assert.assertTrue(!file.getName().contains(newModuleName));
+        }
+      }
+
+      // Check submodules
+      for (AbstractModule subModule : subModules) {
+        Assert.assertTrue(subModule.getModuleSourceDir().toPath().startsWith(module.getModuleSourceDir().toPath()));
+
+        // Check that model roots content folder is updated
+        for (ModelRoot modelRoot : subModule.getModelRoots()) {
+          if (!(modelRoot instanceof FileBasedModelRoot)) {
+            continue;
+          }
+
+          final IFile contentDirectory = ((FileBasedModelRoot) modelRoot).getContentDirectory();
+          Assert.assertNotNull(contentDirectory);
+          Assert.assertTrue(contentDirectory.exists());
+          Assert.assertTrue(contentDirectory.toPath().startsWith(module.getModuleSourceDir().toPath()));
+        }
+
+        final String generatorOutputPathSub = ProjectPathUtil.getGeneratorOutputPath(subModule.getModuleDescriptor());
+        if (generatorOutputPathSub != null) {
+          Assert.assertTrue(generatorOutputPathSub.contains(newModuleName));
+        }
+      }
+
+      if (checker != null) {
+        checker.check(newModuleName, module);
+      }
     });
   }
 

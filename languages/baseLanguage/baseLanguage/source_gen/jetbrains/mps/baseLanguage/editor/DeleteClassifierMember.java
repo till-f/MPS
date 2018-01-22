@@ -10,7 +10,7 @@ import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.editor.runtime.deletionApprover.DeletionApproverUtil;
-import jetbrains.mps.smodel.action.SNodeFactoryOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 
 public class DeleteClassifierMember {
   public static void setCellActions(EditorCell editorCell, SNode node, EditorContext context) {
@@ -37,7 +37,7 @@ public class DeleteClassifierMember {
             return;
           }
           if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(node), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, "jetbrains.mps.baseLanguage.structure.Classifier"))) {
-            SNodeFactoryOperations.replaceWithNewChild(node, SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1458378889e6d166L, "jetbrains.mps.baseLanguage.structure.PlaceholderMember")));
+            SNodeOperations.replaceWithAnother(node, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1458378889e6d166L, "jetbrains.mps.baseLanguage.structure.PlaceholderMember")));
           } else {
             SNodeOperations.deleteNode(node);
           }
@@ -65,7 +65,7 @@ public class DeleteClassifierMember {
             return;
           }
           if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(node), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, "jetbrains.mps.baseLanguage.structure.Classifier"))) {
-            SNodeFactoryOperations.replaceWithNewChild(node, SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1458378889e6d166L, "jetbrains.mps.baseLanguage.structure.PlaceholderMember")));
+            SNodeOperations.replaceWithAnother(node, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1458378889e6d166L, "jetbrains.mps.baseLanguage.structure.PlaceholderMember")));
           } else {
             SNodeOperations.deleteNode(node);
           }

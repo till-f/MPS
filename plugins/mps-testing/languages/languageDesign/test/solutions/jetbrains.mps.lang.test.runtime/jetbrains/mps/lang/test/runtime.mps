@@ -87,6 +87,7 @@
     <import index="7cms" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runners.model(JUnit/)" />
     <import index="bbnd" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runners(JUnit/)" />
     <import index="3qmy" ref="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea/java:jetbrains.mps.classloading(MPS.Core/)" />
+    <import index="ncw5" ref="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea/java:jetbrains.mps.util.annotation(MPS.Core/)" />
     <import index="tp5o" ref="r:00000000-0000-4000-0000-011c89590380(jetbrains.mps.lang.test.behavior)" implicit="true" />
   </imports>
   <registry>
@@ -352,6 +353,7 @@
       <concept id="1116615150612" name="jetbrains.mps.baseLanguage.structure.ClassifierClassExpression" flags="nn" index="3VsKOn">
         <reference id="1116615189566" name="classifier" index="3VsUkX" />
       </concept>
+      <concept id="1178893518978" name="jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" flags="nn" index="1VxSAg" />
       <concept id="1080120340718" name="jetbrains.mps.baseLanguage.structure.AndExpression" flags="nn" index="1Wc70l" />
       <concept id="1170345865475" name="jetbrains.mps.baseLanguage.structure.AnonymousClass" flags="ig" index="1Y3b0j">
         <reference id="1170346070688" name="classifier" index="1Y3XeK" />
@@ -3103,6 +3105,53 @@
         <ref role="3uigEE" to="t6h5:~InvocationTargetException" resolve="InvocationTargetException" />
       </node>
     </node>
+    <node concept="2tJIrI" id="1488IJS8qYB" role="jymVt" />
+    <node concept="3clFb_" id="1488IJS8tgJ" role="jymVt">
+      <property role="TrG5h" value="invokeSurroundWithIntention" />
+      <property role="IEkAT" value="false" />
+      <property role="DiZV1" value="false" />
+      <property role="od$2w" value="false" />
+      <node concept="3clFbS" id="1488IJS8tgK" role="3clF47">
+        <node concept="3clFbF" id="LQ1VB0nFbq" role="3cqZAp">
+          <node concept="2OqwBi" id="LQ1VB0nFbr" role="3clFbG">
+            <node concept="2ShNRf" id="LQ1VB0nFbs" role="2Oq$k0">
+              <node concept="1pGfFk" id="LQ1VB0nFbt" role="2ShVmc">
+                <ref role="37wK5l" node="1488IJS8Ixx" resolve="IntentionTester" />
+                <node concept="Xjq3P" id="LQ1VB0nFbu" role="37wK5m" />
+                <node concept="3clFbT" id="LQ1VB0nJXk" role="37wK5m">
+                  <property role="3clFbU" value="true" />
+                </node>
+              </node>
+            </node>
+            <node concept="liA8E" id="LQ1VB0nFbv" role="2OqNvi">
+              <ref role="37wK5l" node="LQ1VB0mR5$" resolve="invokeMatchingIntention" />
+              <node concept="2ShNRf" id="1488IJS8tgO" role="37wK5m">
+                <node concept="1pGfFk" id="1488IJS8tgP" role="2ShVmc">
+                  <ref role="37wK5l" node="wUiM63QTC$" resolve="MatchIntentionById" />
+                  <node concept="37vLTw" id="1488IJS8tgQ" role="37wK5m">
+                    <ref role="3cqZAo" node="1488IJS8tgR" resolve="id" />
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="37vLTG" id="1488IJS8tgR" role="3clF46">
+        <property role="TrG5h" value="id" />
+        <property role="3TUv4t" value="false" />
+        <node concept="17QB3L" id="1488IJS8tgS" role="1tU5fm" />
+      </node>
+      <node concept="3cqZAl" id="1488IJS8tgV" role="3clF45" />
+      <node concept="3Tmbuc" id="1488IJS8tgW" role="1B3o_S" />
+      <node concept="3uibUv" id="1488IJS8tgX" role="Sfmx6">
+        <ref role="3uigEE" to="wyt6:~InterruptedException" resolve="InterruptedException" />
+      </node>
+      <node concept="3uibUv" id="1488IJS8tgY" role="Sfmx6">
+        <ref role="3uigEE" to="t6h5:~InvocationTargetException" resolve="InvocationTargetException" />
+      </node>
+    </node>
+    <node concept="2tJIrI" id="1488IJS8sZs" role="jymVt" />
     <node concept="2tJIrI" id="7GTm$3eEP4R" role="jymVt" />
     <node concept="3clFb_" id="7GTm$3eEVGy" role="jymVt">
       <property role="1EzhhJ" value="false" />
@@ -12979,20 +13028,25 @@
         <ref role="3uigEE" node="hPMdj4e" resolve="BaseEditorTestBody" />
       </node>
     </node>
+    <node concept="312cEg" id="1488IJS8PGu" role="jymVt">
+      <property role="3TUv4t" value="true" />
+      <property role="TrG5h" value="mySurroundWith" />
+      <node concept="3Tm6S6" id="1488IJS8PGv" role="1B3o_S" />
+      <node concept="10P_77" id="1488IJS8Rfr" role="1tU5fm" />
+    </node>
     <node concept="2tJIrI" id="wUiM63PSJ7" role="jymVt" />
     <node concept="3Tm1VV" id="wUiM63PS_Q" role="1B3o_S" />
     <node concept="3clFbW" id="wUiM63PSJn" role="jymVt">
       <node concept="3cqZAl" id="wUiM63PSJo" role="3clF45" />
       <node concept="3Tm1VV" id="wUiM63PSJp" role="1B3o_S" />
       <node concept="3clFbS" id="wUiM63PSJr" role="3clF47">
-        <node concept="3clFbF" id="wUiM63PSJv" role="3cqZAp">
-          <node concept="37vLTI" id="wUiM63PSJx" role="3clFbG">
-            <node concept="37vLTw" id="wUiM63PSJ_" role="37vLTJ">
-              <ref role="3cqZAo" node="wUiM63PSGQ" resolve="myEditorTest" />
-            </node>
-            <node concept="37vLTw" id="wUiM63PSJA" role="37vLTx">
-              <ref role="3cqZAo" node="wUiM63PSJu" resolve="editorTest" />
-            </node>
+        <node concept="1VxSAg" id="1488IJS8UV0" role="3cqZAp">
+          <ref role="37wK5l" node="1488IJS8Ixx" resolve="IntentionTester" />
+          <node concept="37vLTw" id="1488IJS8Vkj" role="37wK5m">
+            <ref role="3cqZAo" node="wUiM63PSJu" resolve="editorTest" />
+          </node>
+          <node concept="3clFbT" id="1488IJS8Wdd" role="37wK5m">
+            <property role="3clFbU" value="false" />
           </node>
         </node>
       </node>
@@ -13000,6 +13054,43 @@
         <property role="TrG5h" value="editorTest" />
         <node concept="3uibUv" id="wUiM63PSJt" role="1tU5fm">
           <ref role="3uigEE" node="hPMdj4e" resolve="BaseEditorTestBody" />
+        </node>
+      </node>
+    </node>
+    <node concept="2tJIrI" id="1488IJS8GkM" role="jymVt" />
+    <node concept="3clFbW" id="1488IJS8Ixx" role="jymVt">
+      <node concept="37vLTG" id="1488IJS8K0B" role="3clF46">
+        <property role="TrG5h" value="editorTest" />
+        <node concept="3uibUv" id="1488IJS8K0C" role="1tU5fm">
+          <ref role="3uigEE" node="hPMdj4e" resolve="BaseEditorTestBody" />
+        </node>
+      </node>
+      <node concept="37vLTG" id="1488IJS8K11" role="3clF46">
+        <property role="TrG5h" value="surroundWith" />
+        <node concept="10P_77" id="1488IJS8K36" role="1tU5fm" />
+      </node>
+      <node concept="3cqZAl" id="1488IJS8Ixz" role="3clF45" />
+      <node concept="3Tm1VV" id="1488IJS8Ix$" role="1B3o_S" />
+      <node concept="3clFbS" id="1488IJS8Ix_" role="3clF47">
+        <node concept="3clFbF" id="wUiM63PSJv" role="3cqZAp">
+          <node concept="37vLTI" id="wUiM63PSJx" role="3clFbG">
+            <node concept="37vLTw" id="wUiM63PSJ_" role="37vLTJ">
+              <ref role="3cqZAo" node="wUiM63PSGQ" resolve="myEditorTest" />
+            </node>
+            <node concept="37vLTw" id="wUiM63PSJA" role="37vLTx">
+              <ref role="3cqZAo" node="1488IJS8K0B" resolve="editorTest" />
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="1488IJS8Sdl" role="3cqZAp">
+          <node concept="37vLTI" id="1488IJS8SZu" role="3clFbG">
+            <node concept="37vLTw" id="1488IJS8TV$" role="37vLTx">
+              <ref role="3cqZAo" node="1488IJS8K11" resolve="surroundWith" />
+            </node>
+            <node concept="37vLTw" id="1488IJS8Sdj" role="37vLTJ">
+              <ref role="3cqZAo" node="1488IJS8PGu" resolve="mySurroundWith" />
+            </node>
+          </node>
         </node>
       </node>
     </node>
@@ -13196,6 +13287,132 @@
         <ref role="3uigEE" to="wyt6:~InterruptedException" resolve="InterruptedException" />
       </node>
       <node concept="3uibUv" id="wUiM63PU8A" role="Sfmx6">
+        <ref role="3uigEE" to="t6h5:~InvocationTargetException" resolve="InvocationTargetException" />
+      </node>
+    </node>
+    <node concept="2tJIrI" id="LQ1VB0mQnC" role="jymVt" />
+    <node concept="3clFb_" id="LQ1VB0mR5$" role="jymVt">
+      <property role="TrG5h" value="invokeMatchingIntention" />
+      <property role="IEkAT" value="false" />
+      <property role="DiZV1" value="false" />
+      <property role="od$2w" value="false" />
+      <node concept="3clFbS" id="LQ1VB0mR5_" role="3clF47">
+        <node concept="3clFbF" id="LQ1VB0mR5A" role="3cqZAp">
+          <node concept="2OqwBi" id="LQ1VB0mR5B" role="3clFbG">
+            <node concept="37vLTw" id="LQ1VB0mR5C" role="2Oq$k0">
+              <ref role="3cqZAo" node="wUiM63PSGQ" resolve="myEditorTest" />
+            </node>
+            <node concept="liA8E" id="LQ1VB0mR5D" role="2OqNvi">
+              <ref role="37wK5l" node="wUiM63ScWZ" resolve="runUndoableCommandInEDTAndWait" />
+              <node concept="1bVj0M" id="LQ1VB0mR5E" role="37wK5m">
+                <node concept="3clFbS" id="LQ1VB0mR5F" role="1bW5cS">
+                  <node concept="3cpWs8" id="LQ1VB0ncgn" role="3cqZAp">
+                    <node concept="3cpWsn" id="LQ1VB0ncgo" role="3cpWs9">
+                      <property role="TrG5h" value="selectedNode" />
+                      <node concept="3uibUv" id="LQ1VB0ncgk" role="1tU5fm">
+                        <ref role="3uigEE" to="mhbf:~SNode" resolve="SNode" />
+                      </node>
+                      <node concept="2OqwBi" id="LQ1VB0ncgp" role="33vP2m">
+                        <node concept="2OqwBi" id="LQ1VB0ncgq" role="2Oq$k0">
+                          <node concept="37vLTw" id="LQ1VB0ncgr" role="2Oq$k0">
+                            <ref role="3cqZAo" node="wUiM63PSGQ" resolve="myEditorTest" />
+                          </node>
+                          <node concept="liA8E" id="LQ1VB0ncgs" role="2OqNvi">
+                            <ref role="37wK5l" node="wUiM63Q2iD" resolve="getEditorContext" />
+                          </node>
+                        </node>
+                        <node concept="liA8E" id="LQ1VB0ncgt" role="2OqNvi">
+                          <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedNode():org.jetbrains.mps.openapi.model.SNode" resolve="getSelectedNode" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3clFbJ" id="LQ1VB0ncDa" role="3cqZAp">
+                    <node concept="3clFbS" id="LQ1VB0ncDc" role="3clFbx">
+                      <node concept="3cpWs6" id="LQ1VB0nfxu" role="3cqZAp" />
+                    </node>
+                    <node concept="3clFbC" id="LQ1VB0nea4" role="3clFbw">
+                      <node concept="10Nm6u" id="LQ1VB0nepU" role="3uHU7w" />
+                      <node concept="37vLTw" id="LQ1VB0ndNb" role="3uHU7B">
+                        <ref role="3cqZAo" node="LQ1VB0ncgo" resolve="selectedNode" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3cpWs8" id="LQ1VB0mR5N" role="3cqZAp">
+                    <node concept="3cpWsn" id="LQ1VB0mR5O" role="3cpWs9">
+                      <property role="TrG5h" value="singleMatch" />
+                      <node concept="3uibUv" id="LQ1VB0mR5P" role="1tU5fm">
+                        <ref role="3uigEE" to="18ew:~Pair" resolve="Pair" />
+                        <node concept="3uibUv" id="LQ1VB0mR5Q" role="11_B2D">
+                          <ref role="3uigEE" to="nddn:~IntentionExecutable" resolve="IntentionExecutable" />
+                        </node>
+                        <node concept="3uibUv" id="LQ1VB0mR5R" role="11_B2D">
+                          <ref role="3uigEE" to="mhbf:~SNode" resolve="SNode" />
+                        </node>
+                      </node>
+                      <node concept="1rXfSq" id="LQ1VB0mR5S" role="33vP2m">
+                        <ref role="37wK5l" node="wUiM63PU8C" resolve="getSingleMatchingIntention" />
+                        <node concept="37vLTw" id="LQ1VB0nfUA" role="37wK5m">
+                          <ref role="3cqZAo" node="LQ1VB0ncgo" resolve="selectedNode" />
+                        </node>
+                        <node concept="37vLTw" id="LQ1VB0mR5U" role="37wK5m">
+                          <ref role="3cqZAo" node="LQ1VB0mR69" resolve="intentionCondition" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3clFbF" id="LQ1VB0mR5V" role="3cqZAp">
+                    <node concept="2OqwBi" id="LQ1VB0mR5W" role="3clFbG">
+                      <node concept="2OqwBi" id="LQ1VB0mR5X" role="2Oq$k0">
+                        <node concept="37vLTw" id="LQ1VB0mR5Y" role="2Oq$k0">
+                          <ref role="3cqZAo" node="LQ1VB0mR5O" resolve="singleMatch" />
+                        </node>
+                        <node concept="2OwXpG" id="LQ1VB0mR5Z" role="2OqNvi">
+                          <ref role="2Oxat5" to="18ew:~Pair.o1" resolve="o1" />
+                        </node>
+                      </node>
+                      <node concept="liA8E" id="LQ1VB0mR60" role="2OqNvi">
+                        <ref role="37wK5l" to="nddn:~IntentionExecutable.execute(org.jetbrains.mps.openapi.model.SNode,jetbrains.mps.openapi.editor.EditorContext):void" resolve="execute" />
+                        <node concept="2OqwBi" id="LQ1VB0mR61" role="37wK5m">
+                          <node concept="37vLTw" id="LQ1VB0mR62" role="2Oq$k0">
+                            <ref role="3cqZAo" node="LQ1VB0mR5O" resolve="singleMatch" />
+                          </node>
+                          <node concept="2OwXpG" id="LQ1VB0mR63" role="2OqNvi">
+                            <ref role="2Oxat5" to="18ew:~Pair.o2" resolve="o2" />
+                          </node>
+                        </node>
+                        <node concept="2OqwBi" id="LQ1VB0mR64" role="37wK5m">
+                          <node concept="37vLTw" id="LQ1VB0mR65" role="2Oq$k0">
+                            <ref role="3cqZAo" node="wUiM63PSGQ" resolve="myEditorTest" />
+                          </node>
+                          <node concept="liA8E" id="LQ1VB0mR66" role="2OqNvi">
+                            <ref role="37wK5l" node="wUiM63Q2iD" resolve="getEditorContext" />
+                          </node>
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="37vLTG" id="LQ1VB0mR69" role="3clF46">
+        <property role="TrG5h" value="intentionCondition" />
+        <node concept="3uibUv" id="LQ1VB0mR6a" role="1tU5fm">
+          <ref role="3uigEE" to="y49u:~Condition" resolve="Condition" />
+          <node concept="3uibUv" id="LQ1VB0mR6b" role="11_B2D">
+            <ref role="3uigEE" to="nddn:~IntentionExecutable" resolve="IntentionExecutable" />
+          </node>
+        </node>
+      </node>
+      <node concept="3cqZAl" id="LQ1VB0mR6c" role="3clF45" />
+      <node concept="3Tm1VV" id="LQ1VB0mR6d" role="1B3o_S" />
+      <node concept="3uibUv" id="LQ1VB0mR6e" role="Sfmx6">
+        <ref role="3uigEE" to="wyt6:~InterruptedException" resolve="InterruptedException" />
+      </node>
+      <node concept="3uibUv" id="LQ1VB0mR6f" role="Sfmx6">
         <ref role="3uigEE" to="t6h5:~InvocationTargetException" resolve="InvocationTargetException" />
       </node>
     </node>
@@ -13435,6 +13652,19 @@
             <node concept="liA8E" id="wUiM63PU9T" role="2OqNvi">
               <ref role="37wK5l" to="91lp:~IntentionsManager$QueryDescriptor.setCurrentNodeOnly(boolean):void" resolve="setCurrentNodeOnly" />
               <node concept="3clFbT" id="wUiM63PU9U" role="37wK5m" />
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="1488IJS8Y3w" role="3cqZAp">
+          <node concept="2OqwBi" id="1488IJS8YOp" role="3clFbG">
+            <node concept="37vLTw" id="1488IJS8Y3u" role="2Oq$k0">
+              <ref role="3cqZAo" node="wUiM63PU9M" resolve="query" />
+            </node>
+            <node concept="liA8E" id="1488IJS90vh" role="2OqNvi">
+              <ref role="37wK5l" to="91lp:~IntentionsManager$QueryDescriptor.setSurroundWith(boolean):void" resolve="setSurroundWith" />
+              <node concept="37vLTw" id="1488IJS90Da" role="37wK5m">
+                <ref role="3cqZAo" node="1488IJS8PGu" resolve="mySurroundWith" />
+              </node>
             </node>
           </node>
         </node>

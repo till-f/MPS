@@ -85,8 +85,10 @@ public class UpdaterImpl implements Updater {
   public void update() {
     assert !myDisposed;
     boolean wasInProgress = fireEditorUpdateStarted();
-    doUpdate(null);
+    // first cleaning collected events because subsequent update process may call flushModelEvents()
+    // for now and it is expected that all events should be already processed
     myModelListenersController.clearCollectedEvents();
+    doUpdate(null);
     fireEditorUpdated(wasInProgress);
   }
 
@@ -121,7 +123,7 @@ public class UpdaterImpl implements Updater {
     assert
         project == null || !project.isDisposed() :
         "Update was executed for the editor associated with disposed project: " + project + ", editor: " + getEditorComponent() + ", node: " +
-            getEditorComponent().getEditedNode();
+        getEditorComponent().getEditedNode();
 
     assert myUpdateSession == null;
     myUpdateSession = createUpdateSession(node, events);
@@ -251,7 +253,7 @@ public class UpdaterImpl implements Updater {
   protected UpdateSessionImpl createUpdateSession(SNode node, List<SModelEvent> events) {
     UpdateSessionImpl result =
         new UpdateSessionImpl(node, events, this, myBigCellsMap, myRelatedNodes, myRelatedRefTargets, myCleanDependentCells, myDirtyDependentCells,
-            myExistenceDependentCells, myUpdateInfoIndex);
+                              myExistenceDependentCells, myUpdateInfoIndex);
     result.setInitialEditorHints(myInitialHints);
     result.setEditorHintsForNodeMap(myEditorHintsForNodeMap);
 // TODO: clean local state completely & use only info from this UpdateSessionImpl to update the editor after it.

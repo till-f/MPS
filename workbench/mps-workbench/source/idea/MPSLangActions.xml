@@ -340,13 +340,7 @@
       <action id="ToggleCompletionHintsAction" class="com.intellij.codeInsight.hints.ToggleCompletionHintsAction"/>
     </group>
 
-    <action id="ToggleInlineHintsAction" class="com.intellij.codeInsight.hints.ToggleInlineHintsAction">
-      <add-to-group group-id="ParameterNameHints"/>
-    </action>
-    -->
-
-    <!-- Analyze -->
-    <!--
+    &lt;!&ndash; Analyze &ndash;&gt;
     <action id="SliceBackward" class="com.intellij.slicer.SliceBackwardAction"/>
     <action id="SliceForward" class="com.intellij.slicer.SliceForwardAction"/>
     -->
@@ -1133,13 +1127,15 @@
     -->
 
     <group id="RunDashboardContentToolbar">
-      <action id="RunDashboard.Run" class="com.intellij.execution.dashboard.actions.RunAction"/>
-      <action id="RunDashboard.Debug" class="com.intellij.execution.dashboard.actions.DebugAction"/>
+      <!--suppress PluginXmlValidity -->
+      <action id="RunDashboard.Run" class="com.intellij.execution.dashboard.actions.RunAction" use-shortcut-of="RunClass"/>
+      <!--suppress PluginXmlValidity -->
+      <action id="RunDashboard.Debug" class="com.intellij.execution.dashboard.actions.DebugAction" use-shortcut-of="DebugClass"/>
     </group>
-    <action id="RunDashboard.Stop" class="com.intellij.execution.dashboard.actions.StopAction"/>
+    <action id="RunDashboard.Stop" class="com.intellij.execution.dashboard.actions.StopAction" use-shortcut-of="Stop"/>
 
     <action id="RunDashboard.ShowConfigurations" class="com.intellij.execution.dashboard.actions.ShowConfigurationsAction">
-      <add-to-group group-id="Runner.Layout" anchor="after" relative-to-action="Runner.RestoreLayout"/>
+      <add-to-group group-id="Runner.Layout" anchor="before" relative-to-action="Runner.RestoreLayout"/>
     </action>
     <group id="RunDashboardTreeToolbar"/>
     <group id="RunDashboardPopup">

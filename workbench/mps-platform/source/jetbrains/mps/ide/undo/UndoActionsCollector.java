@@ -47,6 +47,8 @@ import java.util.Set;
 public class UndoActionsCollector {
   private final UndoContext myUndoContext;
   private List<UndoItem> myActions = new ArrayList<>();
+  private List<MPSNodeVirtualFile> myDeletedFiles = new ArrayList<>();
+  private List<MPSNodeVirtualFile> myCreatedFiles = new ArrayList<>();
   private boolean myIsGlobal = false;
   private Set<DocumentReference> myDocumentReferences = new LinkedHashSet<>();
   private Map<SModelId, List<VirtualFile>> myChangedFiles = new HashMap<>();
@@ -84,17 +86,19 @@ public class UndoActionsCollector {
     }
 
     if (fileToUpdate != null && action.getAssociatedVfsChange() != VFSChange.NOT_CHANGED) {
-      boolean restoreOnUndo = action.getAssociatedVfsChange() == VFSChange.FILE_DELETED;
-      // restoring virtual file on:
-      // - undo if the file was deleted by original action
-      // - redo if the file was created by original action
-      // if the file is restored on redo, this action should be performed before redoing actual model modification
-      // in order to put file into VFS before making accessing it from the action.
-      RestoreVirtualFileInstance restoreVfAction = new RestoreVirtualFileInstance(fileToUpdate, restoreOnUndo);
-      if (restoreOnUndo) {
-        myActions.add(restoreVfAction);
+      // recording deleted &  created files, using this information later for restoring vFiles in VFS cache
+      // keeping track of files which was deleted & then re-created
+
+      if (action.getAssociatedVfsChange() == VFSChange.FILE_DELETED) {
+        if (!myCreatedFiles.remove(fileToUpdate)) {
+          myDeletedFiles.add(fileToUpdate);
+        }
+      } else if (action.getAssociatedVfsChange() == VFSChange.FILE_CREATED) {
+        if (!myDeletedFiles.remove(fileToUpdate)) {
+          myCreatedFiles.add(0, fileToUpdate);
+        }
       } else {
-        myActions.add(myActions.size() - 1, restoreVfAction);
+        throw new IllegalArgumentException("VFSChange: " + action.getAssociatedVfsChange() + "is not supported.");
       }
     }
   }
@@ -102,7 +106,20 @@ public class UndoActionsCollector {
   void flushAndDispose() {
     assert !myDisposed;
     myDisposed = true;
-    if (myActions.isEmpty()) {
+    List<UndoItem> allItems = new ArrayList<>();
+    // restoring all created virtual files on redo before redoing any other model modifications
+    // in order to put file into VFS before accessing it from the redo actions
+    for (MPSNodeVirtualFile createdFile : myCreatedFiles) {
+      allItems.add(new RestoreVirtualFileInstance(createdFile, false));
+    }
+    allItems.addAll(myActions);
+    // restoring all deleted virtual files on undo before undoing any other model modifications
+    // in order to put file into VFS before accessing it from the undo actions
+    for (MPSNodeVirtualFile deletedFile : myDeletedFiles) {
+      allItems.add(new RestoreVirtualFileInstance(deletedFile, true));
+    }
+
+    if (allItems.isEmpty()) {
       return;
     }
 
@@ -113,7 +130,7 @@ public class UndoActionsCollector {
 
     com.intellij.openapi.project.Project ideaProject = ((MPSProject) project).getProject();
     UndoManager undoManager = UndoManager.getInstance(ideaProject);
-    SNodeIdeaUndoableAction undoableAction = new SNodeIdeaUndoableAction(myActions, myUndoContext.getRepository(), myIsGlobal, myDocumentReferences);
+    SNodeIdeaUndoableAction undoableAction = new SNodeIdeaUndoableAction(allItems, myUndoContext.getRepository(), myIsGlobal, myDocumentReferences);
     undoManager.undoableActionPerformed(undoableAction);
 
     OnReloadingUndoCleaner undoCleaner = ideaProject.getComponent(OnReloadingUndoCleaner.class);

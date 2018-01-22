@@ -37,6 +37,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_InfoStatementReference;
   private ConceptPresentation props_InvokeActionStatement;
   private ConceptPresentation props_InvokeIntentionStatement;
+  private ConceptPresentation props_InvokeSurroundWithIntentionStatement;
   private ConceptPresentation props_IsIntentionApplicableExpression;
   private ConceptPresentation props_LogEvent;
   private ConceptPresentation props_MPSActionReference;
@@ -218,7 +219,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
         if (props_EditorTestCase == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.presentationByName();
-          cpb.icon(IconContainer.RESOURCE_a0a2a0a81b0ad);
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a81b0bd);
           props_EditorTestCase = cpb.create();
         }
         return props_EditorTestCase;
@@ -282,6 +283,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InvokeIntentionStatement = cpb.create();
         }
         return props_InvokeIntentionStatement;
+      case LanguageConceptSwitch.InvokeSurroundWithIntentionStatement:
+        if (props_InvokeSurroundWithIntentionStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("invoke surround with intention");
+          props_InvokeSurroundWithIntentionStatement = cpb.create();
+        }
+        return props_InvokeSurroundWithIntentionStatement;
       case LanguageConceptSwitch.IsIntentionApplicableExpression:
         if (props_IsIntentionApplicableExpression == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -315,7 +323,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x4c010b30d9be4be7L);
           cpb.deprecateAssociation(0x4c010b30d9be54a3L, "migration_old");
           cpb.presentationByName();
-          cpb.icon(IconContainer.RESOURCE_a0a3a0a23b0ad);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a33b0bd);
           props_MigrationTestCase = cpb.create();
         }
         return props_MigrationTestCase;
@@ -488,7 +496,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
         if (props_NodesTestCase == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.presentationByName();
-          cpb.icon(IconContainer.RESOURCE_a0a2a0a65b0ad);
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a75b0bd);
           props_NodesTestCase = cpb.create();
         }
         return props_NodesTestCase;

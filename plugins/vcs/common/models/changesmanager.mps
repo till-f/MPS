@@ -333,7 +333,7 @@
       </concept>
     </language>
     <language id="760a0a8c-eabb-4521-8bfd-65db761a9ba3" name="jetbrains.mps.baseLanguage.logging">
-      <concept id="2034914114981261497" name="jetbrains.mps.baseLanguage.logging.structure.LogToFileStatement" flags="ng" index="RRSsy">
+      <concept id="2034914114981261497" name="jetbrains.mps.baseLanguage.logging.structure.LogLowLevelStatement" flags="ng" index="RRSsy">
         <property id="2034914114981261751" name="severity" index="RRSoG" />
         <child id="2034914114981261755" name="throwable" index="RRSow" />
         <child id="2034914114981261753" name="message" index="RRSoy" />
@@ -8031,21 +8031,45 @@
                   <node concept="3clFbS" id="1JEtvnKIIo6" role="2LFqv$">
                     <node concept="3cpWs8" id="1JEtvnKIJEF" role="3cqZAp">
                       <node concept="3cpWsn" id="1JEtvnKIJEI" role="3cpWs9">
-                        <property role="TrG5h" value="root" />
-                        <node concept="3uibUv" id="1JEtvnKIM$X" role="1tU5fm">
-                          <ref role="3uigEE" to="mhbf:~SNode" resolve="SNode" />
+                        <property role="TrG5h" value="rootId" />
+                        <node concept="3uibUv" id="5gyid2dJu5Z" role="1tU5fm">
+                          <ref role="3uigEE" to="mhbf:~SNodeId" resolve="SNodeId" />
                         </node>
-                        <node concept="2OqwBi" id="1JEtvnKIJM3" role="33vP2m">
-                          <node concept="2GrUjf" id="1JEtvnKIJLw" role="2Oq$k0">
-                            <ref role="2Gs0qQ" node="1JEtvnKIIo4" resolve="event" />
+                        <node concept="2EnYce" id="5gyid2dJqB1" role="33vP2m">
+                          <node concept="2OqwBi" id="1JEtvnKIJM3" role="2Oq$k0">
+                            <node concept="2GrUjf" id="1JEtvnKIJLw" role="2Oq$k0">
+                              <ref role="2Gs0qQ" node="1JEtvnKIIo4" resolve="event" />
+                            </node>
+                            <node concept="liA8E" id="1JEtvnKIJQT" role="2OqNvi">
+                              <ref role="37wK5l" to="j9co:~SModelEvent.getAffectedRoot():org.jetbrains.mps.openapi.model.SNode" resolve="getAffectedRoot" />
+                            </node>
                           </node>
-                          <node concept="liA8E" id="1JEtvnKIJQT" role="2OqNvi">
-                            <ref role="37wK5l" to="j9co:~SModelEvent.getAffectedRoot():org.jetbrains.mps.openapi.model.SNode" resolve="getAffectedRoot" />
+                          <node concept="liA8E" id="5gyid2dJsRN" role="2OqNvi">
+                            <ref role="37wK5l" to="mhbf:~SNode.getNodeId():org.jetbrains.mps.openapi.model.SNodeId" resolve="getNodeId" />
                           </node>
                         </node>
                       </node>
                     </node>
                     <node concept="3clFbJ" id="1JEtvnKIJZB" role="3cqZAp">
+                      <node concept="1Wc70l" id="5gyid2dJuT8" role="3clFbw">
+                        <node concept="2OqwBi" id="5gyid2dJvyL" role="3uHU7w">
+                          <node concept="37vLTw" id="5gyid2dJv9f" role="2Oq$k0">
+                            <ref role="3cqZAo" node="1JEtvnKIBtx" resolve="streamNames" />
+                          </node>
+                          <node concept="liA8E" id="5gyid2dJw8q" role="2OqNvi">
+                            <ref role="37wK5l" to="33ny:~Map.containsKey(java.lang.Object):boolean" resolve="containsKey" />
+                            <node concept="37vLTw" id="5gyid2dJwpa" role="37wK5m">
+                              <ref role="3cqZAo" node="1JEtvnKIJEI" resolve="rootId" />
+                            </node>
+                          </node>
+                        </node>
+                        <node concept="3y3z36" id="1JEtvnKIK6P" role="3uHU7B">
+                          <node concept="37vLTw" id="1JEtvnKIK4L" role="3uHU7B">
+                            <ref role="3cqZAo" node="1JEtvnKIJEI" resolve="rootId" />
+                          </node>
+                          <node concept="10Nm6u" id="1JEtvnKIKbC" role="3uHU7w" />
+                        </node>
+                      </node>
                       <node concept="3clFbS" id="1JEtvnKIJZD" role="3clFbx">
                         <node concept="3clFbF" id="1JEtvnKJkAO" role="3cqZAp">
                           <node concept="2OqwBi" id="1JEtvnKJkT4" role="3clFbG">
@@ -8065,13 +8089,8 @@
                                     </node>
                                     <node concept="liA8E" id="1JEtvnKJmaF" role="2OqNvi">
                                       <ref role="37wK5l" to="33ny:~Map.get(java.lang.Object):java.lang.Object" resolve="get" />
-                                      <node concept="2OqwBi" id="1JEtvnKJmaG" role="37wK5m">
-                                        <node concept="37vLTw" id="1JEtvnKJmaH" role="2Oq$k0">
-                                          <ref role="3cqZAo" node="1JEtvnKIJEI" resolve="root" />
-                                        </node>
-                                        <node concept="liA8E" id="1JEtvnKJmaI" role="2OqNvi">
-                                          <ref role="37wK5l" to="mhbf:~SNode.getNodeId():org.jetbrains.mps.openapi.model.SNodeId" resolve="getNodeId" />
-                                        </node>
+                                      <node concept="37vLTw" id="1JEtvnKJmaH" role="37wK5m">
+                                        <ref role="3cqZAo" node="1JEtvnKIJEI" resolve="rootId" />
                                       </node>
                                     </node>
                                   </node>
@@ -8079,12 +8098,6 @@
                               </node>
                             </node>
                           </node>
-                        </node>
-                      </node>
-                      <node concept="3y3z36" id="1JEtvnKIK6P" role="3clFbw">
-                        <node concept="10Nm6u" id="1JEtvnKIKbC" role="3uHU7w" />
-                        <node concept="37vLTw" id="1JEtvnKIK4L" role="3uHU7B">
-                          <ref role="3cqZAo" node="1JEtvnKIJEI" resolve="root" />
                         </node>
                       </node>
                     </node>

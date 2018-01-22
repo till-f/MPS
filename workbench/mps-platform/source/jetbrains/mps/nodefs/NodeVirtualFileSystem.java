@@ -313,6 +313,13 @@ public final class NodeVirtualFileSystem extends DeprecatedVirtualFileSystem imp
           if (vf != null) {
             deletedFiles.add(vf);
           }
+        } else if (evt instanceof SNodeAddEvent) {
+          // SNode.getReference() for (later) deleted node produces invalid pointer
+          MPSNodeVirtualFile vf = rvf.getVirtualFile(new SNodePointer(evt.getModel().getReference(), ((SNodeAddEvent) evt).getChild().getNodeId()));
+          if (vf != null) {
+            deletedFiles.remove(vf);
+          }
+
         }
       }
       VFSNotifier vfsNotifier = rvf.getNotifier(new VFSNotifier(rvf));

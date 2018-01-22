@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246495777">
+    <file name="MigrateToIndent_NoLayout_Test.java">
+      <node id="2390303184246495777" at="14,64,15,117" concept="0" />
+      <node id="2390303184246495777" at="15,117,16,121" concept="0" />
+      <node id="2390303184246495777" at="22,51,23,72" concept="0" />
+      <node id="2390303184246513591" at="23,72,24,138" concept="0" />
+      <node id="2390303184246513649" at="24,138,25,113" concept="0" />
+      <node id="2390303184246495777" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_NoLayout#()V" />
+      <node id="2390303184246495777" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246495777" at="14,64,16,121" />
+      <scope id="2390303184246495777" at="22,51,25,113" />
+      <scope id="2390303184246495777" at="13,0,18,0" />
+      <scope id="2390303184246495777" at="21,0,27,0" />
+      <unit id="2390303184246495777" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_NoLayout_Test$TestBody" />
+      <unit id="2390303184246495777" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_NoLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246586079">
+    <file name="MigrateToIndent_IndentLayout_Test.java">
+      <node id="2390303184246586079" at="14,68,15,117" concept="0" />
+      <node id="2390303184246586079" at="15,117,16,125" concept="0" />
+      <node id="2390303184246586079" at="22,51,23,53" concept="0" />
+      <node id="2390303184246586417" at="23,53,24,139" concept="0" />
+      <node id="2390303184246586079" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_IndentLayout#()V" />
+      <node id="2390303184246586079" at="21,0,26,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246586079" at="14,68,16,125" />
+      <scope id="2390303184246586079" at="22,51,24,139" />
+      <scope id="2390303184246586079" at="13,0,18,0" />
+      <scope id="2390303184246586079" at="21,0,26,0" />
+      <unit id="2390303184246586079" at="19,0,27,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_IndentLayout_Test$TestBody" />
+      <unit id="2390303184246586079" at="11,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_IndentLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246693522">
+    <file name="MigrateToIndent_FlowLayout_Test.java">
+      <node id="2390303184246693522" at="14,66,15,117" concept="0" />
+      <node id="2390303184246693522" at="15,117,16,123" concept="0" />
+      <node id="2390303184246693522" at="22,51,23,72" concept="0" />
+      <node id="2390303184246693524" at="23,72,24,138" concept="0" />
+      <node id="2390303184246693526" at="24,138,25,113" concept="0" />
+      <node id="2390303184246693522" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_FlowLayout#()V" />
+      <node id="2390303184246693522" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246693522" at="14,66,16,123" />
+      <scope id="2390303184246693522" at="22,51,25,113" />
+      <scope id="2390303184246693522" at="13,0,18,0" />
+      <scope id="2390303184246693522" at="21,0,27,0" />
+      <unit id="2390303184246693522" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_FlowLayout_Test$TestBody" />
+      <unit id="2390303184246693522" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_FlowLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246694260">
+    <file name="MigrateToIndent_HorizontalLayout_Test.java">
+      <node id="2390303184246694260" at="14,72,15,117" concept="0" />
+      <node id="2390303184246694260" at="15,117,16,129" concept="0" />
+      <node id="2390303184246694260" at="22,51,23,72" concept="0" />
+      <node id="2390303184246694262" at="23,72,24,138" concept="0" />
+      <node id="2390303184246694264" at="24,138,25,113" concept="0" />
+      <node id="2390303184246694260" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_HorizontalLayout#()V" />
+      <node id="2390303184246694260" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246694260" at="14,72,16,129" />
+      <scope id="2390303184246694260" at="22,51,25,113" />
+      <scope id="2390303184246694260" at="13,0,18,0" />
+      <scope id="2390303184246694260" at="21,0,27,0" />
+      <unit id="2390303184246694260" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_HorizontalLayout_Test$TestBody" />
+      <unit id="2390303184246694260" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_HorizontalLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246695613">
+    <file name="MigrateToIndent_SuperscriptLayout_Test.java">
+      <node id="2390303184246695613" at="14,73,15,117" concept="0" />
+      <node id="2390303184246695613" at="15,117,16,130" concept="0" />
+      <node id="2390303184246695613" at="22,51,23,72" concept="0" />
+      <node id="2390303184246695615" at="23,72,24,138" concept="0" />
+      <node id="2390303184246695617" at="24,138,25,113" concept="0" />
+      <node id="2390303184246695613" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_SuperscriptLayout#()V" />
+      <node id="2390303184246695613" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246695613" at="14,73,16,130" />
+      <scope id="2390303184246695613" at="22,51,25,113" />
+      <scope id="2390303184246695613" at="13,0,18,0" />
+      <scope id="2390303184246695613" at="21,0,27,0" />
+      <unit id="2390303184246695613" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_SuperscriptLayout_Test$TestBody" />
+      <unit id="2390303184246695613" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_SuperscriptLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246696438">
+    <file name="MigrateToIndent_TableLayout_Test.java">
+      <node id="2390303184246696438" at="14,67,15,117" concept="0" />
+      <node id="2390303184246696438" at="15,117,16,124" concept="0" />
+      <node id="2390303184246696438" at="22,51,23,72" concept="0" />
+      <node id="2390303184246696440" at="23,72,24,138" concept="0" />
+      <node id="2390303184246696442" at="24,138,25,113" concept="0" />
+      <node id="2390303184246696438" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_TableLayout#()V" />
+      <node id="2390303184246696438" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246696438" at="14,67,16,124" />
+      <scope id="2390303184246696438" at="22,51,25,113" />
+      <scope id="2390303184246696438" at="13,0,18,0" />
+      <scope id="2390303184246696438" at="21,0,27,0" />
+      <unit id="2390303184246696438" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_TableLayout_Test$TestBody" />
+      <unit id="2390303184246696438" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_TableLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246697387">
+    <file name="MigrateToIndent_VerticalLayout_Test.java">
+      <node id="2390303184246697387" at="14,70,15,117" concept="0" />
+      <node id="2390303184246697387" at="15,117,16,127" concept="0" />
+      <node id="2390303184246697387" at="22,51,23,72" concept="0" />
+      <node id="2390303184246697389" at="23,72,24,138" concept="0" />
+      <node id="2390303184246697391" at="24,138,25,113" concept="0" />
+      <node id="2390303184246697387" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_VerticalLayout#()V" />
+      <node id="2390303184246697387" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246697387" at="14,70,16,127" />
+      <scope id="2390303184246697387" at="22,51,25,113" />
+      <scope id="2390303184246697387" at="13,0,18,0" />
+      <scope id="2390303184246697387" at="21,0,27,0" />
+      <unit id="2390303184246697387" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_VerticalLayout_Test$TestBody" />
+      <unit id="2390303184246697387" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_VerticalLayout_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ac7fc8d2-009b-4709-96f8-5178c2bb268c(jetbrains.mps.lang.editor.ide.intentions.test)/2390303184246699571">
+    <file name="MigrateToIndent_VerticalGrtidLayout_Test.java">
+      <node id="2390303184246699571" at="14,75,15,117" concept="0" />
+      <node id="2390303184246699571" at="15,117,16,132" concept="0" />
+      <node id="2390303184246699571" at="22,51,23,72" concept="0" />
+      <node id="2390303184246699573" at="23,72,24,138" concept="0" />
+      <node id="2390303184246699575" at="24,138,25,113" concept="0" />
+      <node id="2390303184246699571" at="13,0,18,0" concept="1" trace="test_MigrateToIndent_VerticalGrtidLayout#()V" />
+      <node id="2390303184246699571" at="21,0,27,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="2390303184246699571" at="14,75,16,132" />
+      <scope id="2390303184246699571" at="22,51,25,113" />
+      <scope id="2390303184246699571" at="13,0,18,0" />
+      <scope id="2390303184246699571" at="21,0,27,0" />
+      <unit id="2390303184246699571" at="19,0,28,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_VerticalGrtidLayout_Test$TestBody" />
+      <unit id="2390303184246699571" at="11,0,29,0" name="jetbrains.mps.lang.editor.ide.intentions.test.MigrateToIndent_VerticalGrtidLayout_Test" />
+    </file>
+  </root>
+</debug-info>
+

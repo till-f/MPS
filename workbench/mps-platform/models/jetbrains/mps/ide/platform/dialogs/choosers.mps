@@ -356,12 +356,9 @@
                   </node>
                 </node>
               </node>
-              <node concept="2YIFZM" id="3m2egpBGj2F" role="37wK5m">
-                <ref role="37wK5l" to="bd8o:~ModalityState.stateForComponent(java.awt.Component):com.intellij.openapi.application.ModalityState" resolve="stateForComponent" />
+              <node concept="2YIFZM" id="1P_k_VEn0g0" role="37wK5m">
+                <ref role="37wK5l" to="bd8o:~ModalityState.any():com.intellij.openapi.application.ModalityState" resolve="any" />
                 <ref role="1Pybhc" to="bd8o:~ModalityState" resolve="ModalityState" />
-                <node concept="1rXfSq" id="3m2egpBGj2G" role="37wK5m">
-                  <ref role="37wK5l" to="jkm4:~DialogWrapper.getWindow():java.awt.Window" resolve="getWindow" />
-                </node>
               </node>
               <node concept="3clFbT" id="3m2egpBGj2H" role="37wK5m">
                 <property role="3clFbU" value="false" />

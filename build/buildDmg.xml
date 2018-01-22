@@ -17,7 +17,7 @@
 
   <target name="makeall">
     <mkdir dir="${build.tmp}"/>
-    <copy file="${basedir}/build/resources/mps.inst.mac.png" tofile="${build.tmp}/${build.code}.png"/>
+    <copy file="${basedir}/build/resources/DMG_background.tiff" tofile="${build.tmp}/${build.code}.png"/>
     <copy file="${basedir}/build/resources/mps-sign.sh" tofile="${build.tmp}/${build.code}-sign.sh"/>
     <copy file="${basedir}/build/resources/mps-dmg.sh" tofile="${build.tmp}/${build.code}-dmg.sh"/>
     <copy file="${basedir}/build/resources/mpsdmg.pl" tofile="${build.tmp}/${build.code}.pl"/>

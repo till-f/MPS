@@ -244,37 +244,42 @@
     <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
     <classNode extendsClassName="jetbrains.mps.workbench.action.BaseAction" />
   </dependency>
+  <dependency className="jetbrains.mps.ide.editor.actions.DeleteLineAction" file="DeleteLineAction.java">
+    <classNode dependClassName="java.lang.Object" />
+    <classNode dependClassName="java.util.Optional" />
+    <classNode dependClassName="java.util.function.Consumer" />
+    <classNode dependClassName="jetbrains.mps.core.aspects.behaviour.SMethodTrimmedId" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.cells.ReadOnlyUtil" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleAttributes" />
+    <classNode dependClassName="jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Vertical" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellActionType" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellLayout" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell_Collection" />
+    <classNode dependClassName="jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory" />
+    <classNode dependClassName="jetbrains.mps.smodel.behaviour.BHReflection" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.language.SContainmentLink" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+  </dependency>
   <dependency className="jetbrains.mps.ide.editor.actions.DeleteLine_Action" file="DeleteLine_Action.java">
     <classNode dependClassName="com.intellij.featureStatistics.FeatureUsageTracker" />
     <classNode dependClassName="com.intellij.openapi.actionSystem.AnActionEvent" />
     <classNode dependClassName="java.lang.Object" />
     <classNode dependClassName="java.lang.Override" />
     <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.util.ArrayList" />
-    <classNode dependClassName="java.util.LinkedList" />
-    <classNode dependClassName="java.util.List" />
     <classNode dependClassName="java.util.Map" />
-    <classNode dependClassName="java.util.Queue" />
     <classNode dependClassName="javax.swing.Icon" />
-    <classNode dependClassName="jetbrains.mps.editor.runtime.cells.ReadOnlyUtil" />
     <classNode dependClassName="jetbrains.mps.ide.editor.MPSEditorDataKeys" />
+    <classNode dependClassName="jetbrains.mps.ide.editor.actions.DeleteLineAction" />
     <classNode dependClassName="jetbrains.mps.ide.editor.actions.EditorActionUtils" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.ListSequence" />
     <classNode dependClassName="jetbrains.mps.internal.collections.runtime.MapSequence" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.QueueSequence" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.Sequence" />
-    <classNode dependClassName="jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations" />
     <classNode dependClassName="jetbrains.mps.nodeEditor.EditorComponent" />
-    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
-    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Vertical" />
-    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellConditions" />
-    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellLayout" />
-    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellTraversalUtil" />
     <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
-    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell_Collection" />
-    <classNode dependClassName="jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory" />
     <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
     <classNode extendsClassName="jetbrains.mps.workbench.action.BaseAction" />
   </dependency>
   <dependency className="jetbrains.mps.ide.editor.actions.DeleteToWordEnd_Action" file="DeleteToWordEnd_Action.java">

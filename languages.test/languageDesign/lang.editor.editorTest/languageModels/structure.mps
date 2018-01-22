@@ -1402,5 +1402,101 @@
       </node>
     </node>
   </node>
+  <node concept="1TIwiD" id="5Q8f32J8IJR">
+    <property role="3GE5qa" value="deleteLine" />
+    <property role="TrG5h" value="DeleteLineTestChild" />
+    <property role="EcuMT" value="6739703022154345463" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="PrWs8" id="5Q8f32J96ol" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5Q8f32J8IKL">
+    <property role="3GE5qa" value="deleteLine" />
+    <property role="TrG5h" value="DeleteLineTestRoot" />
+    <property role="EcuMT" value="6739703022154345521" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="5Q8f32J8IKM" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345522" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="verticalMultiple" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8IKS" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345528" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="horizontalMultiple" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8IKO" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345524" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="indentVerticalMultiple" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8IKQ" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345526" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="indentHorizontalMultiple" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8ILB" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345575" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="readOnlyChild" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IPE" resolve="DeleteLineTestReadOnlyChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8IM8" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345608" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="verticalSingle" />
+      <property role="20lbJX" value="0..1" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="5Q8f32J8IMl" role="1TKVEi">
+      <property role="IQ2ns" value="6739703022154345621" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="horizontalSingle" />
+      <property role="20lbJX" value="0..1" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="6LNwc8WAPZO" role="1TKVEi">
+      <property role="IQ2ns" value="7814731350146768884" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="multipleChildrenWithNested" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="6LNwc8WAwY9" resolve="DeleteLineTestChildWithNested" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5Q8f32J8IPE">
+    <property role="3GE5qa" value="deleteLine" />
+    <property role="TrG5h" value="DeleteLineTestReadOnlyChild" />
+    <property role="EcuMT" value="6739703022154345834" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+  </node>
+  <node concept="1TIwiD" id="6LNwc8WAwY9">
+    <property role="3GE5qa" value="deleteLine" />
+    <property role="TrG5h" value="DeleteLineTestChildWithNested" />
+    <property role="EcuMT" value="7814731350146682761" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="6LNwc8WAwYa" role="1TKVEi">
+      <property role="IQ2ns" value="7814731350146682762" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="singleChild" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+    <node concept="1TJgyj" id="6LNwc8WAwYc" role="1TKVEi">
+      <property role="IQ2ns" value="7814731350146682764" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="horizontalChild" />
+      <property role="20lbJX" value="0..n" />
+      <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+  </node>
 </model>
 

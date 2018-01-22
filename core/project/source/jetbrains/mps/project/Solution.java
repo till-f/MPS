@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class Solution extends ReloadableModuleBase {
   private static Map<SModuleReference, ClassType> bootstrapCP = initBootstrapSolutions();
 
   private static Map<SModuleReference, ClassType> initBootstrapSolutions() {
-    Map<SModuleReference, ClassType> result = new HashMap<SModuleReference, ClassType>();
+    Map<SModuleReference, ClassType> result = new HashMap<>();
     result.put(BootstrapLanguages.jdkRef(), ClassType.JDK);
     result.put(BootstrapLanguages.jdkToolsRef(), ClassType.JDK_TOOLS);
     result.put(new jetbrains.mps.project.structure.modules.ModuleReference("Annotations",

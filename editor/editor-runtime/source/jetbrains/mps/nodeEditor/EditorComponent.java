@@ -44,8 +44,6 @@ import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.IdeGlassPane;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.StatusBarEx;
-import com.intellij.psi.codeStyle.MinusculeMatcher;
-import com.intellij.psi.codeStyle.NameUtil;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.components.JBScrollBar;
 import com.intellij.ui.components.JBScrollPane;
@@ -213,7 +211,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class EditorComponent extends JComponent implements Scrollable, DataProvider, ITypeContextOwner, TooltipComponent,
@@ -320,8 +317,8 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
   private Stack<KeyboardHandler> myKbdHandlersStack;
   private MouseListener myMouseEventHandler;
 
-  private final Object myEditorcomponentActionsLock = new Object();
-  private EditorComponentActions myEditorComponentActions;
+  private final Object myEditorComponentActionsLock = new Object();
+  private volatile EditorComponentActions myEditorComponentActions;
 
   private NodeSubstituteChooser myNodeSubstituteChooser;
   private NodeInformationDialog myNodeInformationDialog;
@@ -475,17 +472,6 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
         goToNextHighlightedCell(true);
       }
     }, KeyStroke.getKeyStroke("shift F3"), WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-    registerKeyboardAction(new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        final jetbrains.mps.openapi.editor.cells.EditorCell cell = getSelectedCell();
-        if (cell == null) {
-          return;
-        }
-        getModelAccess().runReadAction(() -> showPopupMenu(cell.getX(), cell.getY()));
-      }
-    }, KeyStroke.getKeyStroke("CONTEXT_MENU"), WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     addMouseListener(new MouseAdapter() {
       @Override
@@ -1246,10 +1232,6 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
   }
 
   private void showPopupMenu(MouseEvent e) {
-    showPopupMenu(e.getX(), e.getY());
-  }
-
-  private void showPopupMenu(int x, int y) {
     if (!myPopupMenuEnabled) {
       return;
     }
@@ -1267,7 +1249,8 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
     );
 
     JPopupMenu popupMenu = ActionManager.getInstance().createActionPopupMenu(ActionPlaces.EDITOR_POPUP, group).getComponent();
-    popupMenu.show(EditorComponent.this, x, y);
+    popupMenu.show(EditorComponent.this, e.getX(), e.getY());
+    e.consume();
   }
 
   protected String getDefaultPopupGroupId() {
@@ -1650,7 +1633,7 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
   public CellAction getComponentAction(final CellActionType type) {
     //todo ensure that this method is called only from EDT, write the contract and then get rid of synchronization
     if (myEditorComponentActions == null) {
-      synchronized (myEditorcomponentActionsLock) {
+      synchronized (myEditorComponentActionsLock) {
         if (myEditorComponentActions == null) {
           myEditorComponentActions = new EditorComponentActions(this);
         }
@@ -2443,7 +2426,8 @@ public abstract class EditorComponent extends JComponent implements Scrollable, 
     // 1st - try to do substitution with current pattern (if cursor at the end of text)
     substituteInfo.invalidateActions();
     if (originalTextChanged || atTheEndOfLine) {
-      SubstituteInfo substituteInfoWithPatternMatchingFilter = NodeSubstituteInfoFilterDecorator.createSubstituteInfoWithPatternMatchingFilter(substituteInfo, getRepository());
+      SubstituteInfo substituteInfoWithPatternMatchingFilter =
+          NodeSubstituteInfoFilterDecorator.createSubstituteInfoWithPatternMatchingFilter(substituteInfo, getRepository());
       List<SubstituteAction> matchingActions = getMatchingActions(editorCell, substituteInfoWithPatternMatchingFilter, isSmart, pattern);
       if (matchingActions.size() == 1 && pattern.length() > 0) {
         // Just one applicable action in the completion menu

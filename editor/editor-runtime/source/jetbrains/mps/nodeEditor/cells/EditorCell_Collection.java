@@ -1119,6 +1119,7 @@ public class EditorCell_Collection extends EditorCell_Basic implements jetbrains
       setSelectable(false);
     }
 
+    @NotNull
     @Override
     public CellInfo getCellInfo() {
       return new BraceCellInfo(EditorCell_Brace.this);
@@ -1201,11 +1202,14 @@ public class EditorCell_Collection extends EditorCell_Basic implements jetbrains
     }
 
     public boolean equals(Object o) {
-      if (!(o instanceof BraceCellInfo)) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
         return false;
       }
-      BraceCellInfo cellInfo = ((BraceCellInfo) o);
-      return myCollectionCellInfo.equals(cellInfo.myCollectionCellInfo) && myOpeningBrace == cellInfo.myOpeningBrace;
+      BraceCellInfo that = ((BraceCellInfo) o);
+      return super.equals(that) && myCollectionCellInfo.equals(that.myCollectionCellInfo) && myOpeningBrace == that.myOpeningBrace;
     }
   }
 

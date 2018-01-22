@@ -578,6 +578,119 @@
     <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
     <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
   </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChildWithNested_Editor" file="DeleteLineTestChildWithNested_Editor.java">
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChildWithNested_EditorBuilder_a" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.DefaultNodeEditor" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChildWithNested_EditorBuilder_a" file="DeleteLineTestChildWithNested_EditorBuilder_a.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.String" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.impl.cellActions.CellAction_DeleteSmart" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleAttributes" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleImpl" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.RefNodeListHandler" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.SingleRoleCellProvider" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Horizontal" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellMenu.SChildSubstituteInfo" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellProviders.AbstractCellListHandler" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Collection" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Constant" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellActionType" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.DefaultSubstituteInfo" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.style.Style" />
+    <classNode dependClassName="jetbrains.mps.smodel.action.NodeFactoryManager" />
+    <classNode dependClassName="jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.language.SContainmentLink" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChild_Editor" file="DeleteLineTestChild_Editor.java">
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChild_EditorBuilder_a" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.DefaultNodeEditor" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChild_EditorBuilder_a" file="DeleteLineTestChild_EditorBuilder_a.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.PropertyCellProvider" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.EditorManager" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellProviders.CellProviderWithRole" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Collection" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Constant" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestReadOnlyChild_Editor" file="DeleteLineTestReadOnlyChild_Editor.java">
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestReadOnlyChild_EditorBuilder_a" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.DefaultNodeEditor" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestReadOnlyChild_EditorBuilder_a" file="DeleteLineTestReadOnlyChild_EditorBuilder_a.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleAttributes" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleImpl" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Collection" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Constant" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.style.Style" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestRoot_Editor" file="DeleteLineTestRoot_Editor.java">
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestRoot_EditorBuilder_a" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.DefaultNodeEditor" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestRoot_EditorBuilder_a" file="DeleteLineTestRoot_EditorBuilder_a.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.String" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.impl.cellActions.CellAction_DeleteSmart" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleAttributes" />
+    <classNode dependClassName="jetbrains.mps.editor.runtime.style.StyleImpl" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.RefNodeListHandler" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.SingleRoleCellProvider" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Horizontal" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellLayout.CellLayout_Vertical" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellMenu.SChildSubstituteInfo" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellProviders.AbstractCellListHandler" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Collection" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cells.EditorCell_Constant" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.CellActionType" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.DefaultSubstituteInfo" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.style.Style" />
+    <classNode dependClassName="jetbrains.mps.smodel.action.NodeFactoryManager" />
+    <classNode dependClassName="jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.language.SContainmentLink" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
   <dependency className="jetbrains.mps.lang.editor.editorTest.editor.DeleteWrapperRoot_Editor" file="DeleteWrapperRoot_Editor.java">
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteWrapperRoot_EditorBuilder_a" />
     <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
@@ -638,6 +751,10 @@
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DelTestChildSpecialContainer_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DelTestSpecialAbstractChild_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DelTestSpecialChild1_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChildWithNested_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestChild_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestReadOnlyChild_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteLineTestRoot_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.DeleteWrapperRoot_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.FoldedCell_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.FoldingContainer_Editor" />

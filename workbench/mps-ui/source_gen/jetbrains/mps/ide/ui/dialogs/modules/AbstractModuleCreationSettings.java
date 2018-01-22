@@ -108,7 +108,7 @@ public abstract class AbstractModuleCreationSettings extends JPanel {
     if ((oldProjectPath != null && oldProjectPath.length() > 0) && myModuleLocation.getText().contains(oldProjectPath)) {
       setModuleLocation(myModuleLocation.getText().replace(oldProjectPath, myProjectPath));
     } else {
-      setModuleLocation(getDefaultModulePath());
+      setModuleLocation(getDefaultModulePath() + getDefaultModuleName());
     }
     fireChanged();
   }

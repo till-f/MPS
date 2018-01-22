@@ -274,6 +274,11 @@ public abstract class BaseEditorTestBody extends BaseTestBody {
     invokeMatchingIntention(node, new MatchIntentionById(id));
   }
 
+  protected void invokeSurroundWithIntention(String id) throws InterruptedException, InvocationTargetException {
+    new IntentionTester(this, true).invokeMatchingIntention(new MatchIntentionById(id));
+  }
+
+
   protected void invokeParameterizedIntention(String id, Object parameter, SNode node) throws InterruptedException, InvocationTargetException {
     invokeMatchingIntention(node, new MatchIntentionByIdAndParameter(id, parameter));
   }

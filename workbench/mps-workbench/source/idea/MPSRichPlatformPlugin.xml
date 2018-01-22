@@ -116,8 +116,6 @@
     <compiler.buildTargetScopeProvider implementation="com.intellij.packaging.impl.compiler.ArtifactBuildTargetScopeProvider"/>
     <compiler implementation="com.intellij.packaging.impl.compiler.ArtifactsCompiler" id="artifactsCompiler"/>
 
-    <compiler.task execute="BEFORE" implementation="com.intellij.compiler.impl.JavaModuleIndexBuildTask"/>
-
     <gotoRelatedProvider implementation="com.intellij.testIntegration.GotoTestRelatedProvider"/>
     -->
 
@@ -194,7 +192,8 @@
                     testServiceImplementation="com.intellij.build.internal.DummyBuildContentManager"/>
 
     <projectService serviceInterface="com.intellij.build.BuildViewManager"
-                    serviceImplementation="com.intellij.build.BuildViewManager"/>
+                    serviceImplementation="com.intellij.build.BuildViewManager"
+                    testServiceImplementation="com.intellij.build.internal.DummyBuildViewManager"/>
     <projectService serviceInterface="com.intellij.build.SyncViewManager"
                     serviceImplementation="com.intellij.build.SyncViewManager"
                     testServiceImplementation="com.intellij.build.internal.DummySyncViewManager"/>
@@ -296,6 +295,7 @@
     <postStartupActivity implementation="com.intellij.externalDependencies.impl.CheckRequiredPluginsActivity"/>
     <projectConfigurable groupId="build" provider="com.intellij.externalDependencies.impl.ExternalDependenciesConfigurableProvider"
                          id="preferences.externalDependencies" displayName="Required Plugins"/>
+    <!--MPS patch: add two setting pages-->
     <projectConfigurable groupId="build" groupWeight="130" instance="jetbrains.mps.library.ProjectLibraryManagerConfigurable"
                          id="preferences.projectLibraryManager" nonDefaultProject="true"/>
     <applicationConfigurable groupId="build" groupWeight="120" instance="jetbrains.mps.library.LibraryManagerConfigurable" id="preferences.libraryManager"/>
@@ -375,6 +375,8 @@
     <programRunner id="defaultRunRunner" implementation="com.intellij.execution.impl.DefaultJavaProgramRunner"/>
     <programRunner implementation="com.intellij.execution.runners.DefaultRunProgramRunner" order="last"/>
 
+    <checkinHandlerFactory implementation="com.intellij.compiler.impl.vcs.UnloadedModulesCompilationCheckinHandler$Factory"/>
+
     <hectorComponentProvider implementation="com.intellij.codeInsight.daemon.impl.ImportPopupHectorComponentProvider"/>
 
 
@@ -403,6 +405,9 @@
     <projectStructure.sourceRootEditHandler implementation="com.intellij.openapi.roots.ui.configuration.JavaTestResourceRootEditHandler"/>
 
     <buildProcess.parametersProvider implementation="com.intellij.compiler.CompilerReferenceIndexBuildParametersProvider"/>
+
+    <editorActionHandler action="EditorChooseLookupItemReplace"
+                         implementationClass="com.intellij.codeInsight.hint.NextParameterAfterCompletionHandler"/>
   -->
   </extensions>
   <!--

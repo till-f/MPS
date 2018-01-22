@@ -19,7 +19,11 @@ public class check_BuildFileIncludeSelector_NonTypesystemRule extends AbstractNo
   public check_BuildFileIncludeSelector_NonTypesystemRule() {
   }
   public void applyRule(final SNode inc, final TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
-    if (SPropertyOperations.getString(inc, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, 0x48d5d03db9262f9dL, "pattern")).contains(" ") || SPropertyOperations.getString(inc, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, 0x48d5d03db9262f9dL, "pattern")).contains("\t") || SPropertyOperations.getString(inc, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, 0x48d5d03db9262f9dL, "pattern")).contains(",")) {
+    String pattern = SPropertyOperations.getString(inc, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, 0x48d5d03db9262f9dL, "pattern"));
+    if (isEmptyString(SPropertyOperations.getString(inc, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, 0x48d5d03db9262f9dL, "pattern")))) {
+      return;
+    }
+    if (pattern.contains(" ") || pattern.contains("\t") || pattern.contains(",")) {
       {
         MessageTarget errorTarget = new NodeMessageTarget();
         errorTarget = new PropertyMessageTarget("pattern");
@@ -35,5 +39,8 @@ public class check_BuildFileIncludeSelector_NonTypesystemRule extends AbstractNo
   }
   public boolean overrides() {
     return false;
+  }
+  private static boolean isEmptyString(String str) {
+    return str == null || str.length() == 0;
   }
 }

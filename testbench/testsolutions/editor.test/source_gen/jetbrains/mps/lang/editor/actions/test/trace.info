@@ -1583,6 +1583,174 @@
       <unit id="6047905657530835410" at="10,0,28,0" name="jetbrains.mps.lang.editor.actions.test.Comment_CommentUncomment_Test" />
     </file>
   </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154441044">
+    <file name="DeleteLineVerticalMultipleCollection_Test.java">
+      <node id="6739703022154441044" at="14,76,15,110" concept="0" />
+      <node id="6739703022154441044" at="15,110,16,126" concept="0" />
+      <node id="6739703022154441044" at="22,51,23,72" concept="0" />
+      <node id="6739703022154441056" at="25,44,26,77" concept="0" />
+      <node id="6739703022154441054" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154441044" at="13,0,18,0" concept="1" trace="test_DeleteLineVerticalMultipleCollection#()V" />
+      <node id="6739703022154441052" at="23,72,28,16" concept="0" />
+      <node id="6739703022154441044" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154441055" at="25,44,26,77" />
+      <scope id="6739703022154441044" at="14,76,16,126" />
+      <scope id="6739703022154441054" at="25,0,28,0" />
+      <scope id="6739703022154441044" at="13,0,18,0" />
+      <scope id="6739703022154441044" at="22,51,28,16" />
+      <scope id="6739703022154441044" at="21,0,30,0" />
+      <unit id="6739703022154441054" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalMultipleCollection_Test$TestBody$1" />
+      <unit id="6739703022154441044" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalMultipleCollection_Test$TestBody" />
+      <unit id="6739703022154441044" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalMultipleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154526888">
+    <file name="DeleteLineIndentVerticalMultipleCollection_Test.java">
+      <node id="6739703022154526888" at="14,82,15,110" concept="0" />
+      <node id="6739703022154526888" at="15,110,16,132" concept="0" />
+      <node id="6739703022154526888" at="22,51,23,72" concept="0" />
+      <node id="6739703022154526894" at="25,44,26,77" concept="0" />
+      <node id="6739703022154526892" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154526888" at="13,0,18,0" concept="1" trace="test_DeleteLineIndentVerticalMultipleCollection#()V" />
+      <node id="6739703022154526890" at="23,72,28,16" concept="0" />
+      <node id="6739703022154526888" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154526893" at="25,44,26,77" />
+      <scope id="6739703022154526888" at="14,82,16,132" />
+      <scope id="6739703022154526892" at="25,0,28,0" />
+      <scope id="6739703022154526888" at="13,0,18,0" />
+      <scope id="6739703022154526888" at="22,51,28,16" />
+      <scope id="6739703022154526888" at="21,0,30,0" />
+      <unit id="6739703022154526892" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentVerticalMultipleCollection_Test$TestBody$1" />
+      <unit id="6739703022154526888" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentVerticalMultipleCollection_Test$TestBody" />
+      <unit id="6739703022154526888" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentVerticalMultipleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154527082">
+    <file name="DeleteLineHorizontalMultipleCollection_Test.java">
+      <node id="6739703022154527082" at="14,78,15,110" concept="0" />
+      <node id="6739703022154527082" at="15,110,16,128" concept="0" />
+      <node id="6739703022154527082" at="22,51,23,72" concept="0" />
+      <node id="6739703022154527088" at="25,44,26,77" concept="0" />
+      <node id="6739703022154527086" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154527082" at="13,0,18,0" concept="1" trace="test_DeleteLineHorizontalMultipleCollection#()V" />
+      <node id="6739703022154527084" at="23,72,28,16" concept="0" />
+      <node id="6739703022154527082" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154527087" at="25,44,26,77" />
+      <scope id="6739703022154527082" at="14,78,16,128" />
+      <scope id="6739703022154527086" at="25,0,28,0" />
+      <scope id="6739703022154527082" at="13,0,18,0" />
+      <scope id="6739703022154527082" at="22,51,28,16" />
+      <scope id="6739703022154527082" at="21,0,30,0" />
+      <unit id="6739703022154527086" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalMultipleCollection_Test$TestBody$1" />
+      <unit id="6739703022154527082" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalMultipleCollection_Test$TestBody" />
+      <unit id="6739703022154527082" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalMultipleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154613199">
+    <file name="DeleteLineIndentHorizontalMultipleCollection_Test.java">
+      <node id="6739703022154613199" at="14,84,15,110" concept="0" />
+      <node id="6739703022154613199" at="15,110,16,134" concept="0" />
+      <node id="6739703022154613199" at="22,51,23,72" concept="0" />
+      <node id="6739703022154613205" at="25,44,26,77" concept="0" />
+      <node id="6739703022154613203" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154613199" at="13,0,18,0" concept="1" trace="test_DeleteLineIndentHorizontalMultipleCollection#()V" />
+      <node id="6739703022154613201" at="23,72,28,16" concept="0" />
+      <node id="6739703022154613199" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154613204" at="25,44,26,77" />
+      <scope id="6739703022154613199" at="14,84,16,134" />
+      <scope id="6739703022154613203" at="25,0,28,0" />
+      <scope id="6739703022154613199" at="13,0,18,0" />
+      <scope id="6739703022154613199" at="22,51,28,16" />
+      <scope id="6739703022154613199" at="21,0,30,0" />
+      <unit id="6739703022154613203" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentHorizontalMultipleCollection_Test$TestBody$1" />
+      <unit id="6739703022154613199" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentHorizontalMultipleCollection_Test$TestBody" />
+      <unit id="6739703022154613199" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineIndentHorizontalMultipleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154613737">
+    <file name="DeleteLineVerticalSingleCollection_Test.java">
+      <node id="6739703022154613737" at="14,74,15,110" concept="0" />
+      <node id="6739703022154613737" at="15,110,16,124" concept="0" />
+      <node id="6739703022154613737" at="22,51,23,72" concept="0" />
+      <node id="6739703022154613743" at="25,44,26,77" concept="0" />
+      <node id="6739703022154613741" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154613737" at="13,0,18,0" concept="1" trace="test_DeleteLineVerticalSingleCollection#()V" />
+      <node id="6739703022154613739" at="23,72,28,16" concept="0" />
+      <node id="6739703022154613737" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154613742" at="25,44,26,77" />
+      <scope id="6739703022154613737" at="14,74,16,124" />
+      <scope id="6739703022154613741" at="25,0,28,0" />
+      <scope id="6739703022154613737" at="13,0,18,0" />
+      <scope id="6739703022154613737" at="22,51,28,16" />
+      <scope id="6739703022154613737" at="21,0,30,0" />
+      <unit id="6739703022154613741" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalSingleCollection_Test$TestBody$1" />
+      <unit id="6739703022154613737" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalSingleCollection_Test$TestBody" />
+      <unit id="6739703022154613737" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineVerticalSingleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154687669">
+    <file name="DeleteLineHorizontalSingleCollection_Test.java">
+      <node id="6739703022154687669" at="14,76,15,110" concept="0" />
+      <node id="6739703022154687669" at="15,110,16,126" concept="0" />
+      <node id="6739703022154687669" at="22,51,23,72" concept="0" />
+      <node id="6739703022154687675" at="25,44,26,77" concept="0" />
+      <node id="6739703022154687673" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154687669" at="13,0,18,0" concept="1" trace="test_DeleteLineHorizontalSingleCollection#()V" />
+      <node id="6739703022154687671" at="23,72,28,16" concept="0" />
+      <node id="6739703022154687669" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154687674" at="25,44,26,77" />
+      <scope id="6739703022154687669" at="14,76,16,126" />
+      <scope id="6739703022154687673" at="25,0,28,0" />
+      <scope id="6739703022154687669" at="13,0,18,0" />
+      <scope id="6739703022154687669" at="22,51,28,16" />
+      <scope id="6739703022154687669" at="21,0,30,0" />
+      <unit id="6739703022154687673" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalSingleCollection_Test$TestBody$1" />
+      <unit id="6739703022154687669" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalSingleCollection_Test$TestBody" />
+      <unit id="6739703022154687669" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineHorizontalSingleCollection_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154766497">
+    <file name="DeleteLineReadOnlyChild_Test.java">
+      <node id="6739703022154766497" at="14,63,15,110" concept="0" />
+      <node id="6739703022154766497" at="15,110,16,113" concept="0" />
+      <node id="6739703022154766497" at="22,51,23,72" concept="0" />
+      <node id="6739703022154766503" at="25,44,26,77" concept="0" />
+      <node id="6739703022154766501" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154766497" at="13,0,18,0" concept="1" trace="test_DeleteLineReadOnlyChild#()V" />
+      <node id="6739703022154766499" at="23,72,28,16" concept="0" />
+      <node id="6739703022154766497" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154766502" at="25,44,26,77" />
+      <scope id="6739703022154766497" at="14,63,16,113" />
+      <scope id="6739703022154766501" at="25,0,28,0" />
+      <scope id="6739703022154766497" at="13,0,18,0" />
+      <scope id="6739703022154766497" at="22,51,28,16" />
+      <scope id="6739703022154766497" at="21,0,30,0" />
+      <unit id="6739703022154766501" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineReadOnlyChild_Test$TestBody$1" />
+      <unit id="6739703022154766497" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineReadOnlyChild_Test$TestBody" />
+      <unit id="6739703022154766497" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineReadOnlyChild_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6739703022154927702">
+    <file name="DeleteLineRoot_Test.java">
+      <node id="6739703022154927702" at="14,54,15,110" concept="0" />
+      <node id="6739703022154927702" at="15,110,16,104" concept="0" />
+      <node id="6739703022154927702" at="22,51,23,72" concept="0" />
+      <node id="6739703022154927708" at="25,44,26,77" concept="0" />
+      <node id="6739703022154927706" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="6739703022154927702" at="13,0,18,0" concept="1" trace="test_DeleteLineRoot#()V" />
+      <node id="6739703022154927704" at="23,72,28,16" concept="0" />
+      <node id="6739703022154927702" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="6739703022154927707" at="25,44,26,77" />
+      <scope id="6739703022154927702" at="14,54,16,104" />
+      <scope id="6739703022154927706" at="25,0,28,0" />
+      <scope id="6739703022154927702" at="13,0,18,0" />
+      <scope id="6739703022154927702" at="22,51,28,16" />
+      <scope id="6739703022154927702" at="21,0,30,0" />
+      <unit id="6739703022154927706" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineRoot_Test$TestBody$1" />
+      <unit id="6739703022154927702" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineRoot_Test$TestBody" />
+      <unit id="6739703022154927702" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineRoot_Test" />
+    </file>
+  </root>
   <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/6866182640452618978">
     <file name="InsertPlaceholderIntoEmptyMultipleCollection_Test.java">
       <node id="6866182640452618978" at="13,84,14,110" concept="0" />
@@ -1767,6 +1935,69 @@
       <unit id="1241246198932818868" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DelOnChild1DeleteParent_Test$TestBody$1" />
       <unit id="7803854675610520166" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DelOnChild1DeleteParent_Test$TestBody" />
       <unit id="7803854675610520166" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DelOnChild1DeleteParent_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/7814731350146682384">
+    <file name="DeleteLineCommentedNode_Test.java">
+      <node id="7814731350146682384" at="14,63,15,110" concept="0" />
+      <node id="7814731350146682384" at="15,110,16,113" concept="0" />
+      <node id="7814731350146682384" at="22,51,23,72" concept="0" />
+      <node id="7814731350146682390" at="25,44,26,77" concept="0" />
+      <node id="7814731350146682388" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="7814731350146682384" at="13,0,18,0" concept="1" trace="test_DeleteLineCommentedNode#()V" />
+      <node id="7814731350146682386" at="23,72,28,16" concept="0" />
+      <node id="7814731350146682384" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="7814731350146682389" at="25,44,26,77" />
+      <scope id="7814731350146682384" at="14,63,16,113" />
+      <scope id="7814731350146682388" at="25,0,28,0" />
+      <scope id="7814731350146682384" at="13,0,18,0" />
+      <scope id="7814731350146682384" at="22,51,28,16" />
+      <scope id="7814731350146682384" at="21,0,30,0" />
+      <unit id="7814731350146682388" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineCommentedNode_Test$TestBody$1" />
+      <unit id="7814731350146682384" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineCommentedNode_Test$TestBody" />
+      <unit id="7814731350146682384" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineCommentedNode_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/7814731350146768750">
+    <file name="DeleteLineNestedSingleChild_Test.java">
+      <node id="7814731350146768750" at="14,67,15,110" concept="0" />
+      <node id="7814731350146768750" at="15,110,16,117" concept="0" />
+      <node id="7814731350146768750" at="22,51,23,72" concept="0" />
+      <node id="7814731350146768756" at="25,44,26,77" concept="0" />
+      <node id="7814731350146768754" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="7814731350146768750" at="13,0,18,0" concept="1" trace="test_DeleteLineNestedSingleChild#()V" />
+      <node id="7814731350146768752" at="23,72,28,16" concept="0" />
+      <node id="7814731350146768750" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="7814731350146768755" at="25,44,26,77" />
+      <scope id="7814731350146768750" at="14,67,16,117" />
+      <scope id="7814731350146768754" at="25,0,28,0" />
+      <scope id="7814731350146768750" at="13,0,18,0" />
+      <scope id="7814731350146768750" at="22,51,28,16" />
+      <scope id="7814731350146768750" at="21,0,30,0" />
+      <unit id="7814731350146768754" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedSingleChild_Test$TestBody$1" />
+      <unit id="7814731350146768750" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedSingleChild_Test$TestBody" />
+      <unit id="7814731350146768750" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedSingleChild_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/7814731350146952041">
+    <file name="DeleteLineNestedHorizontalChild_Test.java">
+      <node id="7814731350146952041" at="14,71,15,110" concept="0" />
+      <node id="7814731350146952041" at="15,110,16,121" concept="0" />
+      <node id="7814731350146952041" at="22,51,23,72" concept="0" />
+      <node id="7814731350146952047" at="25,44,26,77" concept="0" />
+      <node id="7814731350146952045" at="25,0,28,0" concept="1" trace="run#()V" />
+      <node id="7814731350146952041" at="13,0,18,0" concept="1" trace="test_DeleteLineNestedHorizontalChild#()V" />
+      <node id="7814731350146952043" at="23,72,28,16" concept="0" />
+      <node id="7814731350146952041" at="21,0,30,0" concept="1" trace="testMethodImpl#()V" />
+      <scope id="7814731350146952046" at="25,44,26,77" />
+      <scope id="7814731350146952041" at="14,71,16,121" />
+      <scope id="7814731350146952045" at="25,0,28,0" />
+      <scope id="7814731350146952041" at="13,0,18,0" />
+      <scope id="7814731350146952041" at="22,51,28,16" />
+      <scope id="7814731350146952041" at="21,0,30,0" />
+      <unit id="7814731350146952045" at="24,44,28,7" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedHorizontalChild_Test$TestBody$1" />
+      <unit id="7814731350146952041" at="19,0,31,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedHorizontalChild_Test$TestBody" />
+      <unit id="7814731350146952041" at="11,0,32,0" name="jetbrains.mps.lang.editor.actions.test.DeleteLineNestedHorizontalChild_Test" />
     </file>
   </root>
   <root nodeRef="r:c44f4b8c-137c-4225-8bd9-38d232a9b736(jetbrains.mps.lang.editor.actions.test)/7888199326996725782">

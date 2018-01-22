@@ -432,9 +432,9 @@ public class ChangesTracking {
         FilePerRootDataSource ds = (FilePerRootDataSource) dataSource;
         Map<SNodeId, String> streamNames = FilePerRootFormatUtil.getStreamNames(((SModelBase) myModelDescriptor).getSModel());
         for (SModelEvent event : ListSequence.fromList(events)) {
-          SNode root = event.getAffectedRoot();
-          if (root != null) {
-            SetSequence.fromSet(affectedFiles).addElement(ds.getFile(streamNames.get(root.getNodeId())));
+          SNodeId rootId = check_5iuzi5_a0a0c0a7a2bc(event.getAffectedRoot());
+          if (rootId != null && streamNames.containsKey(rootId)) {
+            SetSequence.fromSet(affectedFiles).addElement(ds.getFile(streamNames.get(rootId)));
           }
         }
         // model file can be affected also 
@@ -670,6 +670,12 @@ public class ChangesTracking {
   private static SModel check_5iuzi5_a0a0a54(ChangeSet checkedDotOperand) {
     if (null != checkedDotOperand) {
       return checkedDotOperand.getOldModel();
+    }
+    return null;
+  }
+  private static SNodeId check_5iuzi5_a0a0c0a7a2bc(SNode checkedDotOperand) {
+    if (null != checkedDotOperand) {
+      return checkedDotOperand.getNodeId();
     }
     return null;
   }

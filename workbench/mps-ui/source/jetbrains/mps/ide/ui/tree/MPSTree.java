@@ -140,7 +140,7 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
             //    Would be great to combine RA of doInit, rebuild and presentation update into single method.
             // 4. saveExpansion == false as updatePresentation is not supposed to affect tree structure
             Runnable updateCode = () -> runRebuildAction(mpsTreeNode::updatePresentation, false);
-            myQueue.queue(new SafeUpdate(new Object[] {c, "presentation"}, updateCode, LOG));
+            myQueue.queue(new SafeUpdate(new Object[]{c, "presentation"}, updateCode, LOG));
           }
         }
       }
@@ -173,7 +173,8 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
    * that may add extra utility stuff, like progress indication.
    * Primary responsibility is guards to prevent endless initialization
    */
-  /*package*/ final void performInit(final MPSTreeNode node) {
+  /*package*/
+  final void performInit(final MPSTreeNode node) {
     assert ThreadUtils.isInEDT();
     if (myExpandingNodes.contains(node)) {
       return;
@@ -196,7 +197,7 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
    * Extra initialization stuff, by default adds progress indication (conditional, myLoadingDisabled and node.isLoadingEnabled).
    * Sub-classes may override to provide extra initialization stuff (shall invoke nodeInitRunnable if do not delegate to super)
    * or to wrap nodeInitRunnable into proper access code (e.g. model read if tree node initialization might demand access to model).
-   *
+   * <p>
    * Note, if tree nodes do not initialize lazily with access to a data model, there's no need to override the method and to wrap nodeInitRunnable with
    * data model access control (e.g. model read)
    */
@@ -258,7 +259,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   }
 
   void myMouseReleased(MouseEvent e) {
-    if (e.isPopupTrigger()) showPopup(e.getX(), e.getY());
+    if (e.isPopupTrigger()) {
+      showPopup(e.getX(), e.getY(), e);
+    }
   }
 
   void myMousePressed(final MouseEvent e) {
@@ -267,20 +270,24 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
     if (e.getButton() == 0) {
       // This is a workaround for handling context menu button
       TreePath path = getSelectionPath();
-      if (path == null) return;
+      if (path == null) {
+        return;
+      }
       int rowNum = getRowForPath(path);
       Rectangle r = getRowBounds(rowNum);
-      showPopup(r.x, r.y);
+      showPopup(r.x, r.y, e);
       return;
     }
 
     if (e.isPopupTrigger()) {
-      showPopup(e.getX(), e.getY());
+      showPopup(e.getX(), e.getY(), e);
       return;
     }
 
     TreePath path = getClosestPathForLocation(e.getX(), e.getY());
-    if (path == null) return;
+    if (path == null) {
+      return;
+    }
 
     MPSTreeNode nodeToClick = getOpenableNode(e);
     if (nodeToClick != null) {
@@ -292,25 +299,33 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
 
   private void myMouseClicked(MouseEvent e) {
     if (e.isPopupTrigger()) {
-      showPopup(e.getX(), e.getY());
+      showPopup(e.getX(), e.getY(), e);
     }
   }
 
   private MPSTreeNode getOpenableNode(MouseEvent e) {
     MPSTreeNode node = getNodeFromPath(getClosestPathForLocation(e.getX(), e.getY()));
 
-    if (node == null) return null;
-    if (!node.canBeOpened()) return null;
+    if (node == null) {
+      return null;
+    }
+    if (!node.canBeOpened()) {
+      return null;
+    }
 
     return node;
   }
 
   @Nullable
   private MPSTreeNode getNodeFromPath(@Nullable TreePath path) {
-    if (path == null) return null;
+    if (path == null) {
+      return null;
+    }
     Object lastPathComponent = path.getLastPathComponent();
 
-    if (!(lastPathComponent instanceof MPSTreeNode)) return null;
+    if (!(lastPathComponent instanceof MPSTreeNode)) {
+      return null;
+    }
     return (MPSTreeNode) lastPathComponent;
   }
 
@@ -367,7 +382,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
 
   protected final JPopupMenu createPopupMenu(final MPSTreeNode node) {
     ActionGroup actionGroup = createPopupActionGroup(node);
-    if (actionGroup == null) return null;
+    if (actionGroup == null) {
+      return null;
+    }
     return ActionManager.getInstance().createActionPopupMenu(getPopupMenuPlace(), actionGroup).getComponent();
   }
 
@@ -393,7 +410,7 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
     return ui instanceof WideSelectionTreeUI && ((WideSelectionTreeUI) ui).isWideSelection();
   }
 
-  private void showPopup(int x, int y) {
+  private void showPopup(int x, int y, MouseEvent e) {
     if (!insideTreeItemsArea(y)) {
       return;
     }
@@ -416,13 +433,17 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
       JPopupMenu menu = createPopupMenu(node);
       if (menu != null) {
         menu.show(this, x, y);
+        e.consume();
         return;
       }
     }
 
     JPopupMenu defaultMenu = createDefaultPopupMenu();
-    if (defaultMenu == null) return;
+    if (defaultMenu == null) {
+      return;
+    }
     defaultMenu.show(this, x, y);
+    e.consume();
   }
 
   @Nullable
@@ -448,7 +469,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
 
     while (true) {
       path.add(current);
-      if (current.getChildCount() == 0) break;
+      if (current.getChildCount() == 0) {
+        break;
+      }
       current = (MPSTreeNode) current.getChildAt(0);
     }
 
@@ -469,6 +492,7 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
       myLoadingDisabled = wasLoadingDisabled;
     }
   }
+
   private void expandAllImpl(MPSTreeNode node) {
     expandPath(new TreePath(node.getPath()));
     for (MPSTreeNode c : node) {
@@ -501,7 +525,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
       nodes.add(0, node);
       node = node.getParent();
     }
-    if (nodes.size() == 0) return;
+    if (nodes.size() == 0) {
+      return;
+    }
     TreePath path = new TreePath(nodes.toArray());
     setSelectionPath(path);
     scrollRowToVisible(getRowForPath(path));
@@ -519,6 +545,7 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
    * {@code protected Runnable wrapDataAccess(Runnable)} to facilitate model read wrap.
    * <p/>
    * This method expects EDT thread.
+   *
    * @param rebuildAction code that rebuilds a tree (or part thereof)
    * @param saveExpansion {@code true} to indicate expanded path and selection is preserved
    */
@@ -570,7 +597,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
       @Override
       public void run() {
         // myQueue is attached to EDT
-        if (MPSTree.this.isDisposed()) return;
+        if (MPSTree.this.isDisposed()) {
+          return;
+        }
         rebuildNow();
       }
     }, LOG));
@@ -629,7 +658,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
       result.append(TREE_PATH_SEPARATOR);
       result.append(node.getNodeIdentifier().replaceAll(TREE_PATH_SEPARATOR, "-"));
     }
-    if (result.length() == 0) return TREE_PATH_SEPARATOR;
+    if (result.length() == 0) {
+      return TREE_PATH_SEPARATOR;
+    }
     return result.toString();
   }
 
@@ -653,11 +684,17 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   }
 
   private MPSTreeNode findNodeWith(MPSTreeNode root, Object userObject) {
-    if (root.getUserObject() == userObject) return root;
-    if (!(root.isInitialized() || root.hasInfiniteSubtree())) root.init();
+    if (root.getUserObject() == userObject) {
+      return root;
+    }
+    if (!(root.isInitialized() || root.hasInfiniteSubtree())) {
+      root.init();
+    }
     for (MPSTreeNode child : root) {
       MPSTreeNode result = findNodeWith(child, userObject);
-      if (result != null) return result;
+      if (result != null) {
+        return result;
+      }
     }
     return null;
   }
@@ -683,14 +720,17 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
 
     for (Iterator<String> it = components.iterator(); it.hasNext(); ) {
       String component = it.next();
-      assert current.isInitialized() : String.format("For tree path %s at element %s parent node %s(%s) is not initialized", components, component, current, current.getClass());
-      if (component == null || component.length() == 0) continue;
+      assert current.isInitialized() : String.format("For tree path %s at element %s parent node %s(%s) is not initialized", components, component, current,
+                                                     current.getClass());
+      if (component == null || component.length() == 0) {
+        continue;
+      }
       boolean found = false;
       for (int i = 0; i < current.getChildCount(); i++) {
         MPSTreeNode node = (MPSTreeNode) current.getChildAt(i);
         String treeNodeId =
             escapePathSep ? node.getNodeIdentifier().replaceAll(TREE_PATH_SEPARATOR, "-") :
-                            node.getNodeIdentifier();
+            node.getNodeIdentifier();
         if (treeNodeId.equals(component)) {
           current = node;
           path.add(current);
@@ -755,7 +795,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   public List<List<String>> getExpandedPathsRaw() {
     List<List<String>> result = new ArrayList<>();
     Enumeration<TreePath> expanded = getExpandedDescendants(new TreePath(new Object[]{getModel().getRoot()}));
-    if (expanded == null) return result;
+    if (expanded == null) {
+      return result;
+    }
     while (expanded.hasMoreElements()) {
       List<String> path = new ArrayList<>();
       TreePath expandedPath = expanded.nextElement();
@@ -774,12 +816,15 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   private List<String> getExpandedPaths() {
     List<String> result = new ArrayList<>();
     Enumeration<TreePath> expanded = getExpandedDescendants(new TreePath(new Object[]{getModel().getRoot()}));
-    if (expanded == null) return result;
+    if (expanded == null) {
+      return result;
+    }
     while (expanded.hasMoreElements()) {
       TreePath path = expanded.nextElement();
       String pathString = pathToString(path);
-      if (result.contains(pathString))
+      if (result.contains(pathString)) {
         LOG.warn("two expanded paths have the same string representation");
+      }
       result.add(pathString);
     }
     return result;
@@ -788,8 +833,10 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   // TODO: refactor TreeState to include these instead of the old format
   public List<List<String>> getSelectedPathsRaw() {
     List<List<String>> result = new ArrayList<>();
-    if (getSelectionPaths() == null) return result;
-    for (TreePath selectedPath: getSelectionPaths()) {
+    if (getSelectionPaths() == null) {
+      return result;
+    }
+    for (TreePath selectedPath : getSelectionPaths()) {
       List<String> path = new ArrayList<String>();
       for (int i = 1; i < selectedPath.getPathCount(); i++) {
         MPSTreeNode node = (MPSTreeNode) selectedPath.getPathComponent(i);
@@ -802,11 +849,14 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
 
   private List<String> getSelectedPaths() {
     List<String> result = new ArrayList<>();
-    if (getSelectionPaths() == null) return result;
+    if (getSelectionPaths() == null) {
+      return result;
+    }
     for (TreePath selectionPart : getSelectionPaths()) {
       String pathString = pathToString(selectionPart);
-      if (result.contains(pathString))
+      if (result.contains(pathString)) {
         LOG.warn("two selected paths have the same string representation");
+      }
       result.add(pathString);
     }
     return result;
@@ -833,7 +883,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   @Override
   public int getToggleClickCount() {
     MPSTreeNode node = getNodeFromPath(getSelectionPath());
-    if (node == null) return -1;
+    if (node == null) {
+      return -1;
+    }
     return node.getToggleClickCount();
   }
 
@@ -876,7 +928,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
     @Override
     public void treeWillExpand(TreeExpansionEvent event) throws ExpandVetoException {
       MPSTreeNode treeNode = getNodeFromPath(event.getPath());
-      if (treeNode != null) treeNode.init();
+      if (treeNode != null) {
+        treeNode.init();
+      }
     }
 
     @Override
@@ -887,7 +941,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
   private class MyTreeExpansionListener implements TreeExpansionListener {
     @Override
     public void treeExpanded(TreeExpansionEvent event) {
-      if (!myAutoExpandEnabled) return;
+      if (!myAutoExpandEnabled) {
+        return;
+      }
 
       TreePath eventPath = event.getPath();
       MPSTreeNode node = getNodeFromPath(eventPath);
@@ -943,7 +999,9 @@ public abstract class MPSTree extends DnDAwareTree implements Disposable {
     @Override
     public void actionPerformed(ActionEvent e) {
       MPSTreeNode selNode = getNodeFromPath(getSelectionPath());
-      if (selNode == null) return;
+      if (selNode == null) {
+        return;
+      }
 
       doubleClick(selNode);
     }

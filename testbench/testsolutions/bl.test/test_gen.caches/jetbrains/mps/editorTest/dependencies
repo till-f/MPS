@@ -4080,6 +4080,56 @@
     <classNode dependClassName="org.junit.Test" />
     <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
   </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteLineCommentedStatement_Test" file="DeleteLineCommentedStatement_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteLineMethodInInnerClass_Test" file="DeleteLineMethodInInnerClass_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteLineMethod_Test" file="DeleteLineMethod_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteLineStatementInHorizontalCollection_Test" file="DeleteLineStatementInHorizontalCollection_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteLineStatement_Test" file="DeleteLineStatement_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
   <dependency className="jetbrains.mps.editorTest.DeleteLocalVariableDeclarationFinalKeywordTwoStep_Test" file="DeleteLocalVariableDeclarationFinalKeywordTwoStep_Test.java">
     <classNode dependClassName="java.lang.Exception" />
     <classNode dependClassName="java.lang.Override" />
@@ -4182,6 +4232,16 @@
     <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
     <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
     <classNode dependClassName="junit.framework.Assert" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.DeleteMethodWithDocComment_Test" file="DeleteMethodWithDocComment_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.EditorUtil" />
     <classNode dependClassName="org.junit.Test" />
     <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
   </dependency>
@@ -7691,6 +7751,33 @@
     <classNode dependClassName="java.util.ArrayList" />
     <classNode dependClassName="jetbrains.mps.MPSLaunch" />
     <classNode dependClassName="jetbrains.mps.internal.collections.runtime.ListSequence" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.SurroundWithNegation_addingParens_Test" file="SurroundWithNegation_addingParens_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.SurroundWithNegation_forParens_Test" file="SurroundWithNegation_forParens_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
+    <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
+    <classNode dependClassName="org.junit.Test" />
+    <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />
+  </dependency>
+  <dependency className="jetbrains.mps.editorTest.SurroundWithNegation_notAddingParens_Test" file="SurroundWithNegation_notAddingParens_Test.java">
+    <classNode dependClassName="java.lang.Exception" />
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="jetbrains.mps.MPSLaunch" />
     <classNode dependClassName="jetbrains.mps.lang.test.runtime.BaseEditorTestBody" />
     <classNode dependClassName="org.junit.Test" />
     <classNode extendsClassName="jetbrains.mps.lang.test.runtime.BaseTransformationTest" />

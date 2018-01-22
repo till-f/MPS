@@ -33,6 +33,10 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_DelTestRoot;
   private ConceptPresentation props_DelTestSpecialAbstractChild;
   private ConceptPresentation props_DelTestSpecialChild1;
+  private ConceptPresentation props_DeleteLineTestChild;
+  private ConceptPresentation props_DeleteLineTestChildWithNested;
+  private ConceptPresentation props_DeleteLineTestReadOnlyChild;
+  private ConceptPresentation props_DeleteLineTestRoot;
   private ConceptPresentation props_DeleteWrapperChild;
   private ConceptPresentation props_DeleteWrapperRoot;
   private ConceptPresentation props_FoldedCell;
@@ -282,6 +286,34 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_DelTestSpecialChild1 = cpb.create();
         }
         return props_DelTestSpecialChild1;
+      case LanguageConceptSwitch.DeleteLineTestChild:
+        if (props_DeleteLineTestChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DeleteLineTestChild = cpb.create();
+        }
+        return props_DeleteLineTestChild;
+      case LanguageConceptSwitch.DeleteLineTestChildWithNested:
+        if (props_DeleteLineTestChildWithNested == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DeleteLineTestChildWithNested");
+          props_DeleteLineTestChildWithNested = cpb.create();
+        }
+        return props_DeleteLineTestChildWithNested;
+      case LanguageConceptSwitch.DeleteLineTestReadOnlyChild:
+        if (props_DeleteLineTestReadOnlyChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DeleteLineTestReadOnlyChild");
+          props_DeleteLineTestReadOnlyChild = cpb.create();
+        }
+        return props_DeleteLineTestReadOnlyChild;
+      case LanguageConceptSwitch.DeleteLineTestRoot:
+        if (props_DeleteLineTestRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DeleteLineTestRoot");
+          props_DeleteLineTestRoot = cpb.create();
+        }
+        return props_DeleteLineTestRoot;
       case LanguageConceptSwitch.DeleteWrapperChild:
         if (props_DeleteWrapperChild == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

@@ -23,6 +23,7 @@
     <import index="z60i" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.awt(JDK/)" />
     <import index="lzb2" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.ui(MPS.IDEA/)" />
     <import index="lui2" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.module(MPS.OpenAPI/)" />
+    <import index="xnls" ref="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61/java:jetbrains.mps.ide.icons(MPS.Platform/)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -456,14 +457,37 @@
       <property role="TrG5h" value="getIcon" />
       <node concept="3Tmbuc" id="1pHoCUaw9eK" role="1B3o_S" />
       <node concept="3clFbS" id="1pHoCUaw9eL" role="3clF47">
-        <node concept="3cpWs6" id="1pHoCUaw9f1" role="3cqZAp">
-          <node concept="2YIFZM" id="1pHoCUaw9eX" role="3cqZAk">
-            <ref role="37wK5l" to="sn11:277Nzj6qTFM" resolve="getIconFor" />
-            <ref role="1Pybhc" to="sn11:277Nzj6qTEj" resolve="IconManager" />
-            <node concept="1rXfSq" id="1pHoCUaw9eY" role="37wK5m">
+        <node concept="3cpWs8" id="6BFVqCBr0xw" role="3cqZAp">
+          <node concept="3cpWsn" id="6BFVqCBr0xx" role="3cpWs9">
+            <property role="TrG5h" value="labelNode" />
+            <node concept="3uibUv" id="6BFVqCBr0xv" role="1tU5fm">
+              <ref role="3uigEE" to="mhbf:~SNode" resolve="SNode" />
+            </node>
+            <node concept="1rXfSq" id="6BFVqCBr0xy" role="33vP2m">
               <ref role="37wK5l" node="1pHoCUaw9f7" resolve="getLabelNode" />
-              <node concept="37vLTw" id="1pHoCUaw9eZ" role="37wK5m">
+              <node concept="37vLTw" id="6BFVqCBr0xz" role="37wK5m">
                 <ref role="3cqZAo" node="1pHoCUaw9f4" resolve="element" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3cpWs6" id="1pHoCUaw9f1" role="3cqZAp">
+          <node concept="3K4zz7" id="6BFVqCBr8a0" role="3cqZAk">
+            <node concept="10M0yZ" id="6BFVqCBrdW5" role="3K4E3e">
+              <ref role="3cqZAo" to="xnls:~IdeIcons.UNKNOWN_ICON" resolve="UNKNOWN_ICON" />
+              <ref role="1PxDUh" to="xnls:~IdeIcons" resolve="IdeIcons" />
+            </node>
+            <node concept="3clFbC" id="6BFVqCBr5_S" role="3K4Cdx">
+              <node concept="10Nm6u" id="6BFVqCBr6SD" role="3uHU7w" />
+              <node concept="37vLTw" id="6BFVqCBr4RR" role="3uHU7B">
+                <ref role="3cqZAo" node="6BFVqCBr0xx" resolve="labelNode" />
+              </node>
+            </node>
+            <node concept="2YIFZM" id="6BFVqCBr9oj" role="3K4GZi">
+              <ref role="1Pybhc" to="sn11:277Nzj6qTEj" resolve="IconManager" />
+              <ref role="37wK5l" to="sn11:277Nzj6qTFM" resolve="getIconFor" />
+              <node concept="37vLTw" id="6BFVqCBr9ok" role="37wK5m">
+                <ref role="3cqZAo" node="6BFVqCBr0xx" resolve="labelNode" />
               </node>
             </node>
           </node>

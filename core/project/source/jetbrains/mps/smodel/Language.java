@@ -112,7 +112,7 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
   }
 
   public Set<SModuleReference> getExtendedLanguageRefs() {
-    HashSet<SModuleReference> res = new HashSet<SModuleReference>(myLanguageDescriptor.getExtendedLanguages());
+    HashSet<SModuleReference> res = new HashSet<>(myLanguageDescriptor.getExtendedLanguages());
     if (!BootstrapLanguages.coreLanguageRef().equals(getModuleReference())) {
       //this is needed now as we don't force the user to have an explicit dependency on core
       res.add(BootstrapLanguages.coreLanguageRef());
@@ -122,7 +122,7 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
 
   @Override
   public Iterable<SDependency> getDeclaredDependencies() {
-    HashSet<SDependency> rv = new HashSet<SDependency>(IterableUtil.asCollection(super.getDeclaredDependencies()));
+    HashSet<SDependency> rv = new HashSet<>(IterableUtil.asCollection(super.getDeclaredDependencies()));
     final SRepository repo = getRepository();
     for (SModuleReference language : getExtendedLanguageRefs()) {
       // XXX not clear whether it's worth including implicit "extends lang.core" (see getExtendedLanguageRefs())
@@ -147,18 +147,18 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
    */
   @NotNull
   public Set<Language> getAllExtendedLanguages() {
-    HashSet<Language> langs = new HashSet<Language>();
+    HashSet<Language> languages = new HashSet<>();
     final SRepository repository = getRepository();
     if (repository == null) {
-      return langs;
+      return languages;
     }
 
-    ArrayDeque<Language> queue = new ArrayDeque<Language>();
+    ArrayDeque<Language> queue = new ArrayDeque<>();
     queue.add(this);
 
     do {
       Language current = queue.poll();
-      if (!langs.add(current)) {
+      if (!languages.add(current)) {
         continue;
       }
       for (SModuleReference lr : current.getExtendedLanguageRefs()) {
@@ -169,7 +169,7 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
       }
     } while (!queue.isEmpty());
 
-    return langs;
+    return languages;
   }
 
   public Collection<SModuleReference> getRuntimeModulesReferences() {
@@ -182,7 +182,7 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
   }
 
   public void validateExtends() {
-    List<SModuleReference> remove = new ArrayList<SModuleReference>();
+    List<SModuleReference> remove = new ArrayList<>();
     for (SModuleReference ref : myLanguageDescriptor.getExtendedLanguages()) {
       if (getModuleName().equals(ref.getModuleName())) {
         remove.add(ref);
@@ -291,11 +291,11 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
   }
 
   @Override
-  public void rename(@NotNull String newNamespace) throws DescriptorTargetFileAlreadyExistsException {
+  public void rename(@NotNull String newModuleName) throws DescriptorTargetFileAlreadyExistsException {
     for (Generator g : getGenerators()) {
-      g.rename(newNamespace);
+      g.rename(newModuleName);
     }
-    super.rename(newNamespace);
+    super.rename(newModuleName);
   }
 
   /**
@@ -307,18 +307,18 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
   @Deprecated
   @ToRemove(version = 3.4)
   public List<SNode> getConceptDeclarations() {
-    // FIXME thera are uses in mbeddr
+    // FIXME there are uses in mbeddr
     SModel structureModel = getStructureModelDescriptor();
     if (structureModel == null) return Collections.emptyList();
     return FastNodeFinderManager.get(structureModel).getNodes(SNodeUtil.concept_ConceptDeclaration, true);
   }
 
   public List<SModel> getUtilModels() {
-    Set<SModel> models = new HashSet<SModel>(getModels());
+    Set<SModel> models = new HashSet<>(getModels());
     models.removeAll(LanguageAspectSupport.getAspectModels(this));
     models.removeAll(getAccessoryModels());
 
-    List<SModel> result = new ArrayList<SModel>(models.size());
+    List<SModel> result = new ArrayList<>(models.size());
     for (SModel md : models) {
       String st = SModelStereotype.getStereotype(md);
       if (SModelStereotype.isStubModelStereotype(st) || SModelStereotype.isDescriptorModelStereotype(st)) {
@@ -368,7 +368,7 @@ public class Language extends ReloadableModuleBase implements MPSModuleOwner, Re
   public void removeAccessoryModel(org.jetbrains.mps.openapi.model.SModel sm) {
     // XXX why removal of accessory model is not done through ModuleDescriptor as other editing activities?
     final SModelReference accessoryModelRef = sm.getReference();
-    boolean changed = myLanguageDescriptor.getAccessoryModels().removeIf(m -> accessoryModelRef.equals(m));
+    boolean changed = myLanguageDescriptor.getAccessoryModels().removeIf(accessoryModelRef::equals);
     if (changed) {
       setModuleDescriptor(myLanguageDescriptor);
       reload();

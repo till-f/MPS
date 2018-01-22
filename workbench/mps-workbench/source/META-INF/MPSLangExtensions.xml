@@ -17,10 +17,8 @@
     <applicationService serviceInterface="com.intellij.lang.cacheBuilder.CacheBuilderRegistry"
                         serviceImplementation="com.intellij.lang.cacheBuilder.CacheBuilderRegistryImpl"/>
 
-    <!--
     <applicationService serviceInterface="com.intellij.codeInsight.intention.IntentionManager"
                         serviceImplementation="com.intellij.codeInsight.intention.impl.config.IntentionManagerImpl"/>
-    -->
     <!--MPS patch -->
     <applicationService serviceInterface="com.intellij.codeStyle.CodeStyleFacade"
                         serviceImplementation="jetbrains.mps.codeStyle.MPSCodeStyleFacade"/>
@@ -124,10 +122,10 @@
 
     <applicationService serviceInterface="com.intellij.psi.statistics.StatisticsManager"
                         serviceImplementation="com.intellij.psi.statistics.impl.StatisticsManagerImpl"/>
-    <!--
+
     <applicationService serviceInterface="com.intellij.codeInsight.intention.impl.config.IntentionManagerSettings"
                         serviceImplementation="com.intellij.codeInsight.intention.impl.config.IntentionManagerSettings"/>
-    -->
+
     <applicationService serviceInterface="com.intellij.find.FindSettings"
                         serviceImplementation="com.intellij.find.impl.FindSettingsImpl"/>
     <applicationService serviceImplementation="com.intellij.find.impl.FindSettingsImpl$FindRecents"/>
@@ -212,9 +210,6 @@
     <applicationService serviceInterface="com.intellij.openapi.fileEditor.UniqueVFilePathBuilder"
                         serviceImplementation="com.intellij.openapi.fileEditor.impl.UniqueVFilePathBuilderImpl"/>
 
-    <applicationService serviceInterface="com.intellij.openapi.roots.impl.libraries.JarDirectoryWatcherFactory"
-                        serviceImplementation="com.intellij.openapi.roots.impl.libraries.JarDirectoryWatcherFactoryImpl"/>
-
     <applicationService serviceImplementation="com.intellij.psi.codeStyle.arrangement.engine.ArrangementEngine"/>
     <applicationService serviceImplementation="com.intellij.psi.codeStyle.arrangement.MemberOrderService"/>
 
@@ -242,10 +237,12 @@
 
     <projectService serviceInterface="com.intellij.psi.codeStyle.LegacyCodeStyleSettingsManager"
                     serviceImplementation="com.intellij.psi.codeStyle.LegacyCodeStyleSettingsManager"/>
+    -->
 
     <projectService serviceInterface="com.intellij.codeInsight.daemon.impl.analysis.HighlightingLevelManager"
                     serviceImplementation="com.intellij.codeInsight.daemon.impl.analysis.HighlightingSettingsPerFile"/>
 
+    <!--
     <projectService serviceInterface="com.intellij.find.findInProject.FindInProjectManager"
                     serviceImplementation="com.intellij.find.findInProject.FindInProjectManager"/>
     <projectService serviceInterface="com.intellij.find.replaceInProject.ReplaceInProjectManager"
@@ -296,6 +293,7 @@
                     serviceImplementation="com.intellij.facet.impl.invalid.InvalidFacetManagerImpl"/>
     <projectService serviceInterface="com.intellij.openapi.module.ProjectLoadingErrorsNotifier"
                     serviceImplementation="com.intellij.openapi.module.impl.ProjectLoadingErrorsNotifierImpl"/>
+    <projectService serviceImplementation="com.intellij.openapi.module.impl.AutomaticModuleUnloader"/>
 
     <moduleService serviceInterface="com.intellij.facet.FacetModificationTrackingService"
                    serviceImplementation="com.intellij.facet.impl.FacetModificationTrackingServiceImpl"/>
@@ -919,7 +917,7 @@
     <!--
     <toolWindow id="Favorites" anchor="left" icon="AllIcons.Toolwindows.ToolWindowFavorites" secondary="true"
                 factoryClass="com.intellij.ide.projectView.impl.FavoritesViewToolWindowFactory"/>
-    <toolWindow id="Run Dashboard" anchor="bottom" icon="AllIcons.Toolwindows.ToolWindowRun"
+    <toolWindow id="Run Dashboard" anchor="bottom" icon="AllIcons.Toolwindows.ToolWindowRun" canCloseContents="true"
                 factoryClass="com.intellij.execution.dashboard.RunDashboardToolWindowFactory"
                 conditionClass="com.intellij.execution.dashboard.RunDashboardToolWindowFactory" />
 
@@ -1007,6 +1005,7 @@
     <statistics.usagesCollector implementation="com.intellij.openapi.fileTypes.FileTypeUsagesCollector"/>
     <statistics.usagesCollector implementation="com.intellij.internal.statistic.editor.EditorSettingsStatisticsCollector"/>
     <statistics.usagesCollector implementation="com.intellij.internal.statistic.editor.EditorSettingsStatisticsCollector$ProjectUsages"/>
+    <statistics.usagesCollector implementation="com.intellij.execution.dashboard.RunDashboardUsagesCollector"/>
 
     <renamePsiElementProcessor implementation="com.intellij.refactoring.rename.RenamePsiFileProcessor" order="last"/>
     <renameInputValidator implementation="com.intellij.refactoring.rename.RenameToIgnoredDirectoryFileInputValidator" order="last"/>
@@ -1066,10 +1065,11 @@
     -->
     <applicationService serviceInterface="com.intellij.codeInsight.FileModificationService"
                         serviceImplementation="com.intellij.codeInsight.CodeInsightUtilBase"/>
-    <!--
+    <!--MPS patch: use default implementation of TreeAnchorizer-->
     <applicationService serviceInterface="com.intellij.ide.util.treeView.TreeAnchorizer"
-                        serviceImplementation="com.intellij.ide.projectView.impl.nodes.PsiTreeAnchorizer"/>
+                        serviceImplementation="com.intellij.ide.util.treeView.TreeAnchorizer"/>
 
+    <!--
     <projectStructure.sourceRootEditHandler implementation="com.intellij.openapi.roots.ui.configuration.JavaModuleSourceRootEditHandler"/>
     <projectStructure.sourceRootEditHandler implementation="com.intellij.openapi.roots.ui.configuration.JavaTestSourceRootEditHandler"/>
 
@@ -1139,6 +1139,10 @@
       name="Intellij IDEA color scheme (.icls)"
       schemeClass="com.intellij.openapi.editor.colors.EditorColorsScheme"
       implementationClass="com.intellij.application.options.colors.ColorSchemeExporter"/>
+    <schemeExporter
+        name="Color scheme plug-in .jar"
+        schemeClass="com.intellij.openapi.editor.colors.EditorColorsScheme"
+        implementationClass="com.intellij.application.options.colors.pluginExport.ColorSchemePluginExporter"/>
     <schemeImporter
       name="Intellij IDEA code style XML"
       schemeClass="com.intellij.psi.codeStyle.CodeStyleScheme"
@@ -1167,6 +1171,7 @@
     <applicationService serviceInterface="com.intellij.ide.projectView.impl.ProjectViewFileNestingService"
                         serviceImplementation="com.intellij.ide.projectView.impl.ProjectViewFileNestingService"/>
     <treeStructureProvider implementation="com.intellij.ide.projectView.impl.NestingTreeStructureProvider" order="last"/>
+    <applicationService serviceImplementation="com.intellij.ide.projectView.impl.FileNestingBuilder" />
     <refactoring.safeDeleteProcessor implementation="com.intellij.refactoring.safeDelete.RelatedFilesSafeDeleteProcessorDelegate"/>
     <automaticRenamerFactory implementation="com.intellij.refactoring.rename.RelatedFilesRenamerFactory"/>
     <refactoring.moveHandler implementation="com.intellij.refactoring.move.moveFilesOrDirectories.MoveRelatedFilesHandler"

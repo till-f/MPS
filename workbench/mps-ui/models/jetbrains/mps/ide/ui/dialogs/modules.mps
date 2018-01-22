@@ -1574,8 +1574,13 @@
               <node concept="3clFbF" id="g46k2sd8sy" role="3cqZAp">
                 <node concept="1rXfSq" id="g46k2sd8sz" role="3clFbG">
                   <ref role="37wK5l" node="g46k2scpfH" resolve="setModuleLocation" />
-                  <node concept="1rXfSq" id="g46k2sd8s$" role="37wK5m">
-                    <ref role="37wK5l" node="g46k2sd8ti" resolve="getDefaultModulePath" />
+                  <node concept="3cpWs3" id="4ZJg5CwnKQS" role="37wK5m">
+                    <node concept="1rXfSq" id="4ZJg5CwnLGQ" role="3uHU7w">
+                      <ref role="37wK5l" node="g46k2sdq69" resolve="getDefaultModuleName" />
+                    </node>
+                    <node concept="1rXfSq" id="g46k2sd8s$" role="3uHU7B">
+                      <ref role="37wK5l" node="g46k2sd8ti" resolve="getDefaultModulePath" />
+                    </node>
                   </node>
                 </node>
               </node>

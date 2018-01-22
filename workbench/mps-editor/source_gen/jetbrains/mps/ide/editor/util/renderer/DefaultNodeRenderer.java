@@ -8,8 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.JList;
 import jetbrains.mps.smodel.presentation.NodePresentationUtil;
 import javax.swing.Icon;
-import jetbrains.mps.ide.icons.IconManager;
 import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.ide.icons.IdeIcons;
+import jetbrains.mps.ide.icons.IconManager;
 
 public class DefaultNodeRenderer extends BaseRenderer<NodeNavigatable> {
   protected final SRepository myRepository;
@@ -42,7 +43,8 @@ public class DefaultNodeRenderer extends BaseRenderer<NodeNavigatable> {
   }
   @Override
   protected Icon getIcon(NodeNavigatable element) {
-    return IconManager.getIconFor(getLabelNode(element));
+    SNode labelNode = getLabelNode(element);
+    return (labelNode == null ? IdeIcons.UNKNOWN_ICON : IconManager.getIconFor(labelNode));
   }
   protected SNode getLabelNode(NodeNavigatable element) {
     return element.getNodePointer().resolve(myRepository);
