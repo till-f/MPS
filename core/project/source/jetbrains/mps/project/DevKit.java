@@ -179,6 +179,9 @@ public class DevKit extends AbstractModule {
   @Override
   public void save() {
     super.save();
+    if (isReadOnly()) {
+      return;
+    }
 
     if (myDescriptor.getLoadException() != null){
       return;

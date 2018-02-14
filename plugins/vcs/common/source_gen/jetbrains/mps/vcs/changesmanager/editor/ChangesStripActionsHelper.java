@@ -24,12 +24,13 @@ import jetbrains.mps.vcs.diff.ui.common.DiffModelUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ITranslator2;
 import jetbrains.mps.vcs.diff.changes.NodeChange;
-import jetbrains.mps.util.IterableUtil;
 import java.util.Collections;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.internal.collections.runtime.ILeftCombinator;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.ide.datatransfer.CopyPasteUtil;
 
 public final class ChangesStripActionsHelper {
@@ -134,7 +135,7 @@ public final class ChangesStripActionsHelper {
           return Sequence.<SNode>singleton(oldModel.getNode(((NodeChange) ch).getAffectedNodeId()));
         } else if (ch instanceof NodeGroupChange) {
           NodeGroupChange ngc = (NodeGroupChange) ch;
-          List<SNode> changeChildren = IterableUtil.asList(oldModel.getNode(ngc.getParentNodeId()).getChildren(ngc.getRole()));
+          List<SNode> changeChildren = ngc.getChangedCollection(false);
           return ListSequence.fromList(changeChildren).page(ngc.getBegin(), ngc.getEnd());
         } else {
           return Sequence.fromIterable(Collections.<SNode>emptyList());
@@ -176,20 +177,20 @@ public final class ChangesStripActionsHelper {
           return ListSequence.fromList(p).getElement(ListSequence.fromList(commonPath.value).count());
         }
       });
-      Iterable<String> roles = Sequence.fromIterable(children).select(new ISelector<SNode, String>() {
-        public String select(SNode c) {
-          return SNodeOperations.getContainingLink(c).getName();
+      Iterable<SContainmentLink> links = Sequence.fromIterable(children).select(new ISelector<SNode, SContainmentLink>() {
+        public SContainmentLink select(SNode c) {
+          return SNodeOperations.getContainingLinkInChildrenAndChildAttributesCollection(c);
         }
       });
-      final String commonRole = Sequence.fromIterable(roles).first();
-      if (Sequence.fromIterable(roles).all(new IWhereFilter<String>() {
-        public boolean accept(String r) {
+      final SContainmentLink commonRole = Sequence.fromIterable(links).first();
+      if (Sequence.fromIterable(links).all(new IWhereFilter<SContainmentLink>() {
+        public boolean accept(SContainmentLink r) {
           return eq_ikrecr_a0a0a0a0a0d0u0t(r, commonRole);
         }
       })) {
         Iterable<Integer> indices = Sequence.fromIterable(children).select(new ISelector<SNode, Integer>() {
           public Integer select(SNode c) {
-            return SNodeOperations.getIndexInParent(c);
+            return SNodeOperations.getIndexInChildrenAndChildAttributesCollection(c);
           }
         }).distinct();
         int min = Sequence.fromIterable(indices).reduceLeft(new ILeftCombinator<Integer, Integer>() {
@@ -203,9 +204,7 @@ public final class ChangesStripActionsHelper {
           }
         });
         ListSequence.fromList(nodesToCopy).clear();
-        for (int i = min; i <= max; i++) {
-          ListSequence.fromList(nodesToCopy).addElement(IterableUtil.get(commonNode.getChildren(commonRole), i));
-        }
+        ListSequence.fromList(nodesToCopy).addSequence(Sequence.fromIterable(AttributeOperations.getChildNodesAndAttributes(commonNode, commonRole)).page(min, max + 1));
       }
     }
 

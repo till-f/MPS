@@ -250,6 +250,7 @@ public class ModuleDescriptor implements CopyableDescriptor<ModuleDescriptor>  {
     return RefUpdateUtil.composeUpdates(
       uu.updateModuleRefs(myUsedLanguages),
       uu.updateModuleRefs(myUsedDevkits),
+      uu.updateModuleRefs(myDependencyVersions),
       uu.updateDependencies(myDependencies)
     );
   }

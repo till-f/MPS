@@ -8,20 +8,21 @@ import org.junit.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
 
 @MPSLaunch
-public class CompleteMatchingTextStartsWithPatternImmediately_Test extends BaseTransformationTest {
+public class CompleteImmediately_OnlyStartsWithPattern_Test extends BaseTransformationTest {
   @Test
-  public void test_CompleteMatchingTextStartsWithPatternImmediately() throws Throwable {
+  public void test_CompleteImmediately_OnlyStartsWithPattern() throws Throwable {
     initTest("${mps_home}", "r:f27d9626-8ef5-4cba-bce0-6aa6369f05ff(jetbrains.mps.lang.editor.completion.test)");
-    runTest("jetbrains.mps.lang.editor.completion.test.CompleteMatchingTextStartsWithPatternImmediately_Test$TestBody", "testMethod", false);
+    runTest("jetbrains.mps.lang.editor.completion.test.CompleteImmediately_OnlyStartsWithPattern_Test$TestBody", "testMethod", false);
   }
 
   @MPSLaunch
   public static class TestBody extends BaseEditorTestBody {
     @Override
     public void testMethodImpl() throws Exception {
-      initEditorComponent("2070818307959506191", "2070818307959506193");
-      typeString("ful");
+      initEditorComponent("2769359054249299294", "2769359054249299296");
+      typeString("textsearcho");
       invokeAction("jetbrains.mps.ide.editor.actions.Complete_Action");
+
     }
   }
 }

@@ -41,9 +41,12 @@ import jetbrains.mps.smodel.SModelAdapter;
 import jetbrains.mps.smodel.event.SModelEvent;
 import jetbrains.mps.smodel.event.SModelReferenceEvent;
 import jetbrains.mps.vcs.diff.changes.SetReferenceChange;
-import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.event.SModelChildEvent;
+import jetbrains.mps.smodel.behaviour.BHReflection;
+import jetbrains.mps.core.aspects.behaviour.SMethodTrimmedId;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
+import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import jetbrains.mps.smodel.event.SModelPropertyEvent;
 import jetbrains.mps.vcs.diff.changes.SetPropertyChange;
 import jetbrains.mps.smodel.event.SModelRootEvent;
@@ -323,17 +326,26 @@ public final class MergeSession {
     public void referenceAdded(SModelReferenceEvent event) {
       referenceModified(event);
     }
-    private List<NodeGroupChange> getRelevantNodeGroupChanges(SNode parent, final String role) {
+    private List<NodeGroupChange> getRelevantNodeGroupChanges(SNode parent, final SContainmentLink link) {
       List<ModelChange> nodeChanges = MapSequence.fromMap(myNodeToChanges).get(parent.getNodeId());
       Iterable<NodeGroupChange> allNodeGroupChanges = ListSequence.fromList(nodeChanges).ofType(NodeGroupChange.class);
       return Sequence.fromIterable(allNodeGroupChanges).where(new IWhereFilter<NodeGroupChange>() {
         public boolean accept(NodeGroupChange ngc) {
-          return role.equals(ngc.getRole());
+          return ngc.isAbout(link);
         }
       }).toListSequence();
     }
-    private void invalidateChildrenChanges(SNode parent, String role, int index, final int beginOffset, final int endOffset) {
-      List<? extends SNode> currentChildren = IterableUtil.asList(parent.getChildren(role));
+
+    private void invalidateChildrenChanges(SModelChildEvent event, int offset) {
+      int index = SNodeOperations.getIndexInChildrenAndChildAttributesCollection(event.getChild()) + offset;
+      final int beginOffset = (offset == 1 ? 0 : -1);
+      final int endOffset = (offset == -1 ? 0 : 1);
+      SNode parent = event.getParent();
+      SContainmentLink role = event.getAggregationLink();
+      if (SNodeOperations.isInstanceOf(((SNode) event.getChild()), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"))) {
+        role = ((SContainmentLink) BHReflection.invoke0(SNodeOperations.cast(event.getChild(), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute")), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), SMethodTrimmedId.create("getLink", MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), "BpxLfMirzf")));
+      }
+      Iterable<SNode> currentChildren = AttributeOperations.getChildNodesAndAttributes(((SNode) parent), role);
 
       List<NodeGroupChange> relevantChanges = getRelevantNodeGroupChanges(parent, role);
       if (ListSequence.fromList(relevantChanges).isEmpty()) {
@@ -344,24 +356,27 @@ public final class MergeSession {
       if (baseParent == null) {
         return;
       }
-      List<SNode> baseChildren = IterableUtil.asList(baseParent.getChildren(role));
+      Iterable<SNode> baseChildren = AttributeOperations.getChildNodesAndAttributes(((SNode) baseParent), role);
 
       final Wrappers._int baseIndex = new Wrappers._int();
-      if (0 <= index && index < currentChildren.size()) {
-        final SNodeId currentChildId = currentChildren.get(index).getNodeId();
-        SNode baseChild = ListSequence.fromList(baseChildren).findFirst(new IWhereFilter<SNode>() {
-          public boolean accept(SNode c) {
-            return currentChildId.equals(c.getNodeId());
+      if (0 <= index && index < Sequence.fromIterable(currentChildren).count()) {
+        SNodeId currentChildId = Sequence.fromIterable(currentChildren).toListSequence().get(index).getNodeId();
+        baseIndex.value = 0;
+        boolean baseChildFound = false;
+        for (SNode baseChild : baseChildren) {
+          if (currentChildId.equals(baseChild.getNodeId())) {
+            baseChildFound = true;
+            break;
           }
-        });
-        if (baseChild == null) {
+          baseIndex.value++;
+        }
+        if (!(baseChildFound)) {
           return;
         }
-        baseIndex.value = SNodeOperations.getIndexInParent(baseChild);
       } else if (index == 0) {
         baseIndex.value = 0;
-      } else if (index == currentChildren.size()) {
-        baseIndex.value = ListSequence.fromList(baseChildren).count();
+      } else if (index == Sequence.fromIterable(currentChildren).count()) {
+        baseIndex.value = Sequence.fromIterable(baseChildren).count();
       } else {
         return;
       }
@@ -370,12 +385,7 @@ public final class MergeSession {
           return ch.getBegin() + beginOffset <= baseIndex.value && baseIndex.value < ch.getEnd() + endOffset;
         }
       }));
-    }
-    private void invalidateChildrenChanges(SModelChildEvent event, int offset) {
-      int index = SNodeOperations.getIndexInParent(event.getChild()) + offset;
-      int beginOffset = (offset == 1 ? 0 : -1);
-      int endOffset = (offset == -1 ? 0 : 1);
-      invalidateChildrenChanges(event.getParent(), event.getChildRole(), index, beginOffset, endOffset);
+
     }
     @Override
     public void beforeChildRemoved(SModelChildEvent event) {

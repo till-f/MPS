@@ -23,15 +23,14 @@ import jetbrains.mps.vcs.diff.changes.SetReferenceStructChange;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
+import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.util.LongestCommonSubsequenceFinder;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.vcs.diff.changes.NodeGroupStructChange;
 import java.util.Iterator;
 import jetbrains.mps.internal.collections.runtime.IMapping;
-import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.smodel.PropertySupport;
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.util.EqualUtil;
@@ -78,7 +77,7 @@ public class StructChangeSetBuilder {
       ListSequence.fromList(myNewChanges).addElement(new SetReferenceStructChange(myChangeSet, oldNode.getNodeId(), newNode.getNodeId(), role, targetModel, targetId, check_okvhpb_g0a0a2a2a8(((jetbrains.mps.smodel.SReference) newReference))));
     }
   }
-  private void buildForNode(Map<SNode, SNode> oldToNewMap, @NotNull SNode oldNode, @NotNull SNode newNode) {
+  private void buildForNode(final Map<SNode, SNode> oldToNewMap, @NotNull final SNode oldNode, @NotNull final SNode newNode) {
     // updates oldToNewMap with new mappings 
     if (neq_okvhpb_a0b0j(SNodeOperations.getConcept(oldNode), SNodeOperations.getConcept(newNode))) {
       // todo: should be whole node change instead of going into details... 
@@ -88,18 +87,17 @@ public class StructChangeSetBuilder {
     buildForProperties(oldNode, newNode);
     buildForReferences(oldToNewMap, oldNode, newNode);
 
-    for (SContainmentLink role : ListSequence.fromList(SNodeOperations.getChildren(oldNode)).concat(ListSequence.fromList(SNodeOperations.getChildren(newNode))).select(new ISelector<SNode, SContainmentLink>() {
-      public SContainmentLink select(SNode ch) {
-        return ch.getContainmentLink();
+    final Map<SContainmentLink, List<SNode>> roleToOldChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(oldNode);
+    final Map<SContainmentLink, List<SNode>> roleToNewChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(newNode);
+
+    SetSequence.fromSet(MapSequence.fromMap(roleToOldChildCollection).keySet()).concat(SetSequence.fromSet(MapSequence.fromMap(roleToNewChildCollection).keySet())).distinct().visitAll(new IVisitor<SContainmentLink>() {
+      public void visit(SContainmentLink role) {
+        buildForNodeRole(oldToNewMap, roleToOldChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>())), roleToNewChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>())), oldNode.getNodeId(), newNode.getNodeId(), role);
       }
-    }).distinct()) {
-      buildForNodeRole(oldToNewMap, oldNode, newNode, role);
-    }
+    });
+
   }
-  private void buildForNodeRole(Map<SNode, SNode> oldToNewMap, SNode oldNode, SNode newNode, SContainmentLink role) {
-    // updates oldToNewMap with new mappings 
-    buildForNodeRole(oldToNewMap, IterableUtil.asList(oldNode.getChildren(role)), IterableUtil.asList(newNode.getChildren(role)), oldNode.getNodeId(), newNode.getNodeId(), role);
-  }
+
   private void buildForNodeRole(Map<SNode, SNode> oldToNewMap, List<SNode> oldChildren, List<SNode> newChildren, SNodeId parentId, SNodeId newParentId, SContainmentLink role) {
     // updates oldToNewMap with new mappings 
     final Map<SNode, Integer> nodeClasses = MapSequence.fromMap(new HashMap<SNode, Integer>());
@@ -163,13 +161,13 @@ outer:
   }
   private void addMatchedNodes(Map<SNode, SNode> oldToNewNodes, SNode oldNode, SNode newNode) {
     MapSequence.fromMap(oldToNewNodes).put(oldNode, newNode);
-    for (SContainmentLink role : ListSequence.fromList(SNodeOperations.getChildren(oldNode)).concat(ListSequence.fromList(SNodeOperations.getChildren(newNode))).select(new ISelector<SNode, SContainmentLink>() {
-      public SContainmentLink select(SNode ch) {
-        return ch.getContainmentLink();
-      }
-    }).distinct()) {
-      List<SNode> ch1List = IterableUtil.asList(oldNode.getChildren(role));
-      List<SNode> ch2List = IterableUtil.asList(newNode.getChildren(role));
+
+    Map<SContainmentLink, List<SNode>> roleToOldChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(oldNode);
+    Map<SContainmentLink, List<SNode>> roleToNewChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(newNode);
+
+    for (SContainmentLink role : SetSequence.fromSet(MapSequence.fromMap(roleToOldChildCollection).keySet()).concat(SetSequence.fromSet(MapSequence.fromMap(roleToNewChildCollection).keySet())).distinct()) {
+      List<SNode> ch1List = roleToOldChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>()));
+      List<SNode> ch2List = roleToNewChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>()));
       {
         Iterator<SNode> ch1_it = ListSequence.fromList(ch1List).iterator();
         Iterator<SNode> ch2_it = ListSequence.fromList(ch2List).iterator();
@@ -292,13 +290,13 @@ outer:
       }
     }
 
-    for (SContainmentLink role : ListSequence.fromList(SNodeOperations.getChildren(n1)).concat(ListSequence.fromList(SNodeOperations.getChildren(n2))).select(new ISelector<SNode, SContainmentLink>() {
-      public SContainmentLink select(SNode ch) {
-        return ch.getContainmentLink();
-      }
-    }).distinct()) {
-      List<SNode> ch1List = IterableUtil.asList(n1.getChildren(role));
-      List<SNode> ch2List = IterableUtil.asList(n2.getChildren(role));
+    Map<SContainmentLink, List<SNode>> roleToN1ChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(n1);
+    Map<SContainmentLink, List<SNode>> roleToN2ChildCollection = ChangeSetBuilder.getRoleToChildCollectionMap(n2);
+
+
+    for (SContainmentLink role : SetSequence.fromSet(MapSequence.fromMap(roleToN1ChildCollection).keySet()).concat(SetSequence.fromSet(MapSequence.fromMap(roleToN2ChildCollection).keySet())).distinct()) {
+      List<SNode> ch1List = roleToN1ChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>()));
+      List<SNode> ch2List = roleToN2ChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>()));
       if (ListSequence.fromList(ch1List).count() != ListSequence.fromList(ch2List).count()) {
         return false;
       }

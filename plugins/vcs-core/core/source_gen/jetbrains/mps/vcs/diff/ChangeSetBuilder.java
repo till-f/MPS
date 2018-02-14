@@ -25,12 +25,16 @@ import jetbrains.mps.vcs.diff.changes.SetReferenceChange;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.vcs.diff.changes.AddRootChange;
 import jetbrains.mps.vcs.diff.changes.DeleteRootChange;
+import java.util.Map;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.util.IterableUtil;
+import jetbrains.mps.internal.collections.runtime.SetSequence;
+import jetbrains.mps.internal.collections.runtime.MapSequence;
+import jetbrains.mps.internal.collections.runtime.IVisitor;
+import java.util.HashMap;
+import java.util.function.Function;
 import jetbrains.mps.util.LongestCommonSubsequenceFinder;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import jetbrains.mps.vcs.diff.changes.NodeGroupChange;
-import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import jetbrains.mps.extapi.model.SModelBase;
 import jetbrains.mps.vcs.diff.changes.DependencyChange;
@@ -44,7 +48,6 @@ import jetbrains.mps.vcs.diff.changes.UsedLanguageChange;
 import jetbrains.mps.vcs.diff.changes.EngagedLanguageChange;
 import jetbrains.mps.extapi.model.GeneratableSModel;
 import jetbrains.mps.vcs.diff.changes.DoNotGenerateOptionChange;
-import jetbrains.mps.internal.collections.runtime.SetSequence;
 import java.util.HashSet;
 import java.util.Set;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
@@ -118,7 +121,7 @@ public class ChangeSetBuilder {
     }
   }
 
-  public void buildForNode(@Nullable SNode oldNode, @Nullable SNode newNode) {
+  public void buildForNode(@Nullable final SNode oldNode, @Nullable SNode newNode) {
     assert oldNode != null || newNode != null;
 
     if (oldNode == null) {
@@ -129,27 +132,38 @@ public class ChangeSetBuilder {
       buildForProperties(oldNode, newNode);
       buildForReferences(oldNode, newNode);
 
-      for (SContainmentLink role : ListSequence.fromList(SNodeOperations.getChildren(oldNode)).concat(ListSequence.fromList(SNodeOperations.getChildren(newNode))).select(new ISelector<SNode, SContainmentLink>() {
-        public SContainmentLink select(SNode ch) {
-          return ch.getContainmentLink();
+      final Map<SContainmentLink, List<SNode>> roleToOldChildCollection = getRoleToChildCollectionMap(oldNode);
+      final Map<SContainmentLink, List<SNode>> roleToNewChildCollection = getRoleToChildCollectionMap(newNode);
+
+      SetSequence.fromSet(MapSequence.fromMap(roleToOldChildCollection).keySet()).concat(SetSequence.fromSet(MapSequence.fromMap(roleToNewChildCollection).keySet())).distinct().visitAll(new IVisitor<SContainmentLink>() {
+        public void visit(SContainmentLink role) {
+          buildForNodeRole(roleToOldChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>())), roleToNewChildCollection.getOrDefault(role, ListSequence.fromList(new ArrayList<SNode>())), oldNode.getNodeId(), role);
         }
-      }).distinct()) {
-        buildForNodeRole(oldNode, newNode, role);
-      }
+      });
     }
   }
-
-  private void buildForNodeRole(SNode oldNode, SNode newNode, SContainmentLink role) {
-    buildForNodeRole(IterableUtil.asList(oldNode.getChildren(role)), IterableUtil.asList(newNode.getChildren(role)), oldNode.getNodeId(), role);
+  /*package*/ static Map<SContainmentLink, List<SNode>> getRoleToChildCollectionMap(SNode node) {
+    final Map<SContainmentLink, List<SNode>> roleToChildCollection = new HashMap<SContainmentLink, List<SNode>>();
+    ListSequence.fromList(SNodeOperations.getChildren(node)).visitAll(new IVisitor<SNode>() {
+      public void visit(SNode child) {
+        SContainmentLink link = SNodeOperations.getContainingLinkInChildrenAndChildAttributesCollection(child);
+        roleToChildCollection.computeIfAbsent(link, new Function<SContainmentLink, List<SNode>>() {
+          public List<SNode> apply(SContainmentLink link) {
+            return ListSequence.fromList(new ArrayList<SNode>());
+          }
+        }).add(child);
+      }
+    });
+    return roleToChildCollection;
   }
 
   public void buildForNodeRole(final List<? extends SNode> oldChildren, List<? extends SNode> newChildren, SNodeId parentId, SContainmentLink role) {
-    List<SNodeId> oldIds = ListSequence.fromList(oldChildren).select(new ISelector<SNode, SNodeId>() {
+    List<SNodeId> oldIds = ListSequence.fromList(((List<? extends SNode>) oldChildren)).select(new ISelector<SNode, SNodeId>() {
       public SNodeId select(SNode n) {
         return n.getNodeId();
       }
     }).toListSequence();
-    List<SNodeId> newIds = ListSequence.fromList(newChildren).select(new ISelector<SNode, SNodeId>() {
+    List<SNodeId> newIds = ListSequence.fromList(((List<? extends SNode>) newChildren)).select(new ISelector<SNode, SNodeId>() {
       public SNodeId select(SNode n) {
         return n.getNodeId();
       }
@@ -181,9 +195,9 @@ public class ChangeSetBuilder {
     Iterable<D> added;
     Iterable<D> deleted;
     {
-      Tuples._2<Iterable<D>, Iterable<D>> _tmp_nbyrtw_c0x = getAddedAndDeleted(referencesExtractor);
-      added = _tmp_nbyrtw_c0x._0();
-      deleted = _tmp_nbyrtw_c0x._1();
+      Tuples._2<Iterable<D>, Iterable<D>> _tmp_nbyrtw_c0w = getAddedAndDeleted(referencesExtractor);
+      added = _tmp_nbyrtw_c0w._0();
+      deleted = _tmp_nbyrtw_c0w._1();
     }
     ListSequence.fromList(myNewChanges).addSequence(Sequence.fromIterable(added).select(new ISelector<D, DependencyChange>() {
       public DependencyChange select(D r) {
@@ -300,7 +314,7 @@ public class ChangeSetBuilder {
   }
 
   private <D> Tuples._2<Iterable<D>, Iterable<D>> getAddedAndDeleted(_FunctionTypes._return_P1_E0<? extends Iterable<D>, ? super SModelBase> itemsExtractor) {
-    return getAddedAndDeleted(itemsExtractor.invoke(as_nbyrtw_a0a0a0rb(myOldModel, SModelBase.class)), itemsExtractor.invoke(as_nbyrtw_a0b0a0rb(myNewModel, SModelBase.class)));
+    return getAddedAndDeleted(itemsExtractor.invoke(as_nbyrtw_a0a0a0qb(myOldModel, SModelBase.class)), itemsExtractor.invoke(as_nbyrtw_a0b0a0qb(myNewModel, SModelBase.class)));
   }
 
   public static ModelChangeSet buildChangeSet(SModel oldModel, SModel newModel) {
@@ -393,10 +407,10 @@ public class ChangeSetBuilder {
     }
     return null;
   }
-  private static <T> T as_nbyrtw_a0a0a0rb(Object o, Class<T> type) {
+  private static <T> T as_nbyrtw_a0a0a0qb(Object o, Class<T> type) {
     return (type.isInstance(o) ? (T) o : null);
   }
-  private static <T> T as_nbyrtw_a0b0a0rb(Object o, Class<T> type) {
+  private static <T> T as_nbyrtw_a0b0a0qb(Object o, Class<T> type) {
     return (type.isInstance(o) ? (T) o : null);
   }
 }

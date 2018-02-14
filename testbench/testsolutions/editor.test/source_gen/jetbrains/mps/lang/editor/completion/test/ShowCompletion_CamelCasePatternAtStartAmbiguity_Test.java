@@ -11,21 +11,21 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 
 @MPSLaunch
-public class DontCompleteNotCamelCasePatternAmbiguityImmediately_Test extends BaseTransformationTest {
+public class ShowCompletion_CamelCasePatternAtStartAmbiguity_Test extends BaseTransformationTest {
   @Test
-  public void test_DontCompleteNotCamelCasePatternAmbiguityImmediately() throws Throwable {
+  public void test_ShowCompletion_CamelCasePatternAtStartAmbiguity() throws Throwable {
     initTest("${mps_home}", "r:f27d9626-8ef5-4cba-bce0-6aa6369f05ff(jetbrains.mps.lang.editor.completion.test)");
-    runTest("jetbrains.mps.lang.editor.completion.test.DontCompleteNotCamelCasePatternAmbiguityImmediately_Test$TestBody", "testMethod", false);
+    runTest("jetbrains.mps.lang.editor.completion.test.ShowCompletion_CamelCasePatternAtStartAmbiguity_Test$TestBody", "testMethod", false);
   }
 
   @MPSLaunch
   public static class TestBody extends BaseEditorTestBody {
     @Override
     public void testMethodImpl() throws Exception {
-      initEditorComponent("2070818307959549734", "2070818307959549736");
-      typeString("se");
+      initEditorComponent("391899783184196728", "391899783184196730");
+      typeString("camCas");
       invokeAction("jetbrains.mps.ide.editor.actions.Complete_Action");
-      Assert.assertTrue(getEditorComponent().getNodeSubstituteChooser().isVisible() && getEditorComponent().getNodeSubstituteChooser().getNumberOfActions() == 2);
+      Assert.assertTrue(getEditorComponent().getNodeSubstituteChooser().isVisible() && getEditorComponent().getNodeSubstituteChooser().getNumberOfActions() == 3);
       pressKeys(ListSequence.fromListAndArray(new ArrayList<String>(), " ENTER"));
 
     }

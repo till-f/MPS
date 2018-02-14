@@ -27,8 +27,11 @@ import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import static jetbrains.mps.smodel.SModelReference.differs;
@@ -92,6 +95,24 @@ public final class RefUpdateUtil {
 
     refs.removeAll(remove);
     refs.addAll(add);
+
+    return !remove.isEmpty();
+  }
+
+  public<T> boolean updateModuleRefs(Map<SModuleReference, T> refs) {
+    Set<SModuleReference> remove = new HashSet<>();
+    Map<SModuleReference, T> add = new LinkedHashMap<>();
+
+    for (Entry<SModuleReference, T> ref : refs.entrySet()) {
+      SModuleReference newRef = update(ref.getKey());
+      if (ModuleReference.differs(ref.getKey(), newRef)) {
+        remove.add(ref.getKey());
+        add.put(newRef, ref.getValue());
+      }
+    }
+
+    refs.keySet().removeAll(remove);
+    refs.putAll(add);
 
     return !remove.isEmpty();
   }

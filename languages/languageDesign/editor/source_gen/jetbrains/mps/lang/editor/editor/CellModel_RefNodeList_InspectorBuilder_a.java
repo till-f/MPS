@@ -699,6 +699,7 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
       if (editorCell.getRole() == null) {
         editorCell.setRole("separatorTextQuery");
       }
+      CellModel_RefNodeList_RemoveSeparatorQuery_Actions.setCellActions(editorCell, getNode(), getEditorContext());
     }
     @Override
     protected EditorCell createEmptyCell() {

@@ -49,7 +49,7 @@ import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import jetbrains.mps.internal.collections.runtime.IVisitor;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.util.IterableUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.annotations.Nullable;
@@ -74,8 +74,12 @@ import org.jetbrains.mps.openapi.model.SReference;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.vcs.diff.changes.SetReferenceChange;
 import jetbrains.mps.smodel.event.SModelChildEvent;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.smodel.behaviour.BHReflection;
+import jetbrains.mps.core.aspects.behaviour.SMethodTrimmedId;
 import jetbrains.mps.smodel.CopyUtil;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
+import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.smodel.event.SModelRootEvent;
 import jetbrains.mps.smodel.event.SModelLanguageEvent;
 import org.jetbrains.mps.openapi.language.SLanguage;
@@ -310,8 +314,8 @@ public class ChangesTracking {
     if (oldNode == null) {
       return;
     }
-    List<? extends SNode> children = IterableUtil.asList(oldNode.getChildren(role));
-    ListSequence.fromList(children).visitAll(new IVisitor<SNode>() {
+    Iterable<SNode> children = AttributeOperations.getChildNodesAndAttributes(oldNode, role);
+    Sequence.fromIterable(children).visitAll(new IVisitor<SNode>() {
       public void visit(SNode c) {
         removeDescendantChanges(c.getNodeId());
       }
@@ -388,7 +392,7 @@ public class ChangesTracking {
   private static Iterable<SNodeId> getNodeIdsForNodeGroupChange(@NotNull NodeGroupChange ngc, @Nullable Tuples._2<SNodeId, List<SNodeId>> lastParentAndNewChildrenIds) {
     List<SNodeId> childrenIds;
     if (lastParentAndNewChildrenIds == null || neq_5iuzi5_a0a1a05(lastParentAndNewChildrenIds._0(), ngc.getParentNodeId())) {
-      List<? extends SNode> children = IterableUtil.asList(ngc.getChangeSet().getNewModel().getNode(ngc.getParentNodeId()).getChildren(ngc.getRole()));
+      List<SNode> children = ngc.getChangedCollection(true);
       childrenIds = ListSequence.fromList(children).select(new ISelector<SNode, SNodeId>() {
         public SNodeId select(SNode n) {
           return n.getNodeId();
@@ -413,11 +417,11 @@ public class ChangesTracking {
   }
 
   public class MyEventsCollector extends SModelEventVisitorAdapter implements SModelCommandListener {
-    private Map<SNode, Set<String>> childChanged;
+    private Map<SNode, Set<SContainmentLink>> childChanged;
 
     @Override
     public void eventsHappenedInCommand(List<SModelEvent> events) {
-      childChanged = MapSequence.fromMap(new HashMap<SNode, Set<String>>());
+      childChanged = MapSequence.fromMap(new HashMap<SNode, Set<SContainmentLink>>());
       for (SModelEvent event : ListSequence.fromList(events)) {
         event.accept(this);
       }
@@ -511,24 +515,24 @@ public class ChangesTracking {
       if (parent.getModel() == null) {
         return;
       }
-      String childRoleName = event.getChildRole();
+      SNode child = event.getChild();
+      final SContainmentLink childRole = (SNodeOperations.isInstanceOf(child, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute")) ? ((SContainmentLink) BHReflection.invoke0(SNodeOperations.cast(child, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute")), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), SMethodTrimmedId.create("getLink", MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), "BpxLfMirzf"))) : event.getAggregationLink());
 
       // trying to avoid update task execution for the same child role twice 
-      Set<String> childRoles = MapSequence.fromMap(childChanged).get(parent);
-      if (childRoles == null) {
-        childRoles = SetSequence.fromSet(new HashSet<String>());
-        MapSequence.fromMap(childChanged).put(parent, childRoles);
+      Set<SContainmentLink> changedChildRoles = MapSequence.fromMap(childChanged).get(parent);
+      if (changedChildRoles == null) {
+        changedChildRoles = SetSequence.fromSet(new HashSet<SContainmentLink>());
+        MapSequence.fromMap(childChanged).put(parent, changedChildRoles);
       }
-      if (SetSequence.fromSet(childRoles).contains(childRoleName)) {
+      if (SetSequence.fromSet(changedChildRoles).contains(childRole)) {
         return;
       } else {
-        SetSequence.fromSet(childRoles).addElement(childRoleName);
+        SetSequence.fromSet(changedChildRoles).addElement(childRole);
       }
       final SNodeId parentId = parent.getNodeId();
-      final SContainmentLink childRole = event.getAggregationLink();
 
-      final Wrappers._T<List<? extends SNode>> childrenRightAfterEvent = new Wrappers._T<List<? extends SNode>>(IterableUtil.asList(parent.getChildren(childRole)));
-      childrenRightAfterEvent.value = ListSequence.fromList(childrenRightAfterEvent.value).select(new ISelector<SNode, SNode>() {
+      final Wrappers._T<Iterable<SNode>> childrenRightAfterEvent = new Wrappers._T<Iterable<SNode>>(AttributeOperations.getChildNodesAndAttributes(((SNode) parent), childRole));
+      childrenRightAfterEvent.value = Sequence.fromIterable(childrenRightAfterEvent.value).select(new ISelector<SNode, SNode>() {
         public SNode select(SNode n) {
           return CopyUtil.copyAndPreserveId(n, false);
         }
@@ -541,7 +545,7 @@ public class ChangesTracking {
             }
           });
           removeDescendantChanges(parentId, childRole);
-          myLastParentAndNewChildrenIds = MultiTuple.<SNodeId,List<SNodeId>>from(parentId, ListSequence.fromList(childrenRightAfterEvent.value).select(new ISelector<SNode, SNodeId>() {
+          myLastParentAndNewChildrenIds = MultiTuple.<SNodeId,List<SNodeId>>from(parentId, Sequence.fromIterable(childrenRightAfterEvent.value).select(new ISelector<SNode, SNodeId>() {
             public SNodeId select(SNode n) {
               return n.getNodeId();
             }
@@ -550,7 +554,7 @@ public class ChangesTracking {
             public void invoke(ChangeSetBuilder b) {
               SNode oldParentNode = getOldNode(parentId);
               if (oldParentNode != null) {
-                b.buildForNodeRole(IterableUtil.asList(oldParentNode.getChildren(childRole)), childrenRightAfterEvent.value, parentId, childRole);
+                b.buildForNodeRole(IterableUtil.asList(AttributeOperations.getChildNodesAndAttributes(oldParentNode, childRole)), IterableUtil.asList(childrenRightAfterEvent.value), parentId, childRole);
               }
             }
           });

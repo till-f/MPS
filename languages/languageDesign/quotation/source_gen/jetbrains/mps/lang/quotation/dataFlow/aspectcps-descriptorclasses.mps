@@ -42,6 +42,7 @@
       <concept id="1081236700937" name="jetbrains.mps.baseLanguage.structure.StaticMethodCall" flags="nn" index="2YIFZM">
         <reference id="1144433194310" name="classConcept" index="1Pybhc" />
       </concept>
+      <concept id="1070534058343" name="jetbrains.mps.baseLanguage.structure.NullLiteral" flags="nn" index="10Nm6u" />
       <concept id="1070534934090" name="jetbrains.mps.baseLanguage.structure.CastExpression" flags="nn" index="10QFUN">
         <child id="1070534934091" name="type" index="10QFUM" />
         <child id="1070534934092" name="expression" index="10QFUP" />
@@ -51,6 +52,7 @@
       </concept>
       <concept id="1068431474542" name="jetbrains.mps.baseLanguage.structure.VariableDeclaration" flags="ng" index="33uBYm">
         <property id="1176718929932" name="isFinal" index="3TUv4t" />
+        <child id="1068431790190" name="initializer" index="33vP2m" />
       </concept>
       <concept id="1068498886296" name="jetbrains.mps.baseLanguage.structure.VariableReference" flags="nn" index="37vLTw">
         <reference id="1068581517664" name="variableDeclaration" index="3cqZAo" />
@@ -72,11 +74,18 @@
       <concept id="1068580123155" name="jetbrains.mps.baseLanguage.structure.ExpressionStatement" flags="nn" index="3clFbF">
         <child id="1068580123156" name="expression" index="3clFbG" />
       </concept>
+      <concept id="1068580123159" name="jetbrains.mps.baseLanguage.structure.IfStatement" flags="nn" index="3clFbJ">
+        <child id="1068580123160" name="condition" index="3clFbw" />
+        <child id="1068580123161" name="ifTrue" index="3clFbx" />
+      </concept>
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS">
         <child id="1068581517665" name="statement" index="3cqZAp" />
       </concept>
       <concept id="1068581242878" name="jetbrains.mps.baseLanguage.structure.ReturnStatement" flags="nn" index="3cpWs6">
         <child id="1068581517676" name="expression" index="3cqZAk" />
+      </concept>
+      <concept id="1068581242864" name="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" flags="nn" index="3cpWs8">
+        <child id="1068581242865" name="localVariableDeclaration" index="3cpWs9" />
       </concept>
       <concept id="1068581242863" name="jetbrains.mps.baseLanguage.structure.LocalVariableDeclaration" flags="nr" index="3cpWsn" />
       <concept id="1068581517677" name="jetbrains.mps.baseLanguage.structure.VoidType" flags="in" index="3cqZAl" />
@@ -95,6 +104,11 @@
         <reference id="1107535924139" name="classifier" index="3uigEE" />
         <child id="1109201940907" name="parameter" index="11_B2D" />
       </concept>
+      <concept id="1081773326031" name="jetbrains.mps.baseLanguage.structure.BinaryOperation" flags="nn" index="3uHJSO">
+        <child id="1081773367579" name="rightExpression" index="3uHU7w" />
+        <child id="1081773367580" name="leftExpression" index="3uHU7B" />
+      </concept>
+      <concept id="1073239437375" name="jetbrains.mps.baseLanguage.structure.NotEqualsExpression" flags="nn" index="3y3z36" />
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
@@ -324,7 +338,7 @@
                   <ref role="1Pybhc" to="33ny:~Collections" resolve="Collections" />
                   <node concept="2ShNRf" id="Z" role="37wK5m">
                     <node concept="HV5vD" id="11" role="2ShVmc">
-                      <ref role="HV5vE" node="1S" resolve="Quotation_DataFlow" />
+                      <ref role="HV5vE" node="21" resolve="Quotation_DataFlow" />
                     </node>
                   </node>
                   <node concept="3uibUv" id="10" role="3PaCim">
@@ -421,7 +435,7 @@
           </node>
         </node>
         <node concept="39e2AT" id="1l" role="39e2AY">
-          <ref role="39e2AS" node="1S" resolve="Quotation_DataFlow" />
+          <ref role="39e2AS" node="21" resolve="Quotation_DataFlow" />
         </node>
       </node>
     </node>
@@ -453,184 +467,205 @@
         </node>
       </node>
       <node concept="3clFbS" id="1y" role="3clF47">
-        <node concept="1DcWWT" id="1$" role="3cqZAp">
-          <node concept="2OqwBi" id="1_" role="1DdaDG">
-            <node concept="2OqwBi" id="1C" role="2Oq$k0">
-              <node concept="1DoJHT" id="1E" role="2Oq$k0">
+        <node concept="3cpWs8" id="1$" role="3cqZAp">
+          <node concept="3cpWsn" id="1A" role="3cpWs9">
+            <property role="TrG5h" value="quotedNode" />
+            <node concept="3Tqbb2" id="1B" role="1tU5fm">
+              <ref role="ehGHo" to="tp3r:4IP40Bi2$Ew" resolve="NodeBuilderNode" />
+            </node>
+            <node concept="2OqwBi" id="1C" role="33vP2m">
+              <node concept="1DoJHT" id="1D" role="2Oq$k0">
                 <property role="1Dpdpm" value="getNode" />
-                <node concept="3uibUv" id="1G" role="1Ez5kq">
+                <node concept="3uibUv" id="1F" role="1Ez5kq">
                   <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
                 </node>
-                <node concept="37vLTw" id="1H" role="1EMhIo">
+                <node concept="37vLTw" id="1G" role="1EMhIo">
                   <ref role="3cqZAo" node="1x" resolve="_context" />
                 </node>
               </node>
-              <node concept="3TrEf2" id="1F" role="2OqNvi">
+              <node concept="3TrEf2" id="1E" role="2OqNvi">
                 <ref role="3Tt5mk" to="tp3r:4IP40Bi2$Eu" resolve="quotedNode" />
               </node>
             </node>
-            <node concept="2qgKlT" id="1D" role="2OqNvi">
-              <ref role="37wK5l" to="ii9q:RRzwLnBxZy" resolve="getExternalExpressions" />
-            </node>
           </node>
-          <node concept="3cpWsn" id="1A" role="1Duv9x">
-            <property role="TrG5h" value="expr" />
-            <node concept="3Tqbb2" id="1I" role="1tU5fm">
-              <ref role="ehGHo" to="tpee:fz3vP1J" resolve="Expression" />
-            </node>
-          </node>
-          <node concept="3clFbS" id="1B" role="2LFqv$">
-            <node concept="3clFbF" id="1J" role="3cqZAp">
-              <node concept="2OqwBi" id="1K" role="3clFbG">
-                <node concept="2OqwBi" id="1L" role="2Oq$k0">
-                  <node concept="37vLTw" id="1N" role="2Oq$k0">
-                    <ref role="3cqZAo" node="1x" resolve="_context" />
-                  </node>
-                  <node concept="liA8E" id="1O" role="2OqNvi">
-                    <ref role="37wK5l" to="aplb:3HJD4JbIvKV" resolve="getBuilder" />
-                  </node>
+        </node>
+        <node concept="3clFbJ" id="1_" role="3cqZAp">
+          <node concept="3clFbS" id="1H" role="3clFbx">
+            <node concept="1DcWWT" id="1J" role="3cqZAp">
+              <node concept="2OqwBi" id="1K" role="1DdaDG">
+                <node concept="37vLTw" id="1N" role="2Oq$k0">
+                  <ref role="3cqZAo" node="1A" resolve="quotedNode" />
                 </node>
-                <node concept="liA8E" id="1M" role="2OqNvi">
-                  <ref role="37wK5l" to="1fjm:~StructuralProgramBuilder.build(java.lang.Object):void" resolve="build" />
-                  <node concept="10QFUN" id="1P" role="37wK5m">
-                    <node concept="37vLTw" id="1Q" role="10QFUP">
-                      <ref role="3cqZAo" node="1A" resolve="expr" />
+                <node concept="2qgKlT" id="1O" role="2OqNvi">
+                  <ref role="37wK5l" to="ii9q:RRzwLnBxZy" resolve="getExternalExpressions" />
+                </node>
+              </node>
+              <node concept="3cpWsn" id="1L" role="1Duv9x">
+                <property role="TrG5h" value="expr" />
+                <node concept="3Tqbb2" id="1P" role="1tU5fm">
+                  <ref role="ehGHo" to="tpee:fz3vP1J" resolve="Expression" />
+                </node>
+              </node>
+              <node concept="3clFbS" id="1M" role="2LFqv$">
+                <node concept="3clFbF" id="1Q" role="3cqZAp">
+                  <node concept="2OqwBi" id="1R" role="3clFbG">
+                    <node concept="2OqwBi" id="1S" role="2Oq$k0">
+                      <node concept="37vLTw" id="1U" role="2Oq$k0">
+                        <ref role="3cqZAo" node="1x" resolve="_context" />
+                      </node>
+                      <node concept="liA8E" id="1V" role="2OqNvi">
+                        <ref role="37wK5l" to="aplb:3HJD4JbIvKV" resolve="getBuilder" />
+                      </node>
                     </node>
-                    <node concept="3Tqbb2" id="1R" role="10QFUM" />
+                    <node concept="liA8E" id="1T" role="2OqNvi">
+                      <ref role="37wK5l" to="1fjm:~StructuralProgramBuilder.build(java.lang.Object):void" resolve="build" />
+                      <node concept="10QFUN" id="1W" role="37wK5m">
+                        <node concept="37vLTw" id="1X" role="10QFUP">
+                          <ref role="3cqZAo" node="1L" resolve="expr" />
+                        </node>
+                        <node concept="3Tqbb2" id="1Y" role="10QFUM" />
+                      </node>
+                    </node>
                   </node>
                 </node>
               </node>
+            </node>
+          </node>
+          <node concept="3y3z36" id="1I" role="3clFbw">
+            <node concept="10Nm6u" id="1Z" role="3uHU7w" />
+            <node concept="37vLTw" id="20" role="3uHU7B">
+              <ref role="3cqZAo" node="1A" resolve="quotedNode" />
             </node>
           </node>
         </node>
       </node>
     </node>
   </node>
-  <node concept="312cEu" id="1S">
+  <node concept="312cEu" id="21">
     <property role="TrG5h" value="Quotation_DataFlow" />
-    <node concept="3Tm1VV" id="1T" role="1B3o_S" />
-    <node concept="3uibUv" id="1U" role="1zkMxy">
+    <node concept="3Tm1VV" id="22" role="1B3o_S" />
+    <node concept="3uibUv" id="23" role="1zkMxy">
       <ref role="3uigEE" to="aplb:3HJD4JbIwf_" resolve="DataFlowBuilder" />
     </node>
-    <node concept="3clFb_" id="1V" role="jymVt">
+    <node concept="3clFb_" id="24" role="jymVt">
       <property role="TrG5h" value="build" />
-      <node concept="3Tm1VV" id="1W" role="1B3o_S" />
-      <node concept="3cqZAl" id="1X" role="3clF45" />
-      <node concept="37vLTG" id="1Y" role="3clF46">
+      <node concept="3Tm1VV" id="25" role="1B3o_S" />
+      <node concept="3cqZAl" id="26" role="3clF45" />
+      <node concept="37vLTG" id="27" role="3clF46">
         <property role="TrG5h" value="_context" />
         <property role="3TUv4t" value="true" />
-        <node concept="3uibUv" id="20" role="1tU5fm">
+        <node concept="3uibUv" id="29" role="1tU5fm">
           <ref role="3uigEE" to="aplb:3HJD4JbIvKw" resolve="DataFlowBuilderContext" />
         </node>
       </node>
-      <node concept="3clFbS" id="1Z" role="3clF47">
-        <node concept="1DcWWT" id="21" role="3cqZAp">
-          <node concept="2OqwBi" id="24" role="1DdaDG">
-            <node concept="1DoJHT" id="27" role="2Oq$k0">
+      <node concept="3clFbS" id="28" role="3clF47">
+        <node concept="1DcWWT" id="2a" role="3cqZAp">
+          <node concept="2OqwBi" id="2d" role="1DdaDG">
+            <node concept="1DoJHT" id="2g" role="2Oq$k0">
               <property role="1Dpdpm" value="getNode" />
-              <node concept="3uibUv" id="29" role="1Ez5kq">
+              <node concept="3uibUv" id="2i" role="1Ez5kq">
                 <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
               </node>
-              <node concept="37vLTw" id="2a" role="1EMhIo">
-                <ref role="3cqZAo" node="1Y" resolve="_context" />
+              <node concept="37vLTw" id="2j" role="1EMhIo">
+                <ref role="3cqZAo" node="27" resolve="_context" />
               </node>
             </node>
-            <node concept="2Rf3mk" id="28" role="2OqNvi">
-              <node concept="1xMEDy" id="2b" role="1xVPHs">
-                <node concept="chp4Y" id="2c" role="ri$Ld">
+            <node concept="2Rf3mk" id="2h" role="2OqNvi">
+              <node concept="1xMEDy" id="2k" role="1xVPHs">
+                <node concept="chp4Y" id="2l" role="ri$Ld">
                   <ref role="cht4Q" to="tp3r:hqc44pm" resolve="AbstractAntiquotation" />
                 </node>
               </node>
             </node>
           </node>
-          <node concept="3cpWsn" id="25" role="1Duv9x">
+          <node concept="3cpWsn" id="2e" role="1Duv9x">
             <property role="TrG5h" value="antiquotation" />
-            <node concept="3Tqbb2" id="2d" role="1tU5fm" />
+            <node concept="3Tqbb2" id="2m" role="1tU5fm" />
           </node>
-          <node concept="3clFbS" id="26" role="2LFqv$">
-            <node concept="3clFbF" id="2e" role="3cqZAp">
-              <node concept="2OqwBi" id="2f" role="3clFbG">
-                <node concept="2OqwBi" id="2g" role="2Oq$k0">
-                  <node concept="37vLTw" id="2i" role="2Oq$k0">
-                    <ref role="3cqZAo" node="1Y" resolve="_context" />
+          <node concept="3clFbS" id="2f" role="2LFqv$">
+            <node concept="3clFbF" id="2n" role="3cqZAp">
+              <node concept="2OqwBi" id="2o" role="3clFbG">
+                <node concept="2OqwBi" id="2p" role="2Oq$k0">
+                  <node concept="37vLTw" id="2r" role="2Oq$k0">
+                    <ref role="3cqZAo" node="27" resolve="_context" />
                   </node>
-                  <node concept="liA8E" id="2j" role="2OqNvi">
+                  <node concept="liA8E" id="2s" role="2OqNvi">
                     <ref role="37wK5l" to="aplb:3HJD4JbIvKV" resolve="getBuilder" />
                   </node>
                 </node>
-                <node concept="liA8E" id="2h" role="2OqNvi">
+                <node concept="liA8E" id="2q" role="2OqNvi">
                   <ref role="37wK5l" to="1fjm:~StructuralProgramBuilder.build(java.lang.Object):void" resolve="build" />
-                  <node concept="10QFUN" id="2k" role="37wK5m">
-                    <node concept="37vLTw" id="2l" role="10QFUP">
-                      <ref role="3cqZAo" node="25" resolve="antiquotation" />
+                  <node concept="10QFUN" id="2t" role="37wK5m">
+                    <node concept="37vLTw" id="2u" role="10QFUP">
+                      <ref role="3cqZAo" node="2e" resolve="antiquotation" />
                     </node>
-                    <node concept="3Tqbb2" id="2m" role="10QFUM" />
+                    <node concept="3Tqbb2" id="2v" role="10QFUM" />
                   </node>
                 </node>
               </node>
             </node>
           </node>
         </node>
-        <node concept="3clFbF" id="22" role="3cqZAp">
-          <node concept="2OqwBi" id="2n" role="3clFbG">
-            <node concept="2OqwBi" id="2o" role="2Oq$k0">
-              <node concept="37vLTw" id="2q" role="2Oq$k0">
-                <ref role="3cqZAo" node="1Y" resolve="_context" />
+        <node concept="3clFbF" id="2b" role="3cqZAp">
+          <node concept="2OqwBi" id="2w" role="3clFbG">
+            <node concept="2OqwBi" id="2x" role="2Oq$k0">
+              <node concept="37vLTw" id="2z" role="2Oq$k0">
+                <ref role="3cqZAo" node="27" resolve="_context" />
               </node>
-              <node concept="liA8E" id="2r" role="2OqNvi">
+              <node concept="liA8E" id="2$" role="2OqNvi">
                 <ref role="37wK5l" to="aplb:3HJD4JbIvKV" resolve="getBuilder" />
               </node>
             </node>
-            <node concept="liA8E" id="2p" role="2OqNvi">
+            <node concept="liA8E" id="2y" role="2OqNvi">
               <ref role="37wK5l" to="1fjm:~StructuralProgramBuilder.build(java.lang.Object):void" resolve="build" />
-              <node concept="10QFUN" id="2s" role="37wK5m">
-                <node concept="2OqwBi" id="2t" role="10QFUP">
-                  <node concept="3TrEf2" id="2v" role="2OqNvi">
+              <node concept="10QFUN" id="2_" role="37wK5m">
+                <node concept="2OqwBi" id="2A" role="10QFUP">
+                  <node concept="3TrEf2" id="2C" role="2OqNvi">
                     <ref role="3Tt5mk" to="tp3r:hqc44pr" resolve="modelToCreate" />
                   </node>
-                  <node concept="1DoJHT" id="2w" role="2Oq$k0">
+                  <node concept="1DoJHT" id="2D" role="2Oq$k0">
                     <property role="1Dpdpm" value="getNode" />
-                    <node concept="3uibUv" id="2x" role="1Ez5kq">
+                    <node concept="3uibUv" id="2E" role="1Ez5kq">
                       <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
                     </node>
-                    <node concept="37vLTw" id="2y" role="1EMhIo">
-                      <ref role="3cqZAo" node="1Y" resolve="_context" />
+                    <node concept="37vLTw" id="2F" role="1EMhIo">
+                      <ref role="3cqZAo" node="27" resolve="_context" />
                     </node>
                   </node>
                 </node>
-                <node concept="3Tqbb2" id="2u" role="10QFUM" />
+                <node concept="3Tqbb2" id="2B" role="10QFUM" />
               </node>
             </node>
           </node>
         </node>
-        <node concept="3clFbF" id="23" role="3cqZAp">
-          <node concept="2OqwBi" id="2z" role="3clFbG">
-            <node concept="2OqwBi" id="2$" role="2Oq$k0">
-              <node concept="37vLTw" id="2A" role="2Oq$k0">
-                <ref role="3cqZAo" node="1Y" resolve="_context" />
+        <node concept="3clFbF" id="2c" role="3cqZAp">
+          <node concept="2OqwBi" id="2G" role="3clFbG">
+            <node concept="2OqwBi" id="2H" role="2Oq$k0">
+              <node concept="37vLTw" id="2J" role="2Oq$k0">
+                <ref role="3cqZAo" node="27" resolve="_context" />
               </node>
-              <node concept="liA8E" id="2B" role="2OqNvi">
+              <node concept="liA8E" id="2K" role="2OqNvi">
                 <ref role="37wK5l" to="aplb:3HJD4JbIvKV" resolve="getBuilder" />
               </node>
             </node>
-            <node concept="liA8E" id="2_" role="2OqNvi">
+            <node concept="liA8E" id="2I" role="2OqNvi">
               <ref role="37wK5l" to="1fjm:~StructuralProgramBuilder.build(java.lang.Object):void" resolve="build" />
-              <node concept="10QFUN" id="2C" role="37wK5m">
-                <node concept="2OqwBi" id="2D" role="10QFUP">
-                  <node concept="3TrEf2" id="2F" role="2OqNvi">
+              <node concept="10QFUN" id="2L" role="37wK5m">
+                <node concept="2OqwBi" id="2M" role="10QFUP">
+                  <node concept="3TrEf2" id="2O" role="2OqNvi">
                     <ref role="3Tt5mk" to="tp3r:2KyHUfrw9K5" resolve="nodeId" />
                   </node>
-                  <node concept="1DoJHT" id="2G" role="2Oq$k0">
+                  <node concept="1DoJHT" id="2P" role="2Oq$k0">
                     <property role="1Dpdpm" value="getNode" />
-                    <node concept="3uibUv" id="2H" role="1Ez5kq">
+                    <node concept="3uibUv" id="2Q" role="1Ez5kq">
                       <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
                     </node>
-                    <node concept="37vLTw" id="2I" role="1EMhIo">
-                      <ref role="3cqZAo" node="1Y" resolve="_context" />
+                    <node concept="37vLTw" id="2R" role="1EMhIo">
+                      <ref role="3cqZAo" node="27" resolve="_context" />
                     </node>
                   </node>
                 </node>
-                <node concept="3Tqbb2" id="2E" role="10QFUM" />
+                <node concept="3Tqbb2" id="2N" role="10QFUM" />
               </node>
             </node>
           </node>

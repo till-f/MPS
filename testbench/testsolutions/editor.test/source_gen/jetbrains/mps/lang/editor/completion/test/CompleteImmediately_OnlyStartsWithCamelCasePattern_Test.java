@@ -8,20 +8,21 @@ import org.junit.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
 
 @MPSLaunch
-public class CompleteCamelCasePatternImmediately_Test extends BaseTransformationTest {
+public class CompleteImmediately_OnlyStartsWithCamelCasePattern_Test extends BaseTransformationTest {
   @Test
-  public void test_CompleteCamelCasePatternImmediately() throws Throwable {
+  public void test_CompleteImmediately_OnlyStartsWithCamelCasePattern() throws Throwable {
     initTest("${mps_home}", "r:f27d9626-8ef5-4cba-bce0-6aa6369f05ff(jetbrains.mps.lang.editor.completion.test)");
-    runTest("jetbrains.mps.lang.editor.completion.test.CompleteCamelCasePatternImmediately_Test$TestBody", "testMethod", false);
+    runTest("jetbrains.mps.lang.editor.completion.test.CompleteImmediately_OnlyStartsWithCamelCasePattern_Test$TestBody", "testMethod", false);
   }
 
   @MPSLaunch
   public static class TestBody extends BaseEditorTestBody {
     @Override
     public void testMethodImpl() throws Exception {
-      initEditorComponent("2070818307959549606", "2070818307959549608");
-      typeString("sE");
+      initEditorComponent("391899783184222463", "391899783184222465");
+      typeString("cCTO");
       invokeAction("jetbrains.mps.ide.editor.actions.Complete_Action");
+
     }
   }
 }

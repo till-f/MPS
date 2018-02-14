@@ -19,9 +19,10 @@ import jetbrains.mps.errors.messageTargets.ReferenceMessageTarget;
 import jetbrains.mps.vcs.diff.changes.NodeGroupChange;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNodeId;
-import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.errors.messageTargets.DeletedNodeMessageTarget;
+import jetbrains.mps.util.IterableUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 
 public class ChangeEditorMessageFactory {
   private ChangeEditorMessageFactory() {
@@ -41,14 +42,12 @@ public class ChangeEditorMessageFactory {
       return ListSequence.fromListAndArray(new LinkedList<ChangeEditorMessage>(), new ChangeEditorMessage(node, target, owner, change, conflictChecker, highlighted));
     } else if (change instanceof NodeGroupChange) {
       NodeGroupChange chng = (NodeGroupChange) change;
-      SModel changeModel = (isOldEditor ? change.getChangeSet().getOldModel() : change.getChangeSet().getNewModel());
       SContainmentLink roleLink = chng.getRoleLink();
       SNodeId parentId = chng.getParentNodeId(!(isOldEditor));
-      SNode parentNode = changeModel.getNode(parentId);
-      if (parentNode == null) {
+      List<SNode> changeChildren = chng.getChangedCollection(!(isOldEditor));
+      if (changeChildren == null) {
         return null;
       }
-      List<SNode> changeChildren = IterableUtil.asList(parentNode.getChildren(roleLink));
 
       int changeBegin = (isOldEditor ? chng.getBegin() : chng.getResultBegin());
       int changeEnd = (isOldEditor ? chng.getEnd() : chng.getResultEnd());
@@ -59,8 +58,8 @@ public class ChangeEditorMessageFactory {
       SNodeId endId = (changeEnd < ListSequence.fromList(changeChildren).count() ? ListSequence.fromList(changeChildren).getElement(changeEnd).getNodeId() : null);
       int currentChildrenSize = ListSequence.fromList(changeChildren).count();
 
-      int beginIndex = (beginId == null ? currentChildrenSize : SNodeOperations.getIndexInParent(((SNode) editedModel.getNode(beginId))));
-      int endIndex = (endId == null ? currentChildrenSize : SNodeOperations.getIndexInParent(((SNode) editedModel.getNode(endId))));
+      int beginIndex = ChangeEditorMessageFactory.getIndex(beginId, currentChildrenSize, editedModel);
+      int endIndex = ChangeEditorMessageFactory.getIndex(endId, currentChildrenSize, editedModel);
 
       if (!((0 <= beginIndex && beginIndex <= endIndex && endIndex <= currentChildrenSize))) {
         return null;
@@ -69,7 +68,7 @@ public class ChangeEditorMessageFactory {
         // delete nodes 
         return ListSequence.fromListAndArray(new LinkedList<ChangeEditorMessage>(), new ChangeEditorMessage(editedModel.getNode(parentId), new DeletedNodeMessageTarget(roleLink.getName(), beginIndex), owner, change, conflictChecker, highlighted));
       } else {
-        List<? extends SNode> editedChildren = IterableUtil.asList(editedModel.getNode(parentId).getChildren(roleLink));
+        List<? extends SNode> editedChildren = IterableUtil.asList(AttributeOperations.getChildNodesAndAttributes(((SNode) editedModel.getNode(parentId)), roleLink));
         List<ChangeEditorMessage> msgs = ListSequence.fromList(new LinkedList<ChangeEditorMessage>());
         for (int i = beginIndex; i < endIndex; i++) {
           ListSequence.fromList(msgs).addElement(new ChangeEditorMessage(editedChildren.get(i), new NodeMessageTarget(), owner, change, conflictChecker, highlighted));
@@ -79,6 +78,14 @@ public class ChangeEditorMessageFactory {
     }
     return null;
   }
+  private static int getIndex(SNodeId nodeId, int currentChildrenSize, SModel editedModel) {
+    if (nodeId == null) {
+      return currentChildrenSize;
+    }
+    SNode node = ((SNode) editedModel.getNode(nodeId));
+    return SNodeOperations.getIndexInChildrenAndChildAttributesCollection(node);
+  }
+
 
   public static List<ChangeEditorMessage> createMessages(SModel editedModel, boolean isOldEditor, ModelChange change, EditorMessageOwner owner, ChangeEditorMessage.ConflictChecker conflictChecker) {
     return ChangeEditorMessageFactory.createMessages(editedModel, isOldEditor, change, owner, conflictChecker, true);

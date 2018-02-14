@@ -15,13 +15,12 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.IAttributeDescriptor;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import java.util.ArrayList;
+import jetbrains.mps.internal.collections.runtime.ISelector;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.internal.collections.runtime.IVisitor;
+import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.internal.collections.runtime.IterableUtils;
-import jetbrains.mps.internal.collections.runtime.ISelector;
 import jetbrains.mps.util.NameUtil;
 
 public class NodeGroupChange extends ModelChange {
@@ -50,7 +49,12 @@ public class NodeGroupChange extends ModelChange {
   public SNodeId getParentNodeId(boolean isNewModel) {
     return myParentNodeId;
   }
+  /**
+   * 
+   * @deprecated use getRoleLink()
+   */
   @NotNull
+  @Deprecated
   public String getRole() {
     return myRole.getRoleName();
   }
@@ -97,21 +101,26 @@ public class NodeGroupChange extends ModelChange {
   private SNode getParent(boolean isNewModel) {
     return ((isNewModel ? getChangeSet().getNewModel() : getChangeSet().getOldModel())).getNode(getParentNodeId(isNewModel));
   }
+
+  public final List<SNode> getChangedCollection(boolean isNewModel) {
+    return check_yjf6x2_a0a32(check_yjf6x2_a0a0x(getParent(isNewModel), myRole, this), this);
+  }
+
+
   public void prepare() {
     if (myPreparedIdsToDelete == null) {
-      SNode parent = getParent(false);
-      assert parent != null;
-
-      List<? extends SNode> children = IterableUtil.asList(parent.getChildren(myRole));
-      myPreparedIdsToDelete = ListSequence.fromList(new ArrayList<SNodeId>());
-      for (int i = myBegin; i < myEnd; i++) {
-        ListSequence.fromList(myPreparedIdsToDelete).addElement(children.get(i).getNodeId());
-      }
+      List<SNode> children = getChangedCollection(false);
+      assert children != null;
+      myPreparedIdsToDelete = ListSequence.fromList(children).page(myBegin, myEnd).select(new ISelector<SNode, SNodeId>() {
+        public SNodeId select(SNode it) {
+          return it.getNodeId();
+        }
+      }).toListSequence();
       myPreparedAnchorId = (myBegin == 0 ? null : children.get(myBegin - 1).getNodeId());
     }
   }
   @Override
-  public void apply(@NotNull final SModel model, @NotNull NodeCopier nodeCopier) {
+  public void apply(@NotNull final SModel model, @NotNull final NodeCopier nodeCopier) {
     // delete old nodes 
     prepare();
     ListSequence.fromList(myPreparedIdsToDelete).visitAll(new IVisitor<SNodeId>() {
@@ -122,26 +131,23 @@ public class NodeGroupChange extends ModelChange {
     myPreparedIdsToDelete = null;
 
     // copy nodes to insert 
-    List<SNode> nodesToAdd = ListSequence.fromList(new ArrayList<SNode>());
-    List<? extends SNode> newChildren = IterableUtil.asList(getParent(true).getChildren(myRole));
-    for (int i = myResultBegin; i < myResultEnd; i++) {
-      ListSequence.fromList(nodesToAdd).addElement(nodeCopier.copyNode(newChildren.get(i)));
-    }
+    Iterable<SNode> nodesToAdd = ListSequence.fromList(getChangedCollection(true)).page(myResultBegin, myResultEnd).select(new ISelector<SNode, SNode>() {
+      public SNode select(SNode child) {
+        return nodeCopier.copyNode(child);
+      }
+    });
 
     // insert new nodes 
     SNode anchor = (myPreparedAnchorId == null ? null : model.getNode(myPreparedAnchorId));
     SNode parent = model.getNode(myParentNodeId);
-    if (anchor != null) {
-      // can't use anchor.next-sibling here as it looks for sibling with respect to node's containment role 
-      // while there are tests (MergeCoreTest) that expect ordering according overall children list 
-      anchor = anchor.getNextSibling();
-    } else {
-      // MergeCoreTest expects nodes without anchor to go first 
-      anchor = parent.getFirstChild();
+    for (SNode newNode : Sequence.fromIterable(nodesToAdd)) {
+      anchor = insertNodeAfterAnchor(parent, newNode, anchor);
     }
-    for (SNode newNode : ListSequence.fromList(nodesToAdd)) {
-      parent.insertChildBefore(myRole, newNode, anchor);
-    }
+  }
+  private SNode insertNodeAfterAnchor(SNode parent, SNode newNode, SNode anchor) {
+    SContainmentLink link = (SNodeOperations.isInstanceOf(newNode, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute")) ? MetaAdapterFactory.getContainmentLink(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, 0x47bf8397520e5942L, "smodelAttribute") : myRole);
+    parent.insertChildAfter(link, newNode, anchor);
+    return newNode;
   }
   @Nullable
   @Override
@@ -177,7 +183,7 @@ public class NodeGroupChange extends ModelChange {
     List<SNode> newChildren = null;
     String newIds = null;
     if (verbose) {
-      newChildren = IterableUtil.asList(getParent(true).getChildren(myRole));
+      newChildren = getChangedCollection(true);
       newIds = IterableUtils.join(ListSequence.fromList(newChildren).page(myResultBegin, myResultEnd).select(new ISelector<SNode, String>() {
         public String select(SNode n) {
           return "#" + n.getNodeId();
@@ -185,10 +191,11 @@ public class NodeGroupChange extends ModelChange {
       }), ", ");
     }
 
-    String oldStuff = (myEnd - myBegin == 1 ? getRole() : NameUtil.formatNumericalString(myEnd - myBegin, getRole()));
-    String newStuff = (myResultEnd - myResultBegin == 1 ? getRole() : NameUtil.formatNumericalString(myResultEnd - myResultBegin, getRole()));
+    String role = myRole.getName();
+    String oldStuff = (myEnd - myBegin == 1 ? role : NameUtil.formatNumericalString(myEnd - myBegin, role));
+    String newStuff = (myResultEnd - myResultBegin == 1 ? role : NameUtil.formatNumericalString(myResultEnd - myResultBegin, role));
     // FIXME get rid of this dirty magic with role names "pluralization". PLEASE!!! 
-    if (eq_yjf6x2_a0a7a82(newStuff, getRole()) && eq_yjf6x2_a0a7a82_0(oldStuff, getRole())) {
+    if (eq_yjf6x2_a0a8a33(newStuff, role) && eq_yjf6x2_a0a8a33_0(oldStuff, role)) {
       newStuff = "another";
     } else if (myEnd != myBegin) {
       newStuff = "another " + newStuff;
@@ -218,10 +225,22 @@ public class NodeGroupChange extends ModelChange {
   private static String nodeRange(int begin, int end) {
     return (begin + 1 == end ? String.format("node #%d", begin) : String.format("nodes #%d-%d", begin, end - 1));
   }
-  private static boolean eq_yjf6x2_a0a7a82(Object a, Object b) {
+  private static List<SNode> check_yjf6x2_a0a32(Iterable<SNode> checkedDotOperand, NodeGroupChange checkedDotThisExpression) {
+    if (null != checkedDotOperand) {
+      return Sequence.fromIterable(checkedDotOperand).toListSequence();
+    }
+    return null;
+  }
+  private static Iterable<SNode> check_yjf6x2_a0a0x(SNode checkedDotOperand, SContainmentLink myRole, NodeGroupChange checkedDotThisExpression) {
+    if (null != checkedDotOperand) {
+      return AttributeOperations.getChildNodesAndAttributes(checkedDotOperand, myRole);
+    }
+    return null;
+  }
+  private static boolean eq_yjf6x2_a0a8a33(Object a, Object b) {
     return (a != null ? a.equals(b) : a == b);
   }
-  private static boolean eq_yjf6x2_a0a7a82_0(Object a, Object b) {
+  private static boolean eq_yjf6x2_a0a8a33_0(Object a, Object b) {
     return (a != null ? a.equals(b) : a == b);
   }
 }

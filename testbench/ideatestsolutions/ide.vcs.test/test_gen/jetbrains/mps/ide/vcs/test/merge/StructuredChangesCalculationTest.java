@@ -253,6 +253,47 @@ public class StructuredChangesCalculationTest extends ChangesTestBase {
       }
     });
   }
+  @Test
+  public void addCommentMultipleRole() {
+    // public void f19(int a) { } => 
+    // public void f19(int a, /*int b*/) { } 
+    testDiffCorectness(19, new _FunctionTypes._return_P2_E0<ModelChange[], SNode, SNode>() {
+      public ModelChange[] invoke(SNode n1, SNode n2) {
+        return new ModelChange[]{new NodeGroupStructChange(getChangeSet(), n1.getNodeId(), n2.getNodeId(), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"), 1, 1, 1, 2)};
+      }
+    });
+  }
+  @Test
+  public void commentChid() {
+    // public void f20(int a) { } => 
+    // public void f20(/*int a*/) { } 
+    testDiffCorectness(20, new _FunctionTypes._return_P2_E0<ModelChange[], SNode, SNode>() {
+      public ModelChange[] invoke(SNode n1, SNode n2) {
+        return new ModelChange[]{new NodeGroupStructChange(getChangeSet(), n1.getNodeId(), n2.getNodeId(), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"), 0, 1, 0, 1)};
+      }
+    });
+  }
+  @Test
+  public void addCommentSingleRole() {
+    // public long f21() {return 1; } => 
+    // public /*int*/ long f21() {return 1; } 
+    testDiffCorectness(21, new _FunctionTypes._return_P2_E0<ModelChange[], SNode, SNode>() {
+      public ModelChange[] invoke(SNode n1, SNode n2) {
+        return new ModelChange[]{new NodeGroupStructChange(getChangeSet(), n1.getNodeId(), n2.getNodeId(), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType"), 0, 0, 0, 1)};
+      }
+    });
+  }
+  @Test
+  public void addNodeAttribute() {
+    // public long f22() {return 1; } => 
+    // /*@return f22 */ 
+    // public long f22() {return 1; } 
+    testDiffCorectness(22, new _FunctionTypes._return_P2_E0<ModelChange[], SNode, SNode>() {
+      public ModelChange[] invoke(SNode n1, SNode n2) {
+        return new ModelChange[]{new NodeGroupStructChange(getChangeSet(), n1.getNodeId(), n2.getNodeId(), MetaAdapterFactory.getContainmentLink(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, 0x47bf8397520e5942L, "smodelAttribute"), 0, 0, 0, 1)};
+      }
+    });
+  }
 
 
   private StructChangeSet getChangeSet() {

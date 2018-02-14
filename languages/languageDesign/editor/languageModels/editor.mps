@@ -99,6 +99,7 @@
       <concept id="1106270549637" name="jetbrains.mps.lang.editor.structure.CellLayout_Horizontal" flags="nn" index="2iRfu4" />
       <concept id="1106270571710" name="jetbrains.mps.lang.editor.structure.CellLayout_Vertical" flags="nn" index="2iRkQZ" />
       <concept id="8954657570917870539" name="jetbrains.mps.lang.editor.structure.TransformationLocation_ContextAssistant" flags="ng" index="2j_NTm" />
+      <concept id="3459162043708467089" name="jetbrains.mps.lang.editor.structure.CellActionMap_CanExecuteFunction" flags="in" index="jK8Ss" />
       <concept id="6089045305654894367" name="jetbrains.mps.lang.editor.structure.SubstituteMenuReference_Named" flags="ng" index="2kknPI">
         <reference id="6089045305654944382" name="menu" index="2kkw0f" />
       </concept>
@@ -306,6 +307,7 @@
       <concept id="1139535280617" name="jetbrains.mps.lang.editor.structure.CellActionMapItem" flags="lg" index="1hA7zw">
         <property id="1139535298778" name="actionId" index="1hAc7j" />
         <property id="1139537298254" name="description" index="1hHO97" />
+        <child id="3459162043708468028" name="canExecuteFunction" index="jK8aL" />
         <child id="1139535280620" name="executeFunction" index="1hA7z_" />
       </concept>
       <concept id="1139535439104" name="jetbrains.mps.lang.editor.structure.CellActionMap_ExecuteFunction" flags="in" index="1hAIg9" />
@@ -6933,6 +6935,7 @@
           <node concept="3F1sOY" id="Ny5pAsxJQD" role="3EZMnx">
             <property role="2ru_X1" value="true" />
             <ref role="1NtTu8" to="tpc2:Ny5pAsx39_" resolve="separatorTextQuery" />
+            <ref role="1ERwB7" node="7r9L9Fo9LsW" resolve="CellModel_RefNodeList_RemoveSeparatorQuery_Actions" />
             <node concept="OXEIz" id="3EUGuXc80Kh" role="P5bDN">
               <node concept="1ou48o" id="3EUGuXc80Ki" role="OY2wv">
                 <property role="1ezIyd" value="custom" />
@@ -26376,6 +26379,71 @@
       <node concept="3F0ifn" id="6hgzQ4Z6YgZ" role="3EZMnx">
         <property role="3F0ifm" value="/" />
         <ref role="1k5W1q" to="tpen:hFCSUmN" resolve="RightParen" />
+      </node>
+    </node>
+  </node>
+  <node concept="1h_SRR" id="7r9L9Fo9LsW">
+    <property role="3GE5qa" value="CellModel" />
+    <property role="TrG5h" value="CellModel_RefNodeList_RemoveSeparatorQuery_Actions" />
+    <ref role="1h_SK9" to="tpc2:fBF2Hee" resolve="CellModel_RefNodeList" />
+    <node concept="1hA7zw" id="7r9L9Fo9Lto" role="1h_SK8">
+      <property role="1hAc7j" value="delete_action_id" />
+      <node concept="1hAIg9" id="7r9L9Fo9Ltp" role="1hA7z_">
+        <node concept="3clFbS" id="7r9L9Fo9Ltq" role="2VODD2">
+          <node concept="3clFbJ" id="7r9L9Fo9TNP" role="3cqZAp">
+            <node concept="2OqwBi" id="7r9L9Foa3tp" role="3clFbw">
+              <node concept="2OqwBi" id="7r9L9Fo9U5c" role="2Oq$k0">
+                <node concept="0IXxy" id="7r9L9Fo9TO1" role="2Oq$k0" />
+                <node concept="3TrEf2" id="7r9L9Foa2Rp" role="2OqNvi">
+                  <ref role="3Tt5mk" to="tpc2:Ny5pAsx39_" resolve="separatorTextQuery" />
+                </node>
+              </node>
+              <node concept="2xy62i" id="7r9L9Foa3P6" role="2OqNvi">
+                <node concept="1Q80Hx" id="7r9L9Foa3T5" role="2xHN3q" />
+              </node>
+            </node>
+            <node concept="3clFbS" id="7r9L9Fo9TNR" role="3clFbx">
+              <node concept="3cpWs6" id="7r9L9Foa3Xa" role="3cqZAp" />
+            </node>
+          </node>
+          <node concept="3clFbF" id="7r9L9Foa41p" role="3cqZAp">
+            <node concept="2OqwBi" id="7r9L9Foa5iB" role="3clFbG">
+              <node concept="2OqwBi" id="7r9L9Foa4fH" role="2Oq$k0">
+                <node concept="0IXxy" id="7r9L9Foa41n" role="2Oq$k0" />
+                <node concept="3TrEf2" id="7r9L9Foa4FJ" role="2OqNvi">
+                  <ref role="3Tt5mk" to="tpc2:Ny5pAsx39_" resolve="separatorTextQuery" />
+                </node>
+              </node>
+              <node concept="3YRAZt" id="7r9L9Foa5Y2" role="2OqNvi" />
+            </node>
+          </node>
+          <node concept="3clFbF" id="7r9L9Foa66n" role="3cqZAp">
+            <node concept="2OqwBi" id="7r9L9Foa6kT" role="3clFbG">
+              <node concept="0IXxy" id="7r9L9Foa66l" role="2Oq$k0" />
+              <node concept="1OKiuA" id="7r9L9Foa6Hw" role="2OqNvi">
+                <node concept="1Q80Hx" id="7r9L9Foa6Ig" role="lBI5i" />
+                <node concept="eBIwv" id="7r9L9Foa6K2" role="lGT1i">
+                  <ref role="fyFUz" to="tpc2:gAczwbX" resolve="separatorText" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="jK8Ss" id="7r9L9Fo9ZKA" role="jK8aL">
+        <node concept="3clFbS" id="7r9L9Fo9ZKB" role="2VODD2">
+          <node concept="3clFbF" id="7r9L9Fo9ZS4" role="3cqZAp">
+            <node concept="2OqwBi" id="7r9L9Foa1vG" role="3clFbG">
+              <node concept="2OqwBi" id="7r9L9Foa0fP" role="2Oq$k0">
+                <node concept="0IXxy" id="7r9L9Fo9ZS3" role="2Oq$k0" />
+                <node concept="3TrEf2" id="7r9L9Foa0Jd" role="2OqNvi">
+                  <ref role="3Tt5mk" to="tpc2:Ny5pAsx39_" resolve="separatorTextQuery" />
+                </node>
+              </node>
+              <node concept="3x8VRR" id="7r9L9Foa2i7" role="2OqNvi" />
+            </node>
+          </node>
+        </node>
       </node>
     </node>
   </node>

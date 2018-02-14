@@ -46,6 +46,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_IDelTestConcreteChild;
   private ConceptPresentation props_ISpecialDelTestChild;
   private ConceptPresentation props_ISpecialDelTestConcreteChild;
+  private ConceptPresentation props_ImmediateCompletionChild;
   private ConceptPresentation props_InitAbstractChild;
   private ConceptPresentation props_InitChildWithDirectCycle_card1;
   private ConceptPresentation props_InitChildWithDirectCycle_card1n;
@@ -374,6 +375,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ISpecialDelTestConcreteChild = cpb.create();
         }
         return props_ISpecialDelTestConcreteChild;
+      case LanguageConceptSwitch.ImmediateCompletionChild:
+        if (props_ImmediateCompletionChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ImmediateCompletionChild = cpb.create();
+        }
+        return props_ImmediateCompletionChild;
       case LanguageConceptSwitch.InitAbstractChild:
         if (props_InitAbstractChild == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

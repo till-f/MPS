@@ -1016,6 +1016,12 @@
       <property role="20kJfa" value="child" />
       <ref role="20lvS9" node="5tii5yjw2eH" resolve="CompletionChild" />
     </node>
+    <node concept="1TJgyj" id="lKjGr4ffY1" role="1TKVEi">
+      <property role="IQ2ns" value="391899783184056193" />
+      <property role="20lmBu" value="aggregation" />
+      <property role="20kJfa" value="immediateCompletionChild" />
+      <ref role="20lvS9" node="lKjGr4fekd" resolve="ImmediateCompletionChild" />
+    </node>
   </node>
   <node concept="1TIwiD" id="5tii5yjw2eH">
     <property role="EcuMT" value="6292171174658974637" />
@@ -1496,6 +1502,15 @@
       <property role="20kJfa" value="horizontalChild" />
       <property role="20lbJX" value="0..n" />
       <ref role="20lvS9" node="5Q8f32J8IJR" resolve="DeleteLineTestChild" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="lKjGr4fekd">
+    <property role="EcuMT" value="391899783184049421" />
+    <property role="3GE5qa" value="completion" />
+    <property role="TrG5h" value="ImmediateCompletionChild" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="PrWs8" id="lKjGr4feke" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
   </node>
 </model>

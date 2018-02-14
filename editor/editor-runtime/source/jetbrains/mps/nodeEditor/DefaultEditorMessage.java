@@ -57,7 +57,7 @@ public class DefaultEditorMessage implements EditorMessage {
   @Override
   public boolean sameAs(SimpleEditorMessage message) {
     return message.getNode() == getNode() && getOwner() == message.getOwner() &&
-        getStatus() == message.getStatus() && getMessage().equals(message.getMessage());
+           getStatus() == message.getStatus() && getMessage().equals(message.getMessage());
   }
 
   @Override
@@ -116,7 +116,10 @@ public class DefaultEditorMessage implements EditorMessage {
 
   @Override
   public void doNavigate(EditorComponent editorComponent) {
-    editorComponent.changeSelection(getCellInBothWays(editorComponent));
+    EditorCell editorCell = getCellInBothWays(editorComponent);
+    if (editorCell != null) {
+      editorComponent.changeSelection(editorCell);
+    }
   }
 
   protected EditorCell getCellInBothWays(final EditorComponent editor) {

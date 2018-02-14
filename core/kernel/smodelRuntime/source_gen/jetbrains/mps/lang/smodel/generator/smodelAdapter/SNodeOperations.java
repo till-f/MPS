@@ -25,13 +25,13 @@ import jetbrains.mps.smodel.behaviour.BHReflection;
 import jetbrains.mps.core.aspects.behaviour.SMethodTrimmedId;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.smodel.MPSModuleRepository;
 import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.util.NameUtil;
 import org.jetbrains.mps.openapi.model.SReference;
 import jetbrains.mps.kernel.model.SModelUtil;
-import jetbrains.mps.internal.collections.runtime.Sequence;
 import java.util.Collections;
 import jetbrains.mps.util.ConditionalIterable;
 import org.jetbrains.annotations.Nullable;
@@ -529,6 +529,17 @@ public class SNodeOperations {
     }
     return IterableUtil.asList(node.getParent().getChildren(role)).indexOf(node);
   }
+  public static int getIndexInChildrenAndChildAttributesCollection(SNode node) {
+    if (node == null || SNodeOperations.getParent(node) == null) {
+      return -1;
+    }
+    SContainmentLink role = getContainingLinkInChildrenAndChildAttributesCollection(node);
+    if (role == null) {
+      return -1;
+    }
+    return Sequence.fromIterable(AttributeOperations.getChildNodesAndAttributes(SNodeOperations.getParent(node), role)).toListSequence().indexOf(node);
+  }
+
   public static List<SNode> getAllAttributes(SNode node) {
     return AttributeOperations.getAllAttributes(node);
   }
@@ -637,6 +648,13 @@ public class SNodeOperations {
       return null;
     }
     return containmentLink.getDeclarationNode();
+  }
+  public static SContainmentLink getContainingLinkInChildrenAndChildAttributesCollection(SNode childNode) {
+    if (SNodeOperations.isInstanceOf(childNode, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"))) {
+      return ((SContainmentLink) BHReflection.invoke0(SNodeOperations.cast(childNode, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute")), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), SMethodTrimmedId.create("getLink", MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), "BpxLfMirzf")));
+    } else {
+      return getContainingLink(childNode);
+    }
   }
   public static SContainmentLink getContainingLink(SNode childNode) {
     if (childNode == null) {

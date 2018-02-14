@@ -13,7 +13,10 @@ import org.jetbrains.mps.openapi.model.SNodeId;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import java.awt.Point;
 import java.awt.Rectangle;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.nodeEditor.selection.SingularSelectionListenerAdapter;
 import jetbrains.mps.openapi.editor.selection.SingularSelection;
 import javax.swing.event.ChangeListener;
@@ -69,11 +72,17 @@ public class DiffEditorsGroup {
             }
           }
 
-          SNode prevSibling = SNodeOperations.getPrevSibling(visibleNode);
-          if (check_s6qw4f_a5a6a0a0e0f(visibleNode.getRoleInParent(), prevSibling)) {
-            visibleNode = prevSibling;
+          SContainmentLink link = SNodeOperations.getContainingLinkInChildrenAndChildAttributesCollection(visibleNode);
+          SNode parent = visibleNode.getParent();
+
+          if (link == null || parent == null) {
+            return;
+          }
+          int index = SNodeOperations.getIndexInChildrenAndChildAttributesCollection(visibleNode);
+          if (index != 0) {
+            visibleNode = ListSequence.fromList(Sequence.fromIterable(AttributeOperations.getChildNodesAndAttributes(parent, link)).toListSequence()).getElement(index - 1);
           } else {
-            visibleNode = visibleNode.getParent();
+            visibleNode = parent;
           }
         }
       }
@@ -141,18 +150,6 @@ public class DiffEditorsGroup {
   private static SModel check_s6qw4f_a0d0a0a4a5(SNode checkedDotOperand) {
     if (null != checkedDotOperand) {
       return checkedDotOperand.getModel();
-    }
-    return null;
-  }
-  private static boolean check_s6qw4f_a5a6a0a0e0f(String checkedDotOperand, SNode prevSibling) {
-    if (null != checkedDotOperand) {
-      return checkedDotOperand.equals(check_s6qw4f_a0a5a6a0a0e0f(prevSibling));
-    }
-    return false;
-  }
-  private static String check_s6qw4f_a0a5a6a0a0e0f(SNode checkedDotOperand) {
-    if (null != checkedDotOperand) {
-      return checkedDotOperand.getRoleInParent();
     }
     return null;
   }

@@ -764,6 +764,8 @@
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.IDelTestConcreteChild_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.ISpecialDelTestChild_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.ISpecialDelTestConcreteChild_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_Editor" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_SubstituteMenu" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.InitChildWithDirectCycle_card1_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.InitChildWithDirectCycle_card1n_Editor" />
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.InitChildWithTwoSameConceptChildren_Editor" />
@@ -1017,6 +1019,48 @@
     <classNode dependClassName="org.jetbrains.annotations.NotNull" />
     <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
     <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_Editor" file="ImmediateCompletionChild_Editor.java">
+    <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_EditorBuilder_a" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.DefaultNodeEditor" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_EditorBuilder_a" file="ImmediateCompletionChild_EditorBuilder_a.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.cellProviders.PropertyCellProvider" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.EditorManager" />
+    <classNode dependClassName="jetbrains.mps.nodeEditor.cellProviders.CellProviderWithRole" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.EditorContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.cells.EditorCell" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+  </dependency>
+  <dependency className="jetbrains.mps.lang.editor.editorTest.editor.ImmediateCompletionChild_SubstituteMenu" file="ImmediateCompletionChild_SubstituteMenu.java">
+    <classNode dependClassName="java.lang.Override" />
+    <classNode dependClassName="java.lang.String" />
+    <classNode dependClassName="java.lang.Throwable" />
+    <classNode dependClassName="java.util.ArrayList" />
+    <classNode dependClassName="java.util.List" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.menus.MenuPart" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.menus.substitute.ConstraintsFilteringSubstituteMenuPartDecorator" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.menus.substitute.DefaultSubstituteMenuItem" />
+    <classNode dependClassName="jetbrains.mps.lang.editor.menus.substitute.SingleItemSubstituteMenuPart" />
+    <classNode dependClassName="jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations" />
+    <classNode dependClassName="jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuContext" />
+    <classNode dependClassName="jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem" />
+    <classNode dependClassName="jetbrains.mps.smodel.SNodePointer" />
+    <classNode dependClassName="jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory" />
+    <classNode dependClassName="org.apache.log4j.Logger" />
+    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
+    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
+    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
+    <classNode extendsClassName="jetbrains.mps.nodeEditor.menus.substitute.SubstituteMenuBase" />
   </dependency>
   <dependency className="jetbrains.mps.lang.editor.editorTest.editor.InitChildWithDirectCycle_card1_Editor" file="InitChildWithDirectCycle_card1_Editor.java">
     <classNode dependClassName="jetbrains.mps.lang.editor.editorTest.editor.InitChildWithDirectCycle_card1_EditorBuilder_a" />

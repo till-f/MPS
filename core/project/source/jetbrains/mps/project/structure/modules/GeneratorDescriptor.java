@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2017 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class GeneratorDescriptor extends ModuleDescriptor {
   private List<MappingPriorityRule> myPriorityRules;
 
   private boolean myGenerateTemplates = false;
-  private boolean myQueriesViaReflection = true;
+  private boolean myQueriesViaReflection = false;
   private String myGenOutputPath;
   private SModuleReference mySourceLanguage;
 

@@ -2278,7 +2278,7 @@
       <node concept="aVJcg" id="5HVSRHdVf2e" role="aVJcv">
         <node concept="NbPM2" id="5HVSRHdVf2f" role="aVJcq">
           <node concept="3Mxwew" id="5HVSRHdVf2g" role="3MwsjC">
-            <property role="3MwjfP" value="2017.3.2" />
+            <property role="3MwjfP" value="2017.3.4" />
           </node>
         </node>
       </node>
@@ -17965,7 +17965,7 @@
       <node concept="13uQ2_" id="5w9VucA$Mg7" role="39821P">
         <node concept="3_J27D" id="5w9VucA$Mg9" role="13uQ07">
           <node concept="3Mxwew" id="4vNfevbfZxr" role="3MwsjC">
-            <property role="3MwjfP" value="ecj-4.6.2.jar" />
+            <property role="3MwjfP" value="ecj-4.7.2.jar" />
           </node>
         </node>
       </node>
@@ -19719,7 +19719,7 @@
       <property role="2OjLBK" value="3" />
       <property role="TrG5h" value="MPS" />
       <property role="2OjLBL" value="2017" />
-      <property role="1lNJF1" value="2" />
+      <property role="1lNJF1" value="4" />
       <node concept="NbPM2" id="2FTyjkjSqva" role="2gocG4">
         <node concept="3Mxwew" id="2FTyjkjSqv9" role="3MwsjC">
           <property role="3MwjfP" value="117" />

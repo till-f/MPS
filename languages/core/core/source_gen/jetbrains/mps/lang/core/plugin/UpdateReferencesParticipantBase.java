@@ -187,7 +187,8 @@ public abstract class UpdateReferencesParticipantBase<T> extends RefactoringPart
           return scope;
         }
       };
-      if (movedNodes != null) {
+      if (!(ListSequence.fromList(movedNodes).contains(null))) {
+        // all source nodes are present, so we can run find usages (we are probably inside in-project refactoring) 
         progressMonitor.start("References in current project", 1);
         usages = (Set<SReference>) FindUsagesFacade.getInstance().findUsages(searchScope, SetSequence.fromSetWithValues(new HashSet<SNode>(), movedNodes), progressMonitor.subTask(1));
       } else {

@@ -8283,13 +8283,22 @@
         <node concept="L3pyB" id="2SJclOrQDBl" role="3cqZAp">
           <node concept="3clFbS" id="2SJclOrQDBn" role="L3pyw">
             <node concept="3clFbJ" id="2SJclOrQEVJ" role="3cqZAp">
-              <node concept="3y3z36" id="2SJclOrQFs5" role="3clFbw">
-                <node concept="10Nm6u" id="2SJclOrQFzn" role="3uHU7w" />
-                <node concept="37vLTw" id="2SJclOrQFb8" role="3uHU7B">
-                  <ref role="3cqZAo" node="2SJclOrQBde" resolve="movedNodes" />
+              <node concept="3fqX7Q" id="2Ap4oLDqNWr" role="3clFbw">
+                <node concept="2OqwBi" id="2Ap4oLDqNWt" role="3fr31v">
+                  <node concept="37vLTw" id="2Ap4oLDqNWu" role="2Oq$k0">
+                    <ref role="3cqZAo" node="2SJclOrQBde" resolve="movedNodes" />
+                  </node>
+                  <node concept="3JPx81" id="2Ap4oLDqNWv" role="2OqNvi">
+                    <node concept="10Nm6u" id="2Ap4oLDqNWw" role="25WWJ7" />
+                  </node>
                 </node>
               </node>
               <node concept="3clFbS" id="2SJclOrQEVL" role="3clFbx">
+                <node concept="3SKdUt" id="2Ap4oLDqTbF" role="3cqZAp">
+                  <node concept="3SKdUq" id="2Ap4oLDqTbH" role="3SKWNk">
+                    <property role="3SKdUp" value="all source nodes are present, so we can run find usages (we are probably inside in-project refactoring)" />
+                  </node>
+                </node>
                 <node concept="3clFbF" id="2DQHtcLAkV2" role="3cqZAp">
                   <node concept="2OqwBi" id="2DQHtcLAlgv" role="3clFbG">
                     <node concept="37vLTw" id="2vOGnLEqbEi" role="2Oq$k0">

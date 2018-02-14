@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.ScrollPaneFactory;
+import com.intellij.util.ui.AbstractLayoutManager;
 import com.intellij.util.ui.UIUtil;
 import jetbrains.mps.nodeEditor.EditorSettings;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
@@ -33,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -50,69 +52,37 @@ class NodeSubstituteChooserUi implements ISubstituteChooserUi {
 
   private NodeSubstituteChooser myNodeSubstituteChooser;
   private NodeSubstitutePatternEditor myPatternEditor;
-  private JPanel myMainPanel;
   private final JList<SubstituteAction> myList;
   private NodeItemCellRenderer myCellRenderer;
 
-  private PopupPosition myRelativePosition = PopupPosition.BOTTOM;
+  private PopupPosition myRelativePosition;
 
   private JBPopup myPopup;
+  private JScrollPane myScrollPane;
 
   NodeSubstituteChooserUi(@NotNull NodeSubstituteChooser nodeSubstituteChooser, @NotNull JList<SubstituteAction> list,
                           @NotNull NodeSubstitutePatternEditor patternEditor) {
     myNodeSubstituteChooser = nodeSubstituteChooser;
-    myPatternEditor = patternEditor;
-    myMainPanel = new JPanel(new BorderLayout());
     myList = list;
-    JScrollPane scrollPane = ScrollPaneFactory.createScrollPane(myList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                                                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-
-    scrollPane.getHorizontalScrollBar().setFocusable(false);
-    scrollPane.getVerticalScrollBar().setFocusable(false);
-    myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    //TODO: change to EditorColorManager default font
-    myList.setFont(EditorSettings.getInstance().getDefaultEditorFont());
-    myList.setBackground(BACKGROUND_COLOR);
-    myList.setForeground(FOREGROUND_COLOR);
-    myList.setSelectionBackground(SELECTED_BACKGROUND_COLOR);
-    myList.setSelectionForeground(SELECTED_FOREGROUND_COLOR);
-    myList.setFocusable(false);
-    myCellRenderer = new NodeItemCellRenderer(myNodeSubstituteChooser);
-    myMainPanel.add(scrollPane, BorderLayout.CENTER);
-    myPopup = JBPopupFactory.getInstance().createComponentPopupBuilder(myMainPanel, myMainPanel)
-                            .setResizable(true)
-                            .setCancelKeyEnabled(false)
-                            .setCancelOnClickOutside(false)
-                            .setCancelOnOtherWindowOpen(false)
-                            .setCancelOnWindowDeactivation(false)
-                            .createPopup();
+    myPatternEditor = patternEditor;
   }
 
   public void refreshUi(boolean recalculateSize) {
     if (recalculateSize) {
-      resetSize();
+      resetListSize();
+      myPopup.getContent().validate();
+      myPopup.pack(true, true);
+      resetRelativePosition(myPopup.getContent().getPreferredSize());
       updateLocation();
     }
     myList.ensureIndexIsVisible(myList.getSelectedIndex());
   }
 
-  private void resetSize() {
-    Dimension dimension = calculateSize();
+  private void resetListSize() {
+    Dimension dimension = calculateListSize();
     myList.setFixedCellWidth(dimension.width);
     myList.setFixedCellHeight(dimension.height);
     myList.setVisibleRowCount(Math.min(myNodeSubstituteChooser.getSubstituteActions().size(), MAX_LOOKUP_LIST_HEIGHT));
-    myMainPanel.validate();
-    Dimension preferredSize = getPreferredSize();
-    int height = preferredSize.height;
-    if (myList.getModel().getSize() > myList.getVisibleRowCount() && myList.getVisibleRowCount() > 1) {
-      height = preferredSize.height - myList.getFixedCellHeight() / 2;
-    }
-    int width = Math.min(getMaxWidth(), preferredSize.width);
-    width = Math.max(width, MY_MIN_CELL_WIDTH);
-
-
-    myPopup.setSize(new Dimension(width, height));
   }
 
   public void updateListSize(int width, int height) {
@@ -123,13 +93,48 @@ class NodeSubstituteChooserUi implements ISubstituteChooserUi {
       myList.setFixedCellHeight(height);
     }
   }
+
+
   public void show() {
+    myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    //TODO: change to EditorColorManager default font
+    myList.setFont(EditorSettings.getInstance().getDefaultEditorFont());
+    myList.setBackground(BACKGROUND_COLOR);
+    myList.setForeground(FOREGROUND_COLOR);
+    myList.setSelectionBackground(SELECTED_BACKGROUND_COLOR);
+    myList.setSelectionForeground(SELECTED_FOREGROUND_COLOR);
+    myList.setFocusable(false);
+    myCellRenderer = new NodeItemCellRenderer(myNodeSubstituteChooser);
     myList.setCellRenderer(myCellRenderer);
-    resetSize();
-    initRelativePosition();
-    Point location = calculateLocation();
-    myPopup.showInScreenCoordinates(myNodeSubstituteChooser.getEditorWindow(), location);
+    resetListSize();
+
+    myScrollPane = ScrollPaneFactory.createScrollPane(myList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+
+    myScrollPane.getHorizontalScrollBar().setFocusable(false);
+    myScrollPane.getVerticalScrollBar().setFocusable(false);
+
+    JPanel mainPanel = new JPanel(new MyLayoutManager());
+    mainPanel.add(myScrollPane, BorderLayout.CENTER);
+
+    myPopup = JBPopupFactory.getInstance().createComponentPopupBuilder(mainPanel, mainPanel)
+                            .setResizable(true)
+                            .setCancelKeyEnabled(false)
+                            .setCancelOnClickOutside(false)
+                            .setCancelOnOtherWindowOpen(false)
+                            .setCancelOnWindowDeactivation(false)
+                            .setLocateWithinScreenBounds(false)
+                            .createPopup();
+    myPopup.setMinimumSize(new Dimension(MY_MIN_CELL_WIDTH, 0));
+
+    Dimension preferredSize = myPopup.getContent().getPreferredSize();
+    initRelativePosition(preferredSize);
+    Point location = calculateLocation(preferredSize);
+    myPopup.setLocation(location);
+    myPopup.show(myNodeSubstituteChooser.getEditorWindow());
     myList.ensureIndexIsVisible(myList.getSelectedIndex());
+
   }
 
   public void hide() {
@@ -137,7 +142,7 @@ class NodeSubstituteChooserUi implements ISubstituteChooserUi {
   }
 
 
-  private Dimension calculateSize() {
+  private Dimension calculateListSize() {
     return new ModelComputeRunnable<>(() -> {
       int counter = 0;
       int height = 0;
@@ -155,65 +160,81 @@ class NodeSubstituteChooserUi implements ISubstituteChooserUi {
     }).runRead(myNodeSubstituteChooser.getEditorComponent().getEditorContext().getRepository().getModelAccess());
   }
 
-  @NotNull
-  private Dimension getPreferredSize() {
-    return myMainPanel.getPreferredSize();
-  }
-
-
   public void updateLocation() {
-    Point newLocation = calculateLocation();
+    Point newLocation = calculateLocation(myPopup.getContent().getPreferredSize());
     myPopup.setLocation(newLocation);
   }
 
-  private Point calculateLocation() {
+  private Point calculateLocation(Dimension popupSize) {
     Point location = myPatternEditor.getLeftBottomPosition();
     if (myRelativePosition == PopupPosition.TOP) {
-      location = new Point(location.x, location.y - getHeight() - myPatternEditor.getHeight());
+      location = new Point(location.x, location.y - popupSize.height - myPatternEditor.getHeight());
     }
-    return getLocationWithRespectToScreenBounds(location, WindowsUtil.findDeviceBoundsAt(location));
+    return getLocationWithRespectToScreenBounds(location, WindowsUtil.findDeviceBoundsAt(location), popupSize);
   }
 
   private int getMaxWidth() {
     return WindowsUtil.findDeviceBoundsAt(myPatternEditor.getLeftBottomPosition()).width * 3 / 4;
   }
 
-  private void initRelativePosition() {
+  private void initRelativePosition(Dimension popupSize) {
+    myRelativePosition = calculateRelativePosition(popupSize);
+  }
+
+  private PopupPosition calculateRelativePosition(Dimension popupSize) {
     Point location = myPatternEditor.getLeftBottomPosition();
     Rectangle deviceBounds = WindowsUtil.findDeviceBoundsAt(location);
-    Dimension preferredSize = getPreferredSize();
-    if (location.getY() + preferredSize.getHeight() > deviceBounds.height + deviceBounds.y - 150 &&
+    if (location.getY() + popupSize.height > deviceBounds.height + deviceBounds.y - 150 &&
         location.getY() - myPatternEditor.getHeight() / 2 > deviceBounds.y + deviceBounds.height / 2) {
-      myRelativePosition = PopupPosition.TOP;
+      return PopupPosition.TOP;
     } else {
-      myRelativePosition = PopupPosition.BOTTOM;
+      return PopupPosition.BOTTOM;
     }
+  }
 
+  private void resetRelativePosition(Dimension popupSize) {
+    if (myRelativePosition == PopupPosition.BOTTOM) {
+      PopupPosition popupPosition = calculateRelativePosition(popupSize);
+      if (popupPosition == PopupPosition.TOP) {
+        myRelativePosition = popupPosition;
+      }
+    }
   }
 
 
-  private Point getLocationWithRespectToScreenBounds(Point location, Rectangle deviceBounds) {
+  private Point getLocationWithRespectToScreenBounds(Point location, Rectangle deviceBounds, Dimension popupSize) {
     if (location.x < deviceBounds.x) {
       location.x = deviceBounds.x;
     }
 
-    if (getWidth() + location.x > deviceBounds.width + deviceBounds.x) {
-      location = new Point(deviceBounds.width + deviceBounds.x - getWidth(), location.y);
+    if (popupSize.width + location.x > deviceBounds.width + deviceBounds.x) {
+      location = new Point(deviceBounds.width + deviceBounds.x - popupSize.width, location.y);
     }
     return location;
-  }
-
-  private int getWidth() {
-    return myPopup.getSize().width;
-  }
-
-  private int getHeight() {
-    return myPopup.getSize().height;
   }
 
   private enum PopupPosition {
     TOP, BOTTOM
   }
 
+  private class MyLayoutManager extends AbstractLayoutManager {
+
+    @Override
+    public Dimension preferredLayoutSize(Container parent) {
+      Dimension preferredSize = myScrollPane.getPreferredSize();
+      int height = preferredSize.height;
+      if (myList.getModel().getSize() > myList.getVisibleRowCount() && myList.getVisibleRowCount() > 1) {
+        height = preferredSize.height - myList.getFixedCellHeight() / 2;
+      }
+      int width = Math.min(getMaxWidth(), preferredSize.width);
+      width = Math.max(width, MY_MIN_CELL_WIDTH);
+      return new Dimension(width, height);
+    }
+
+    @Override
+    public void layoutContainer(Container parent) {
+      myScrollPane.setSize(parent.getSize());
+    }
+  }
 
 }

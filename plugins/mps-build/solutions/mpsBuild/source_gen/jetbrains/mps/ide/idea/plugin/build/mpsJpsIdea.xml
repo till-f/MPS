@@ -114,7 +114,7 @@
         <fileset file="${artifacts.IDEA}/lib/jdom.jar" />
         <fileset file="${artifacts.IDEA}/lib/trove4j.jar" />
         <fileset dir="${artifacts.IDEA}/lib/ant/lib" includes="*.jar" />
-        <fileset file="${artifacts.IDEA}/lib/ecj-4.6.2.jar" />
+        <fileset file="${artifacts.IDEA}/lib/ecj-4.7.2.jar" />
         <path refid="path.jdk.classpath" />
       </classpath>
     </javac2>

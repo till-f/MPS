@@ -16,12 +16,9 @@
 package jetbrains.mps.nodeEditor.cellMenu;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.codeStyle.MinusculeMatcher;
-import com.intellij.psi.codeStyle.NameUtil;
 import com.intellij.ui.SimpleColoredComponent;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.speedSearch.SpeedSearchUtil;
-import com.intellij.util.containers.FList;
 import com.intellij.util.ui.UIUtil;
 import jetbrains.mps.ide.icons.IconManager;
 import jetbrains.mps.ide.icons.IdeIcons;
@@ -163,8 +160,8 @@ class NodeItemCellRenderer extends JPanel implements ListCellRenderer<Substitute
     }
   }
 
-  private FList<TextRange> getMatchingFragments(String pattern, String text) {
-    return mySubstituteChooser.getMatcherFactory().createMatcher(pattern).matchingFragments(text);
+  private Iterable<TextRange> getMatchingFragments(String pattern, String text) {
+    return NodeSubstituteChooserHandler.CASE_INSENSITIVE_MATCHER_FACTORY.createMatcher(pattern).matchingFragments(text);
   }
 
   private int getStyle(SubstituteAction action) {

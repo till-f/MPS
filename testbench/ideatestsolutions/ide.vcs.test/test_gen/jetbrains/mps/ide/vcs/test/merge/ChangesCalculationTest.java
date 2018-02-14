@@ -21,13 +21,18 @@ import jetbrains.mps.vcs.diff.changes.SetReferenceChange;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import jetbrains.mps.vcs.diff.changes.NodeGroupChange;
-import jetbrains.mps.vcs.diff.ChangeSetImpl;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.IAttributeDescriptor;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import java.util.List;
 import jetbrains.mps.vcs.diff.changes.ModelChange;
+import junit.framework.Assert;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.editor.runtime.impl.cellActions.CommentUtil;
+import jetbrains.mps.vcs.diff.ChangeSetImpl;
 import jetbrains.mps.persistence.PersistenceUtil;
 import jetbrains.mps.vcs.diff.ModelChangeSet;
 import jetbrains.mps.vcs.diff.ChangeSetBuilder;
-import org.junit.Assert;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import jetbrains.mps.smodel.SModelUtil_new;
 import jetbrains.mps.smodel.SReference;
@@ -102,6 +107,33 @@ public class ChangesCalculationTest extends ChangesTestBase {
       }
     }), new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, 0x10f6353296dL, "superclass"), 0, 0, 0, 1));
   }
+  @Test
+  public void addNodeAttribute() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        AttributeOperations.createAndSetAttrbiute(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), new IAttributeDescriptor.NodeAttribute(MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2274019e61e234c9L, "jetbrains.mps.lang.core.structure.ReviewMigration")), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2274019e61e234c9L, "jetbrains.mps.lang.core.structure.ReviewMigration"));
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, 0x47bf8397520e5942L, "smodelAttribute"), 0, 0, 0, 1));
+  }
+  @Test
+  public void addChildAttribute() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        ChangesTestUtil.addCommentedMethod(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"))).last());
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 3, 3, 3, 4));
+  }
+
+  @Test
+  public void addChildAttributeAndCheckItIsAboutRole() {
+    List<ModelChange> changes = getRealChanges(new Runnable() {
+      public void run() {
+        ChangesTestUtil.addCommentedMethod(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"))).last());
+      }
+    });
+    Assert.assertTrue(ListSequence.fromList(changes).count() == 1 && ListSequence.fromList(changes).first() instanceof NodeGroupChange && ((NodeGroupChange) ListSequence.fromList(changes).first()).isAbout(MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member")));
+
+  }
 
   @Test
   public void removeChild() {
@@ -110,6 +142,39 @@ public class ChangesCalculationTest extends ChangesTestBase {
         SNodeOperations.deleteNode(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "8885850892994216610"));
       }
     }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 0, 1, 0, 0));
+  }
+  @Test
+  public void removeChildAttribute() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        SNodeOperations.deleteNode(SNodeOperations.cast(SNodeOperations.getParent(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5297043982019668093")), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3dcc194340c24debL, "jetbrains.mps.lang.core.structure.BaseCommentAttribute")));
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 1, 2, 1, 1));
+  }
+  @Test
+  public void replaceChild() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        SNodeOperations.deleteNode(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "8885850892994216610"));
+        ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"))).insertElement(0, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1458378889e6d166L, "jetbrains.mps.baseLanguage.structure.PlaceholderMember")));
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 0, 1, 0, 1));
+  }
+  @Test
+  public void commentChild() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        CommentUtil.commentOut(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "8885850892994216610"));
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 0, 1, 0, 1));
+  }
+  @Test
+  public void uncommentChild() {
+    testDiffCorrectness(new Runnable() {
+      public void run() {
+        ChangesTestUtil.uncommentFirstCommentedMethod(SNodeOperations.getNode("r:296ba97d-4b26-4d06-be61-297d86180cce(jetbrains.mps.ide.vcs.test.testModel)", "5876208808348821705"));
+      }
+    }, new NodeGroupChange(createFakeChangeSet(), ROOT_ID, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101d9d3ca30L, 0x4a9a46de59132803L, "member"), 1, 2, 1, 2));
   }
 
   @Test
@@ -121,7 +186,17 @@ public class ChangesCalculationTest extends ChangesTestBase {
     return new ChangeSetImpl(getTestModel(), getTestModel());
   }
 
-  private void testDiffCorrectness(Runnable todo, ModelChange... changes) {
+  private void testDiffCorrectness(Runnable todo, ModelChange... expectedChanges) {
+    List<ModelChange> realChanges = getRealChanges(todo);
+    org.junit.Assert.assertEquals(ListSequence.fromList(realChanges).count(), expectedChanges.length);
+    for (int i = 0; i < expectedChanges.length; i++) {
+      ModelChange real = ListSequence.fromList(realChanges).getElement(i);
+      ModelChange expected = expectedChanges[i];
+      org.junit.Assert.assertEquals(real.toString(), expected.toString());
+    }
+  }
+
+  private List<ModelChange> getRealChanges(Runnable todo) {
     final Wrappers._T<SModel> modelCopy = new Wrappers._T<SModel>();
     ModelAccess.instance().runReadAction(new Runnable() {
       public void run() {
@@ -136,12 +211,7 @@ public class ChangesCalculationTest extends ChangesTestBase {
         diff.value = ChangeSetBuilder.buildChangeSet(modelCopy.value, getTestModel());
       }
     });
-    Assert.assertEquals(ListSequence.fromList(diff.value.getModelChanges()).count(), changes.length);
-    for (int i = 0; i < changes.length; i++) {
-      ModelChange real = ListSequence.fromList(diff.value.getModelChanges()).getElement(i);
-      ModelChange expected = changes[i];
-      Assert.assertEquals(real.toString(), expected.toString());
-    }
+    return diff.value.getModelChanges();
   }
   private static SNode createClassConcept_7w1430_a0a0a0b0g() {
     PersistenceFacade facade = PersistenceFacade.getInstance();
