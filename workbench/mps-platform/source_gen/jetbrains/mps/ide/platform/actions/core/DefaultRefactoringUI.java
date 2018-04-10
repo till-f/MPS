@@ -19,6 +19,7 @@ import com.intellij.openapi.progress.Task;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.progress.ProgressIndicator;
 import jetbrains.mps.progress.ProgressMonitorAdapter;
+import org.apache.log4j.Level;
 import jetbrains.mps.ide.findusages.model.SearchResults;
 import jetbrains.mps.ide.findusages.model.SearchTask;
 import jetbrains.mps.refactoring.participant.RefactoringSession;
@@ -28,7 +29,6 @@ import jetbrains.mps.ide.platform.refactoring.RefactoringAccessEx;
 import jetbrains.mps.ide.platform.refactoring.RefactoringViewAction;
 import jetbrains.mps.ide.platform.refactoring.RefactoringViewItem;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
-import org.apache.log4j.Level;
 import com.intellij.openapi.ui.Messages;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 
@@ -71,7 +71,14 @@ public class DefaultRefactoringUI implements RefactoringUI {
         DefaultRefactoringUI.this.myRepository.getModelAccess().runReadAction(new Runnable() {
           public void run() {
             ProgressMonitorAdapter progressMonitor = new ProgressMonitorAdapter(progressIndicator);
-            task.invoke(progressMonitor);
+            try {
+              task.invoke(progressMonitor);
+            } catch (RuntimeException e) {
+              progressMonitor.cancel();
+              if (LOG.isEnabledFor(Level.ERROR)) {
+                LOG.error("Exception during usages search", e);
+              }
+            }
           }
         });
       }

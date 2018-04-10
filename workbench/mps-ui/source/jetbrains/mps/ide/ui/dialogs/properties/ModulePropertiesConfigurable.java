@@ -354,6 +354,7 @@ public class ModulePropertiesConfigurable extends MPSPropertiesConfigurable {
                                              GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
         myGenOut = new JTextField();
+        myGenOut.setEditable(false); // Allow edit only with FileChooser
         final FileChooserDescriptor outputPathsChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
         InsertPathAction.addTo(myGenOut, outputPathsChooserDescriptor);
         outputPathsChooserDescriptor.setHideIgnored(false);

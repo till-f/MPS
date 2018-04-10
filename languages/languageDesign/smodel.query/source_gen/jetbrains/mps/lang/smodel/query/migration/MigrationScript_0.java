@@ -23,6 +23,7 @@ import jetbrains.mps.internal.collections.runtime.ISelector;
 import jetbrains.mps.lang.migration.runtime.base.DeprecatedConceptNotMigratedProblem;
 import jetbrains.mps.lang.migration.runtime.base.DeprecatedConceptMemberNotMigratedProblem;
 import jetbrains.mps.lang.migration.runtime.base.MigrationScriptReference;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 public class MigrationScript_0 extends MigrationScriptBase {
   public String getCaption() {
@@ -136,7 +137,7 @@ public class MigrationScript_0 extends MigrationScriptBase {
       });
       Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
-          return SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(it)), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6a40a3596560a9d9L, "jetbrains.mps.lang.smodel.query.structure.BLExpression_old"))) || SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6a40a3596560a9d9L, "jetbrains.mps.console.base.structure.BLExpression")));
+          return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6a40a3596560a9d9L, "jetbrains.mps.console.base.structure.BLExpression"))) || MigrationScript_0.isMovedConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6a40a3596560a9d9L, "jetbrains.mps.lang.smodel.query.structure.BLExpression_old"));
         }
       }).visitAll(new IVisitor<SNode>() {
         public void visit(SNode node) {
@@ -145,7 +146,7 @@ public class MigrationScript_0 extends MigrationScriptBase {
       });
       Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
-          return SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(it)), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4bd43869e610f3e9L, "jetbrains.mps.lang.smodel.query.structure.BLCommand_old"))) || SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x4bd43869e610f3e9L, "jetbrains.mps.console.base.structure.BLCommand")));
+          return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x4bd43869e610f3e9L, "jetbrains.mps.console.base.structure.BLCommand"))) || MigrationScript_0.isMovedConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4bd43869e610f3e9L, "jetbrains.mps.lang.smodel.query.structure.BLCommand_old"));
         }
       }).visitAll(new IVisitor<SNode>() {
         public void visit(SNode node) {
@@ -154,7 +155,7 @@ public class MigrationScript_0 extends MigrationScriptBase {
       });
       Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
-          return SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(it)), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6c8954f469a7c420L, "jetbrains.mps.lang.smodel.query.structure.AbstractPrintExpression_old"))) || SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6c8954f469a7c420L, "jetbrains.mps.console.base.structure.AbstractPrintExpression")));
+          return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6c8954f469a7c420L, "jetbrains.mps.console.base.structure.AbstractPrintExpression"))) || MigrationScript_0.isMovedConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6c8954f469a7c420L, "jetbrains.mps.lang.smodel.query.structure.AbstractPrintExpression_old"));
         }
       }).visitAll(new IVisitor<SNode>() {
         public void visit(SNode node) {
@@ -172,7 +173,7 @@ public class MigrationScript_0 extends MigrationScriptBase {
       });
       Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
-          return SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(it)), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x75bb0160f191d79fL, "jetbrains.mps.lang.smodel.query.structure.ShowExpression_old"))) || SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xa5e4de5346a344daL, 0xaab368fdf1c34ed0L, 0x75bb0160f191d79fL, "jetbrains.mps.console.ideCommands.structure.ShowExpression")));
+          return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xa5e4de5346a344daL, 0xaab368fdf1c34ed0L, 0x75bb0160f191d79fL, "jetbrains.mps.console.ideCommands.structure.ShowExpression"))) || MigrationScript_0.isMovedConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x75bb0160f191d79fL, "jetbrains.mps.lang.smodel.query.structure.ShowExpression_old"));
         }
       }).visitAll(new IVisitor<SNode>() {
         public void visit(SNode node) {
@@ -207,7 +208,7 @@ __switch__:
                       case 2:
                         this._2__yield_zc5nt1_a0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x3bc64421763adda2L, "jetbrains.mps.lang.smodel.query.structure.ProjectScope_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x3bc64421763adda2L, "jetbrains.mps.lang.smodel.query.structure.ProjectScope_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x3bc64421763adda2L, "jetbrains.mps.console.base.structure.ProjectScope"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -226,7 +227,7 @@ __switch__:
                       case 5:
                         this._6__yield_zc5nt1_b0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0xa721a59126bb908L, "jetbrains.mps.lang.smodel.query.structure.ProjectExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0xa721a59126bb908L, "jetbrains.mps.lang.smodel.query.structure.ProjectExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0xa721a59126bb908L, "jetbrains.mps.console.base.structure.ProjectExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -245,7 +246,7 @@ __switch__:
                       case 9:
                         this._10__yield_zc5nt1_c0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6c8954f469a7c420L, "jetbrains.mps.lang.smodel.query.structure.AbstractPrintExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6c8954f469a7c420L, "jetbrains.mps.lang.smodel.query.structure.AbstractPrintExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6c8954f469a7c420L, "jetbrains.mps.console.base.structure.AbstractPrintExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -264,7 +265,7 @@ __switch__:
                       case 13:
                         this._14__yield_zc5nt1_d0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4c7a26b31bd03b59L, "jetbrains.mps.lang.smodel.query.structure.PrintNodeExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4c7a26b31bd03b59L, "jetbrains.mps.lang.smodel.query.structure.PrintNodeExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x4c7a26b31bd03b59L, "jetbrains.mps.console.base.structure.PrintNodeExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -283,7 +284,7 @@ __switch__:
                       case 17:
                         this._18__yield_zc5nt1_e0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x5f195a051bd9bddcL, "jetbrains.mps.lang.smodel.query.structure.PrintNodeReferenceExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x5f195a051bd9bddcL, "jetbrains.mps.lang.smodel.query.structure.PrintNodeReferenceExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x5f195a051bd9bddcL, "jetbrains.mps.console.base.structure.PrintNodeReferenceExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -302,7 +303,7 @@ __switch__:
                       case 21:
                         this._22__yield_zc5nt1_f0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6a40a3596560a9d9L, "jetbrains.mps.lang.smodel.query.structure.BLExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6a40a3596560a9d9L, "jetbrains.mps.lang.smodel.query.structure.BLExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6a40a3596560a9d9L, "jetbrains.mps.console.base.structure.BLExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -321,7 +322,7 @@ __switch__:
                       case 25:
                         this._26__yield_zc5nt1_g0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x7417cca3eb1feca9L, "jetbrains.mps.lang.smodel.query.structure.PrintTextExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x7417cca3eb1feca9L, "jetbrains.mps.lang.smodel.query.structure.PrintTextExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x7417cca3eb1feca9L, "jetbrains.mps.console.base.structure.PrintTextExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -340,7 +341,7 @@ __switch__:
                       case 29:
                         this._30__yield_zc5nt1_h0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b2a9377L, "jetbrains.mps.lang.smodel.query.structure.PrintExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b2a9377L, "jetbrains.mps.lang.smodel.query.structure.PrintExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6979f0787b2a9377L, "jetbrains.mps.console.base.structure.PrintExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -359,7 +360,7 @@ __switch__:
                       case 33:
                         this._34__yield_zc5nt1_i0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b7db64fL, "jetbrains.mps.lang.smodel.query.structure.PrintSequenceExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b7db64fL, "jetbrains.mps.lang.smodel.query.structure.PrintSequenceExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x6979f0787b7db64fL, "jetbrains.mps.console.base.structure.PrintSequenceExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -378,7 +379,7 @@ __switch__:
                       case 37:
                         this._38__yield_zc5nt1_j0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4bd43869e610f3e9L, "jetbrains.mps.lang.smodel.query.structure.BLCommand_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4bd43869e610f3e9L, "jetbrains.mps.lang.smodel.query.structure.BLCommand_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xde1ad86d6e504a02L, 0xb306d4d17f64c375L, 0x4bd43869e610f3e9L, "jetbrains.mps.console.base.structure.BLCommand"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -463,7 +464,7 @@ __switch__:
                       case 53:
                         this._54__yield_zc5nt1_n0a0c0a0e_it = Sequence.fromIterable(Sequence.fromIterable(CommandUtil.nodes(CommandUtil.createConsoleScope(null, false, context))).where(new IWhereFilter<SNode>() {
                           public boolean accept(SNode it) {
-                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x75bb0160f191d79fL, "jetbrains.mps.lang.smodel.query.structure.ShowExpression_old")));
+                            return SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x75bb0160f191d79fL, "jetbrains.mps.lang.smodel.query.structure.ShowExpression_old"))) && !(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xa5e4de5346a344daL, 0xaab368fdf1c34ed0L, 0x75bb0160f191d79fL, "jetbrains.mps.console.ideCommands.structure.ShowExpression"))));
                           }
                         }).select(new ISelector<SNode, Problem>() {
                           public Problem select(SNode it) {
@@ -654,5 +655,41 @@ __switch__:
   }
   public MigrationScriptReference getDescriptor() {
     return new MigrationScriptReference(MetaAdapterFactory.getLanguage(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, "jetbrains.mps.lang.smodel.query"), 0);
+  }
+  public static boolean isMovedConcept(SAbstractConcept c) {
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x3bc64421763adda2L, "jetbrains.mps.lang.smodel.query.structure.ProjectScope_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0xa721a59126bb908L, "jetbrains.mps.lang.smodel.query.structure.ProjectExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6c8954f469a7c420L, "jetbrains.mps.lang.smodel.query.structure.AbstractPrintExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4c7a26b31bd03b59L, "jetbrains.mps.lang.smodel.query.structure.PrintNodeExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x5f195a051bd9bddcL, "jetbrains.mps.lang.smodel.query.structure.PrintNodeReferenceExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6a40a3596560a9d9L, "jetbrains.mps.lang.smodel.query.structure.BLExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x7417cca3eb1feca9L, "jetbrains.mps.lang.smodel.query.structure.PrintTextExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b2a9377L, "jetbrains.mps.lang.smodel.query.structure.PrintExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x6979f0787b7db64fL, "jetbrains.mps.lang.smodel.query.structure.PrintSequenceExpression_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x4bd43869e610f3e9L, "jetbrains.mps.lang.smodel.query.structure.BLCommand_old")))) {
+      return true;
+    }
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(c), SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x75bb0160f191d79fL, "jetbrains.mps.lang.smodel.query.structure.ShowExpression_old")))) {
+      return true;
+    }
+    return false;
   }
 }
