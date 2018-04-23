@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="de.itemis.jfx.embed">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../rapidfx/code/de.itemis.mps.editor.rapidfx/languages/de.itemis.mps.editor.rapidfx/runtime/lib/de.itemis.jfx.embed.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
