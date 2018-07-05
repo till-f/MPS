@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="graphing">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mbeddr.core/code/languages/com.mbeddr.mpsutil/languages/com.mbeddr.mpsutil.graphstream/runtime/lib/graphing-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../mbeddr.core/code/languages/com.mbeddr.mpsutil/languages/com.mbeddr.mpsutil.graphstream/runtime/lib/graphing-jgraphx.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../mbeddr.core/code/languages/com.mbeddr.mpsutil/languages/com.mbeddr.mpsutil.graphstream/runtime/lib/jgraphx-3.9.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../de.itemis.graphing/graphing-jgraphx/src" />
+      <root url="file://$PROJECT_DIR$/../de.itemis.graphing/graphing-core/src" />
+    </SOURCES>
+  </library>
+</component>
